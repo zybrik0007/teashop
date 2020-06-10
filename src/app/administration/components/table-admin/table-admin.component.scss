@@ -1,0 +1,112 @@
+#tableAr-admin {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  font-size: small;
+}
+
+#tableArea-admin {
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+#tableContent-admin {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+#tableHead-admin {
+  position: sticky;
+  top: 0;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background: white;
+  border-bottom: 1px solid #b5b5b5;
+}
+
+#tableHead-admin>div {
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid #b5b5b5;
+}
+
+#tableHead-admin>div>div {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#tableHead-admin>div>div>div {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+}
+
+.filterPosition {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+
+}
+
+.filterDESC {
+  transform: rotate(180deg);
+}
+
+.tableBlock-admin {
+  height: 70px;
+  width: 100%;
+}
+
+.tableBlock-admin:nth-child(2n) {
+  background: #dedede;
+}
+
+.tableBlock-admin>div {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.tableBlock-admin>div>div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+.tableBlock-admin>div>div>div {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.tableBlock-admin>div>div>div>span {
+  width: 85%;
+}

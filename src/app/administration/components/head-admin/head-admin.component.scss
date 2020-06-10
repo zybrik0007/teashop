@@ -1,0 +1,87 @@
+#headArea-admin {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  width: 100%;
+}
+
+#headRow-admin {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: spase-between;
+}
+
+#headLeft-admin {
+  height: 100%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  font-family: "Roboto", sans-serif;
+  color: #714871;
+}
+
+#headLeft-admin>div {
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+  margin-left: 5%;
+}
+
+#headLeft-admin>div>h4 {
+  margin: 0;
+  padding: 0;
+}
+
+#headRight-admin {
+  height: 100%;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#headRight-admin>div {
+  margin-right: 5%;
+}
+
+#headName-admin {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+}
+
+#headName-admin>h2 {
+  margin: 0;
+  padding: 0;
+  font-family: "Unkempt", cursive;
+  color: #714871;
+}
+
+#headName-admin>span {
+  margin-top: -7%;
+  font-size: small;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  color: #714871;
+}
+
+#headUser-admin {
+  font-family: "Roboto", sans-serif;
+  color: #666;
+}
+
+#headExit-admin {
+  font-family: "Roboto", sans-serif;
+  color:#a42ae2;
+}

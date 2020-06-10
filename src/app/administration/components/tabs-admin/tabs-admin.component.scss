@@ -1,0 +1,51 @@
+#tabsArea-admin {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  width: 100%;
+}
+
+#tabsRow-admin {
+  width: 100%;
+  height: 50px;
+  background: #b5b5b5;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  font-family: "Roboto", sans-serif;
+  font-size: small;
+  align-items: flex-end;
+}
+
+#tabsRow-admin>div {
+  height: 40px;
+  width: 15%;
+  margin-left: 15px;
+  color: #714871;
+}
+#tabsRow-admin>div>div {
+  width: 100%;
+  height: 100%;
+}
+
+
+#tabsRow-admin>div>div>a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#tabsRow-admin>div>div>a>span {
+  overflow: hidden;
+}
+
+.tabActive {
+  border-radius: 3px 3px 0 0;
+  background: #eddfec;
+  color: #714871;
+}

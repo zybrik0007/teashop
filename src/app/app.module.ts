@@ -19,6 +19,7 @@ import { MainWebComponent } from './website/components/main-web/main-web.compone
 import { TableWebComponent } from './website/components/table-web/table-web.component';
 import { FooterWebComponent } from './website/components/footer-web/footer-web.component';
 import { CabinetWebComponent } from './website/components/cabinet-web/cabinet-web.component';
+import { TableAdminComponent } from './administration/components/table-admin/table-admin.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CabinetWebComponent } from './website/components/cabinet-web/cabinet-we
     MainWebComponent,
     TableWebComponent,
     FooterWebComponent,
-    CabinetWebComponent
+    CabinetWebComponent,
+    TableAdminComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

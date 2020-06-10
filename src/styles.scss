@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Unkempt';
+  src: url('https://fonts.google.com/specimen/Roboto');
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('https://fonts.google.com/specimen/Unkempt');
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url("./icomoon/fonts/icomoon.woff");
+}
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+

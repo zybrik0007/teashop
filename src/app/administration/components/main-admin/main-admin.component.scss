@@ -1,0 +1,52 @@
+#area-admin {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#leftArea-admin {
+  height: 100%;
+  background: #bd97bd;
+}
+
+#rightArea-admin {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100%;
+  width: 100%;
+}
+
+#head-admin {
+  width: 100%;
+  height: 50px;
+}
+#tabs-admin {
+  width: 100%;
+  height: 50px;
+}
+
+#buttons-admin {
+  width: 100%;
+  height: 60px;
+}
+
+#tabs-admin {
+  width: 100%;
+  flex-grow: 1;
+}
+
+#table-admin {
+  flex-grow: 1;
+  width: 100%;
+}
+
+#footer-admin {
+  width: 100%;
+  height: 30px;
+}
+
+

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableWebComponent } from './table-web.component';
+import { TableAdminComponent } from './table-admin.component';
 
-describe('TableWebComponent', () => {
-  let component: TableWebComponent;
-  let fixture: ComponentFixture<TableWebComponent>;
+describe('TableAdminComponent', () => {
+  let component: TableAdminComponent;
+  let fixture: ComponentFixture<TableAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableWebComponent ]
+      declarations: [ TableAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableWebComponent);
+    fixture = TestBed.createComponent(TableAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
