@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +23,7 @@ import { TableWebComponent } from './website/components/table-web/table-web.comp
 import { FooterWebComponent } from './website/components/footer-web/footer-web.component';
 import { CabinetWebComponent } from './website/components/cabinet-web/cabinet-web.component';
 import { TableAdminComponent } from './administration/components/table-admin/table-admin.component';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +48,9 @@ import { TableAdminComponent } from './administration/components/table-admin/tab
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

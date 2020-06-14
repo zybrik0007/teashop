@@ -2,7 +2,7 @@
 
   <div class="navigation-admin">
     <div class="navigationItem-admin navigationMenu-admin">
-      <div class="navigationIcon-admin">
+      <div class="navigationIcon-admin" >
         <span class="icon-paragraph-justify"></span>
       </div>
       <div class="navigationText-admin">
@@ -12,7 +12,7 @@
   </div>
 
   <div class="navigation-admin">
-    <div class="navigationItem-admin navigationActive">
+    <div class="navigationItem-admin"  [routerLink]="['/administration','orders']" routerLinkActive="navigationActive">
       <div class="navigationIcon-admin">
         <span class="icon-coin-dollar"></span>
       </div>
@@ -22,18 +22,7 @@
     </div>
   </div>
 
-  <div class="navigation-admin">
-    <div class="navigationItem-admin">
-      <div class="navigationIcon-admin">
-        <span class="icon-stack"></span>
-      </div>
-      <div class="navigationText-admin">
-        <h5>Категории</h5>
-      </div>
-    </div>
-  </div>
-
-  <div class="navigation-admin">
+  <div class="navigation-admin" [routerLink]="['/administration','goods']" routerLinkActive="navigationActive">
     <div class="navigationItem-admin">
       <div class="navigationIcon-admin">
         <span class="icon-mug"></span>
@@ -45,7 +34,19 @@
   </div>
 
   <div class="navigation-admin">
-    <div class="navigationItem-admin">
+    <div class="navigationItem-admin" [routerLink]="['/administration','category']" routerLinkActive="navigationActive">
+      <div class="navigationIcon-admin">
+        <span class="icon-stack"></span>
+      </div>
+      <div class="navigationText-admin">
+        <h5>Категории</h5>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="navigation-admin" >
+    <div class="navigationItem-admin" [routerLink]="['/administration','clients']" routerLinkActive="navigationActive">
       <div class="navigationIcon-admin">
         <span class="icon-users"></span>
       </div>
@@ -56,7 +57,18 @@
   </div>
 
   <div class="navigation-admin">
-    <div class="navigationItem-admin">
+    <div class="navigationItem-admin" [routerLink]="['/administration','options']" routerLinkActive="navigationActive">
+      <div class="navigationIcon-admin">
+        <span class="icon-cog"></span>
+      </div>
+      <div class="navigationText-admin">
+        <h5>Опции</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="navigation-admin">
+    <div class="navigationItem-admin" [routerLink]="['/administration','setting']" routerLinkActive="navigationActive">
       <div class="navigationIcon-admin">
         <span class="icon-cog"></span>
       </div>

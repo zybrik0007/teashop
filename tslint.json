@@ -7,6 +7,11 @@
         "statements"
       ]
     },
+    "only-arrow-functions":
+    [true,
+      "allow-declarations",
+      "allow-named-functions"
+    ],
     "array-type": false,
     "arrow-return-shorthand": true,
     "curly": true,
