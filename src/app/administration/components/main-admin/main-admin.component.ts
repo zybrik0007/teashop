@@ -1,8 +1,19 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {CouponsGetInterface} from '../../interfaces/requests/administration.requests.coupons';
-import {CouponsService} from '../../services/requests/coupons.service';
+import {CouponsGetInterface} from '../../interfaces/requests/options/requests.coupons.interface';
+import {PaymentGetInterface} from '../../interfaces/requests/options/requests.payment.interface';
+import {DeliveryGetInterface} from '../../interfaces/requests/options/requests.delivery.interface';
+import {GroupsGetInterface} from '../../interfaces/requests/options/requests.groups.interface';
+import {PriceGetInterface} from '../../interfaces/requests/options/requests.price.interface';
+import {StatusGetInterface} from '../../interfaces/requests/options/requests.status.interface';
+import {CouponsService} from '../../services/requests/options/coupons.service';
+import {DeliveryService} from '../../services/requests/options/delivery.service';
+import {GroupsService} from '../../services/requests/options/groups.service';
+import {PaymentService} from '../../services/requests/options/payment.service';
+import {PriceService} from '../../services/requests/options/price.service';
+import {StatusService} from '../../services/requests/options/status.service';
+
 
 @Component({
   selector: 'app-main-admin',
@@ -22,7 +33,12 @@ export class MainAdminComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private couponsService: CouponsService
+    private couponsService: CouponsService,
+    private paymentService: PaymentService,
+    private groupsService: GroupsService,
+    private priceService: PriceService,
+    private statusService: StatusService,
+    private deliveryService: DeliveryService,
   ) {}
 
   ngOnInit(): void {
@@ -32,35 +48,135 @@ export class MainAdminComponent implements OnInit {
     this.sortValue = 'ASC';
     this.searchName = '';
 
-    /*Первичная инициализация таблицы купоны*/
+    /*Первичная инициализация раздела Купоны*/
     if (this.router.url === '/administration/options/coupons') {
-      console.log('Определение url - /administration/options/coupons в main component');
-      this.getCoupons(
-        {
+      this.getCoupons({
           rows: this.rows,
           page: this.page,
           sortName: this.sortName,
           sortValue: this.sortValue,
           searchName: this.searchName
-        }
-      );
+        });
+    }
+
+    /*Первичная инициализация раздела Способ оплаты*/
+    if (this.router.url === '/administration/options/payment') {
+      this.getPayment({
+        rows: this.rows,
+        page: this.page,
+        sortName: this.sortName,
+        sortValue: this.sortValue,
+        searchName: this.searchName
+      });
+    }
+
+    /*Первичная инициализация раздела Способ доставки*/
+    if (this.router.url === '/administration/options/delivery') {
+      this.getDelivery({
+        rows: this.rows,
+        page: this.page,
+        sortName: this.sortName,
+        sortValue: this.sortValue,
+        searchName: this.searchName
+      });
+    }
+
+    /*Первичная инициализация раздела Цены на доставку*/
+    if (this.router.url === '/administration/options/price') {
+      this.getPrice({
+        rows: this.rows,
+        page: this.page,
+        sortName: this.sortName,
+        sortValue: this.sortValue,
+        searchName: this.searchName
+      });
+    }
+
+    /*Первичная инициализация раздела Статус заказа*/
+    if (this.router.url === '/administration/options/status') {
+      this.getStatus({
+        rows: this.rows,
+        page: this.page,
+        sortName: this.sortName,
+        sortValue: this.sortValue,
+        searchName: this.searchName
+      });
+    }
+
+    /*Первичная инициализация раздела Группы пользователей*/
+    if (this.router.url === '/administration/options/groups') {
+      this.getGroups({
+        rows: this.rows,
+        page: this.page,
+        sortName: this.sortName,
+        sortValue: this.sortValue,
+        searchName: this.searchName
+      });
     }
   }
 
-  /***** Функции выборки данных для таблиц *****/
-  /*Выборка купонов*/
+
+
+  /***** Функции requests запросов к серверу *****/
+  /*Купоны*/
+  /*Выборка купонов для таблицы Купоны*/
   getCoupons(getParameter: CouponsGetInterface) {
-    console.log('Запуск функции getCoupons в main component');
     this.couponsService.getCouponsService(getParameter)
       .subscribe(
-        value => {
-          console.log('Ответ сервера: ', value);
-        },
-        error => {
-          console.log('Ошибка вывода таблицы coupons');
-        }
+        res => {},
+        error => {}
         );
   }
-  /***** *****/
 
+  /*Способ оплаты*/
+  /*Выборка сопособ оплаты для таблицы Способы оплаты*/
+  getPayment(getParameter: PaymentGetInterface) {
+    this.paymentService.getPaymentService(getParameter)
+      .subscribe(
+        res => {},
+        error => {}
+      );
+  }
+
+  /*Способ доставки*/
+  /*Выборка способов доставки для таблицы Способ доставки*/
+  getDelivery(getParameter: DeliveryGetInterface) {
+    this.deliveryService.getDeliveryService(getParameter)
+      .subscribe(
+        res => {},
+        error => {}
+      );
+  }
+
+  /*Цены на доставку*/
+  /*Выборка цен на доставку для таблицы Цены на доставку*/
+  getPrice(getParameter: PriceGetInterface) {
+    this.priceService.getPriceService(getParameter)
+      .subscribe(
+        res => {},
+        error => {}
+      );
+  }
+
+  /*Статус заказа*/
+  /*Выборка статусов заказа для таблицы Статус заказа*/
+  getStatus(getParameter: StatusGetInterface) {
+    this.statusService.getStatusService(getParameter)
+      .subscribe(
+        res => {},
+        error => {}
+      );
+  }
+
+  /*Группа пользователей*/
+  /*Выборка сопособ групп пользователей для таблицы Статус заказа*/
+  getGroups(getParameter: GroupsGetInterface) {
+    this.groupsService.getGroupsService(getParameter)
+      .subscribe(
+        res => {},
+        error => {}
+      );
+  }
+
+    /***** *****/
 }

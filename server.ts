@@ -18,7 +18,7 @@ import bodyParser from 'body-parser';
 import {resolve} from 'dns';
 import {Express} from 'express';
 
-import {routerCoupons} from './server/routes/administration/coupons.requests.route';
+import {routerCoupons} from './server/routes/administration/options/coupons.requests.route';
 //const routerCoupons = require('./server/routes/administration/coupons.requests.route');
 
 const server = express();

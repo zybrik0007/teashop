@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 const express = require('express');
 export const routerCoupons = express.Router();
 
-/*Роутеры для купонов Администрирования сайта*/
+/*Роутеры для раздела купонов Администрирования сайта*/
 
 routerCoupons.get(
   '/get',

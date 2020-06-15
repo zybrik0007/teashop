@@ -15,11 +15,15 @@ export class TabsAdminComponent implements OnInit {
   routerTrue: string;
   routerArr: string[];
 
+  /*Соотношение url и отображение вкладок*/
   tabsObj: TabsDisplayAdminInterface[] = [
     {
       url: '/administration/orders',
-      tabArr: [['/administration', 'orders' , 'orders']],
-      name: ['Заказы']
+      tabArr: [
+        ['/administration', 'orders' , 'orders'],
+        ['/administration', 'orders' , 'statistics']
+      ],
+      name: ['Заказы', 'Статистика']
     },
     {
       url: '/administration/goods',
@@ -28,7 +32,10 @@ export class TabsAdminComponent implements OnInit {
     },
     {
       url: '/administration/category',
-      tabArr: [['/administration' , 'category' , 'category'], ['/administration' , 'category' , 'subcategory']],
+      tabArr: [
+        ['/administration' , 'category' , 'category'],
+        ['/administration' , 'category' , 'subcategory']
+      ],
       name: ['Категории', 'Субкатегории']
     },
     {
@@ -38,12 +45,22 @@ export class TabsAdminComponent implements OnInit {
     },
     {
       url: '/administration/options',
-      tabArr: [['/administration' , 'options' , 'coupons']],
-      name: ['Купоны']
+      tabArr: [
+        ['/administration' , 'options' , 'coupons'],
+        ['/administration' , 'options' , 'payment'],
+        ['/administration' , 'options' , 'delivery'],
+        ['/administration' , 'options' , 'price'],
+        ['/administration' , 'options' , 'status'],
+        ['/administration' , 'options' , 'groups']
+      ],
+      name: ['Купоны', 'Способ оплаты', 'Способ доставки', 'Цены на доставку', 'Статус заказа', 'Группы пользователей']
     },
     {
       url: '/administration/setting',
-      tabArr: [['/administration' , 'setting' , 'setting'], ['/administration' , 'setting' , 'administrators']],
+      tabArr: [
+        ['/administration' , 'setting' , 'setting'],
+        ['/administration' , 'setting' , 'administrators']
+      ],
       name: ['Настройки', 'Администраторы']
     },
   ];
