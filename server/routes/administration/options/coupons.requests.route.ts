@@ -11,12 +11,9 @@ routerCoupons.get(
     req,
     res,
     next): Promise<any> {
-    console.log('Route func active');
-    const test = await function(){
-      return {a: '123456'};
-    };
-    console.log('testRoute: ', test());
-    res.json(test);
+    console.log('router IN');
+    console.log('req: ', req.query);
+
   }
 );
 
