@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import {CouponsValidation} from '../../validation_route/administration/options/validation.coupons';
 
 /*Роутеры для категорий Администрирования сайта*/
 export class CategoryRoute {

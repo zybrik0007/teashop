@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlServer: 'localhost:4000/api/'
+  urlServer: 'localhost:4000/api/',
+  errorValidationServer: 'Невалидный запрос.'
 };
 
 /*

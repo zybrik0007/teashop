@@ -1,5 +1,5 @@
-const configuration_server = {
-  port_database: 3000,
+module.exports = {
+  port_database: 3306,
   host_database: 'localhost',
   user_database: 'admin',
   name_database: 'teashop',
@@ -8,4 +8,4 @@ const configuration_server = {
 };
 
 
-module.exports.configuration_server = configuration_server;
+

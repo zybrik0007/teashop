@@ -1,5 +1,8 @@
-require('./configuration_database');
-sequel.sequelize
+const connect = require('./configuration.database.ts');
+const model = require('../shemes_database/administration/shemes.administration.ts');
+
+
+connect.sequelize
   .authenticate()
   .then(() => {
     console.log('Соединение установлено.');

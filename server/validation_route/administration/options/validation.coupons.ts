@@ -2,7 +2,7 @@ const validationModule = require('../../../validation/administration/validation.
 const validation = new validationModule();
 
 /*Проверка запрсов на валидность данных разделе Купоны*/
-class CouponsValidation {
+export class CouponsValidation {
   getCoupons(req): boolean {
     if (!validation.typeObj(req)) {
       return false;
@@ -58,3 +58,4 @@ class CouponsValidation {
     return validation.typeStr(req[`searchName`]);
   }
 }
+
