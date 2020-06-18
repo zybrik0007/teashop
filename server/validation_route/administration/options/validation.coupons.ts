@@ -1,61 +1,60 @@
-const validationModule = require('../../../validation/administration/validation.requests.administration');
-const validation = new validationModule();
-
+import {ValidationRequestsAdmin} from '../../../validation/administration/validation.requests.administration';
+const validationd = new ValidationRequestsAdmin();
 /*Проверка запрсов на валидность данных разделе Купоны*/
 export class CouponsValidation {
   getCoupons(req): boolean {
-    if (!validation.typeObj(req)) {
+    if (!validationd.typeObj(req)) {
       return false;
     }
-    if (!validation.objRows(req)) {
+    if (!validationd.objRows(req)) {
       return false;
     }
-    if (!validation.objPage(req)) {
+    if (!validationd.objPage(req)) {
       return false;
     }
-    if (!validation.objSearchName(req)) {
+    if (!validationd.objSearchName(req)) {
       return false;
     }
-    if (!validation.objSortName(req)) {
+    if (!validationd.objSortName(req)) {
       return false;
     }
-    if (!validation.objSortValue(req)) {
+    if (!validationd.objSortValue(req)) {
       return false;
     }
-    if (!validation.typeStr(req[`rows`])) {
+    if (!validationd.typeStr(req[`rows`])) {
       return false;
     }
-    if (!validation.rowsValidation(req[`rows`])) {
+    if (!validationd.rowsValidation(req[`rows`])) {
       return false;
     }
-    if (!validation.typeStr(req[`page`])) {
+    if (!validationd.typeStr(req[`page`])) {
       return false;
     }
-    if (!validation.trimStr(req[`page`])) {
+    if (!validationd.trimStr(req[`page`])) {
       return false;
     }
-    if (!validation.integerNum(req[`page`])) {
+    if (!validationd.integerNum(req[`page`])) {
       return false;
     }
-    if (!validation.zeroNum(req[`page`])) {
+    if (!validationd.zeroNum(req[`page`])) {
       return false;
     }
-    if (!validation.zeroBigger(req[`page`])) {
+    if (!validationd.zeroBigger(req[`page`])) {
       return false;
     }
-    if (!validation.typeStr(req[`sortName`])) {
+    if (!validationd.typeStr(req[`sortName`])) {
       return false;
     }
-    if (!validation.sortNameCoupons(req[`sortName`])) {
+    if (!validationd.sortNameCoupons(req[`sortName`])) {
       return false;
     }
-    if (!validation.typeStr(req[`sortValue`])) {
+    if (!validationd.typeStr(req[`sortValue`])) {
       return false;
     }
-    if (!validation.sortValueValidation(req[`sortValue`])) {
+    if (!validationd.sortValueValidation(req[`sortValue`])) {
       return false;
     }
-    return validation.typeStr(req[`searchName`]);
+    return validationd.typeStr(req[`searchName`]);
   }
 }
 

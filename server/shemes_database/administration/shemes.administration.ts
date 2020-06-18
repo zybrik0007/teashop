@@ -63,6 +63,7 @@ const Coupon = connectDB.sequelize.define('coupon', {
   }
 });
 
+/*
 Coupon.sync()
   .then(
     r => {
@@ -71,7 +72,7 @@ Coupon.sync()
   .catch(e => {
     console.log('error add table');
   });
-
+*/
 module.exports.Coupon = Coupon;
 
 

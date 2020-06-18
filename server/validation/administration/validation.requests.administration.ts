@@ -1,4 +1,4 @@
-class ValidationRequestsAdmin {
+export class ValidationRequestsAdmin {
 
   /*Проверка что тип Строка*/
   typeStr(req): boolean {
@@ -78,7 +78,6 @@ class ValidationRequestsAdmin {
     return (req === 'ASC' || req === 'DESC');
   }
 
-
 }
 
-module.exports =  ValidationRequestsAdmin;
+
