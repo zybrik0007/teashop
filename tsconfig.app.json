@@ -6,11 +6,9 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts",
-    "./server/validation/administration/validation.requests.administration.ts"
+    "src/polyfills.ts"
   ],
   "include": [
-    "src/**/*.d.ts",
-    "./server/validation/administration/validation.requests.administration.ts"
+    "src/**/*.d.ts"
   ]
 }

@@ -1,6 +1,7 @@
-const Sequelizes = require('sequelize');
-const Op = Sequelize.Op;
-const scheme = require('../../../shemes_database/administration/shemes.administration');
+import {Sequelize, Op} from 'sequelize';
+
+
+import {Coupon} from '../../../shemes_database/administration/shemes.administration';
 
 /*Класс по работе запросов купонов и БД*/
 export class CouponDB {
@@ -10,7 +11,7 @@ export class CouponDB {
     /**/
     const limitd: number = Number(req[`page`]) * Number(req[`rows`]);
     const offsetd: number = limitd - Number(req[`rows`]);
-    const getCoupon = await scheme.Coupon.findAll({
+    const getCoupon = await Coupon.findAll({
       where: {
         [Op.or]: [
           {name: {[Op.like]: '%' + req[`searchName`] + '%'}},
@@ -22,7 +23,7 @@ export class CouponDB {
     });
     const getCouponPars = JSON.parse(JSON.stringify(getCoupon));
 
-    const countCoupon = await scheme.Coupon.findAll({
+    const countCoupon = await Coupon.findAll({
       attributes: [[Sequelize.fn('COUNT', Sequelize.col('*')), 'count']],
       where: {
         [Op.or]: [

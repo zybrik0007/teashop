@@ -1,8 +1,9 @@
-const connect = require('./configuration.database.ts');
-const model = require('../shemes_database/administration/shemes.administration.ts');
+import {Sequelize} from 'sequelize';
+import {sequel} from './configuration.database';
+import {Coupon} from '../shemes_database/administration/shemes.administration';
 
 
-connect.sequelize
+sequel
   .authenticate()
   .then(() => {
     console.log('Соединение установлено.');

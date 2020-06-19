@@ -1,13 +1,26 @@
-const Seq = require('sequelize');
-const connectDB = require('../../configuration_database/configuration.database.ts');
+import { Sequelize, Model, DataTypes, BuildOptions } from 'sequelize';
+import {sequel} from '../../configuration_database/configuration.database';
+
+
+
+
+
+// We need to declare an interface for our model that is basically what our class would be
+interface MyModel extends Model {
+  readonly id: number;
+}
+// Need to declare the static model so `findOne` etc. use correct types.
+// tslint:disable-next-line:prefer-const
+let MyModelStatic;
+type MyModelStatic = typeof Model & (new (values?: object, options?: BuildOptions) => MyModel);
 
 
 
 /*Таблицы купоны*/
-const Coupon = connectDB.sequelize.define('coupon', {
+export const Coupon = MyModelStatic.sequel.define('coupon', {
   /*id*/
   id: {
-    type: Seq.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     unique: true,
@@ -15,49 +28,49 @@ const Coupon = connectDB.sequelize.define('coupon', {
   },
   /*Публикация*/
   publication: {
-    type: Seq.BOOLEAN,
+    type: DataTypes.BOOLEAN,
     unique: false,
     allowNull: false
   },
   /*Код*/
   code: {
-    type: Seq.STRING,
+    type: DataTypes.STRING,
     unique: true,
     allowNull: false
   },
   /*Тип*/
   type: {
-    type: Seq.BOOLEAN,
+    type: DataTypes.BOOLEAN,
     unique: false,
     allowNull: false
   },
   /*Значение*/
   value: {
-    type: Seq.FLOAT,
+    type: DataTypes.FLOAT,
     unique: false,
     allowNull: false
   },
   /*Дата начала*/
   startDate: {
-    type: Seq.DATE,
+    type: DataTypes.DATE,
     unique: false,
     allowNull: false
   },
   /*Дата окончания*/
   endDate: {
-    type: Seq.DATE,
+    type: DataTypes.DATE,
     unique: false,
     allowNull: false
   },
   /*Для клинета ID*/
   clientId: {
-    type: Seq.INTEGER,
+    type: DataTypes.INTEGER,
     unique: false,
     allowNull: true
   },
   /*Завершить полсе испольхования*/
   completion: {
-    type: Seq.BOOLEAN,
+    type: DataTypes.BOOLEAN,
     unique: false,
     allowNull: false
   }
@@ -73,6 +86,6 @@ Coupon.sync()
     console.log('error add table');
   });
 */
-module.exports.Coupon = Coupon;
+
 
 

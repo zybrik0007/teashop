@@ -5,9 +5,9 @@ import {environment} from '../../../../src/environments/environment';
 const validation = new CouponsValidation();
 const express = require('express');
 
+import {CouponDB} from '../../../requests_database/administration/options/coupons.database.request';
 
-const CouponsDB = require('../../../requests_database/administration/options/coupons.databse.request');
-const CouponsReqDB = new CouponsDB.CouponDB();
+const CouponsReqDB = new CouponDB();
 
 export const routerCoupons = express.Router();
 
