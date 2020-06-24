@@ -1,4 +1,6 @@
 import {ValidationRequestsAdmin} from '../../../validation/administration/validation.requests.administration';
+import {PutInterface} from '../../../interfaces/administration/server.administration.interface';
+
 const validationd = new ValidationRequestsAdmin();
 /*Проверка запрсов на валидность данных разделе Купоны*/
 export class CouponsValidation {
@@ -55,6 +57,12 @@ export class CouponsValidation {
       return false;
     }
     return validationd.typeStr(req[`searchName`]);
+  }
+
+  putCoupons(req): [boolean, string] {
+    if (!req[`publication`]) {
+      return [false, ''];
+    }
   }
 }
 

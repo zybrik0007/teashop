@@ -78,6 +78,11 @@ export class ValidationRequestsAdmin {
     return (req === 'ASC' || req === 'DESC');
   }
 
+  /*Проверка что входящие данные равны 0 или 1*/
+  booleanValidation(req): boolean {
+    return (req === '0' || req === '1');
+  }
+
 }
 
 
