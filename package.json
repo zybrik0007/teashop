@@ -27,6 +27,7 @@
     "@nguniversal/express-engine": "^9.1.1",
     "express": "^4.15.2",
     "mysql2": "^2.1.0",
+    "pg-hstore": "^2.3.3",
     "rxjs": "~6.5.4",
     "sequelize": "^5.21.12",
     "tslib": "^1.10.0",

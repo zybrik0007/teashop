@@ -29,6 +29,7 @@ export class MainAdminComponent implements OnInit {
   @Input() sortValue: string; /*Значение сортировки ASC или DESC*/
   @Input() searchName: string; /*Значение поля поиск*/
 
+  test: string;
 
 
   constructor(
@@ -46,7 +47,7 @@ export class MainAdminComponent implements OnInit {
     this.page = 1;
     this.sortName = 'id';
     this.sortValue = 'ASC';
-    this.searchName = '';
+    this.searchName = 'test false';
 
     /*Первичная инициализация раздела Купоны*/
     if (this.router.url === '/administration/options/coupons') {
@@ -57,6 +58,7 @@ export class MainAdminComponent implements OnInit {
           sortValue: this.sortValue,
           searchName: this.searchName
         });
+      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Способ оплаты*/
@@ -68,6 +70,8 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
+      this.test = 'test true';
+      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Способ доставки*/
@@ -79,6 +83,7 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
+      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Цены на доставку*/
@@ -90,6 +95,7 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
+      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Статус заказа*/
@@ -101,6 +107,7 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
+      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Группы пользователей*/
@@ -112,6 +119,7 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
+      console.log('test: ', this.test);
     }
   }
 

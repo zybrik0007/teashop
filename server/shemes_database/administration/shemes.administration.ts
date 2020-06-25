@@ -7,11 +7,11 @@ interface MyModel extends Model {
 }
 // Need to declare the static model so `findOne` etc. use correct types.
 // tslint:disable-next-line:prefer-const
-let MyModelStatic;
+//let MyModelStatic;
 type MyModelStatic = typeof Model & (new (values?: object, options?: BuildOptions) => MyModel);
 
 /*Таблица администраторы*/
-export const Administrator = MyModelStatic.sequel.define('administrator', {
+export const Administrator = <MyModelStatic> sequel.define('administrator', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
@@ -53,7 +53,7 @@ export const Administrator = MyModelStatic.sequel.define('administrator', {
 });
 
 /*Таблица налоги*/
-export const Tax = MyModelStatic.sequel.define('tax', {
+export const Tax = <MyModelStatic> sequel.define('tax', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -76,7 +76,7 @@ export const Tax = MyModelStatic.sequel.define('tax', {
 });
 
 /*Таблицы купоны*/
-export const Coupon = MyModelStatic.sequel.define('coupon', {
+export const Coupon = <MyModelStatic> sequel.define('coupon', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
@@ -142,7 +142,7 @@ export const Coupon = MyModelStatic.sequel.define('coupon', {
 });
 
 /*Способ оплаты*/
-export const Payment = MyModelStatic.sequel.define('payment', {
+export const Payment = <MyModelStatic> sequel.define('payment', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
@@ -190,7 +190,6 @@ export const Payment = MyModelStatic.sequel.define('payment', {
   /*Выберити налог*/
   taxId: {
     type: DataTypes.INTEGER,
-    foreignKey : true,
     unique: false,
     allowNull: false
   },
@@ -242,7 +241,7 @@ Payment.hasMany(Tax, {foreignKey: 'taxId'});
 Tax.belongsTo(Payment, {foreignKey: 'taxId'});
 
 /*Способ доставки*/
-export const Delivery =  MyModelStatic.sequel.define('delivery', {
+export const Delivery =  <MyModelStatic> sequel.define('delivery', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
@@ -284,7 +283,7 @@ export const Delivery =  MyModelStatic.sequel.define('delivery', {
 });
 
 /*Цены на доставку*/
-export const Price = MyModelStatic.sequel.define('price', {
+export const Price = <MyModelStatic> sequel.define('price', {
   /*Название*/
   name: {
     type: DataTypes.STRING,
@@ -300,7 +299,6 @@ export const Price = MyModelStatic.sequel.define('price', {
   /*Налог*/
   taxId: {
     type: DataTypes.INTEGER,
-    foreignKey : true,
     unique: false,
     allowNull: false
   },
@@ -313,7 +311,6 @@ export const Price = MyModelStatic.sequel.define('price', {
   /*Налог на упаковку*/
   packing_taxId: {
     type: DataTypes.INTEGER,
-    foreignKey : true,
     unique: false,
     allowNull: false
   }
@@ -325,7 +322,7 @@ Price.hasMany(Tax, {foreignKey: 'packing_taxId'});
 Tax.belongsTo(Price, {foreignKey: 'packing_taxId'});
 
 /*Статус заказа*/
-export const Status = MyModelStatic.sequel.define('status', {
+export const Status = <MyModelStatic> sequel.define('status', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
@@ -355,7 +352,7 @@ export const Status = MyModelStatic.sequel.define('status', {
 });
 
 /*Группы пользователей*/
-export const Group = MyModelStatic.sequel.define('group', {
+export const Group = <MyModelStatic> sequel.define('group', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
@@ -397,10 +394,10 @@ export const Group = MyModelStatic.sequel.define('group', {
 });
 
 /*Таблица категорий*/
-const Category = MyModelStatic.sequel.define('category', {
+const Category = <MyModelStatic> sequel.define('category', {
   /*id*/
   id: {
-    type:DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     unique: true,
@@ -469,7 +466,7 @@ const Category = MyModelStatic.sequel.define('category', {
 });
 
 /*Таблица субкатегорий*/
-const Subcategory = MyModelStatic.sequel.define('subcategory', {
+const Subcategory = <MyModelStatic> sequel.define('subcategory', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
@@ -529,7 +526,6 @@ const Subcategory = MyModelStatic.sequel.define('subcategory', {
   /*Категория*/
   categoryId: {
     type: DataTypes.INTEGER,
-    foreignKey : true,
     unique: false,
     allowNull: false
   },
@@ -552,7 +548,7 @@ Subcategory.hasMany(Category, {foreignKey: 'categoryId'});
 Category.belongsTo(Subcategory, {foreignKey: 'categoryId'});
 
 /*Таблица товар*/
-const Good = MyModelStatic.sequel.define('good', {
+const Good = <MyModelStatic> sequel.define('good', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
@@ -654,14 +650,12 @@ const Good = MyModelStatic.sequel.define('good', {
   /*Категория*/
   categoryId: {
     type: DataTypes.INTEGER,
-    foreignKey : true,
     unique: false,
     allowNull: false
   },
   /*Cубкатегория*/
   subcategoryId: {
     type: DataTypes.INTEGER,
-    foreignKey : true,
     unique: false,
     allowNull: true
   },
