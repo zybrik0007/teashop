@@ -1,4 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewInit,
+  Component, DoCheck,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2
+} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-footer-admin',
@@ -7,27 +18,43 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FooterAdminComponent implements OnInit {
 
-  @Input() count: string;
-  @Input() page: string;
-  @Input() str: string;
+  @Input() countRows: number;
+  @Input() rows: number;
 
   firstPage: number;
   endPage: number;
-
+  activePage: number;
+  arrayPage: number[];
   pageDis: boolean;
 
-  constructor() { }
+  constructor(
+    el: ElementRef,
+    r: Renderer2
+  ) { }
 
   ngOnInit(): void {
-    this.FirstPageDisplay(this.count, this.page, this.str);
+    console.log('ngOnInit');
+    this.FirstPageDisplay(this.countRows, this.rows);
   }
 
-  FirstPageDisplay(countd, paged, strd) {
-    const sum: number = Math.ceil(Number(countd) / Number(strd));
+  FirstPageDisplay(countd, strd) {
+    const sum: number = Math.ceil(countd / strd);
     this.pageDis = sum > 1;
-    this.firstPage = paged;
+    this.firstPage = 1;
     this.endPage = (sum > 5) ? 5 : sum;
+    this.activePage = this.firstPage;
+    const arrd = [];
+    for (let i = this.firstPage; i <= this.endPage; i++) {
+      arrd.push(i);
+    }
+    this.arrayPage = arrd;
+    const ac =  document.getElementsByClassName('page');
+    this.activePage = 1;
   }
 
+  UpdatePage(event) {
+    this.activePage = event.target.innerText;
+    console.log(event);
+  }
 
 }

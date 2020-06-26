@@ -16,16 +16,12 @@
     </div>
     <div id="footerRight-admin" *ngIf="pageDis">
       <div id="footerRightArea-admin">
-        <div id="pages">
-          <a class="footerButtons"><small ><span class="icon-previous2"></span></small></a>
-          <a class="footerButtons"><small ><span class="icon-backward2"></span></small></a>
-          <a><small>10000</small></a>
-          <a><small>10002</small></a>
-          <a><small>10003</small></a>
-          <a><small>10004</small></a>
-          <a><small>10005</small></a>
-          <a class="footerButtons"><small><span class="icon-forward3"></span></small></a>
-          <a class="footerButtons"><small><span class="icon-next2"></span></small></a>
+        <div id="pages" >
+          <a class="footerButtons"><small>+<span class="icon-previous2"></span></small></a>
+          <a class="footerButtons"><small>+<span class="icon-backward2"></span></small></a>
+          <a id="pageItem" *ngFor="let item of arrayPage"><a [class.pageAct]="item == activePage" (click)=UpdatePage($event)><small>{{item}}</small></a></a>
+          <a class="footerButtons"><small>+<span class="icon-forward3"></span></small></a>
+          <a class="footerButtons"><small>+<span class="icon-next2"></span></small></a>
         </div>
       </div>
     </div>

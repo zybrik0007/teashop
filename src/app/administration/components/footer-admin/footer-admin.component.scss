@@ -18,7 +18,8 @@
 }
 
 #pages>a {
-  margin-right: 1.5%;
+  margin-right: 2%;
+  margin-left: 2%;
 }
 
 #footerRow-admin {
@@ -34,4 +35,19 @@
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: flex-end
+}
+
+#pageItem {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+}
+#pageItem>a {
+  margin-right: 2%;
+  margin-left: 2%;
+}
+.pageAct {
+  pointer-events: none;
+  color: red;
 }

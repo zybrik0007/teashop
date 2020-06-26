@@ -22,12 +22,14 @@ import {StatusService} from '../../services/requests/options/status.service';
 })
 export class MainAdminComponent implements OnInit {
 
-
   @Input() rows: number;  /*Количество строк*/
   @Input() page: number; /*Страница*/
   @Input() sortName: string; /*Поле сортировки*/
   @Input() sortValue: string; /*Значение сортировки ASC или DESC*/
   @Input() searchName: string; /*Значение поля поиск*/
+  @Input() countRows: number;
+
+
 
   test: string;
 
@@ -51,6 +53,8 @@ export class MainAdminComponent implements OnInit {
 
     /*Первичная инициализация раздела Купоны*/
     if (this.router.url === '/administration/options/coupons') {
+      this.countRows = 5000;
+      this.rows = 20;
       this.getCoupons({
           rows: this.rows,
           page: this.page,
@@ -58,11 +62,13 @@ export class MainAdminComponent implements OnInit {
           sortValue: this.sortValue,
           searchName: this.searchName
         });
-      console.log('test: ', this.test);
+
     }
 
     /*Первичная инициализация раздела Способ оплаты*/
     if (this.router.url === '/administration/options/payment') {
+      this.countRows = 40;
+      this.rows = 20;
       this.getPayment({
         rows: this.rows,
         page: this.page,
@@ -76,6 +82,8 @@ export class MainAdminComponent implements OnInit {
 
     /*Первичная инициализация раздела Способ доставки*/
     if (this.router.url === '/administration/options/delivery') {
+      this.countRows = 20;
+      this.rows = 20;
       this.getDelivery({
         rows: this.rows,
         page: this.page,
@@ -88,6 +96,8 @@ export class MainAdminComponent implements OnInit {
 
     /*Первичная инициализация раздела Цены на доставку*/
     if (this.router.url === '/administration/options/price') {
+      this.countRows = 80;
+      this.rows = 20;
       this.getPrice({
         rows: this.rows,
         page: this.page,
