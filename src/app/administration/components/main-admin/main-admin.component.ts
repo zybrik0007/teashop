@@ -53,7 +53,7 @@ export class MainAdminComponent implements OnInit {
 
     /*Первичная инициализация раздела Купоны*/
     if (this.router.url === '/administration/options/coupons') {
-      this.countRows = 5000;
+      this.countRows = 1000;
       this.rows = 20;
       this.getCoupons({
           rows: this.rows,

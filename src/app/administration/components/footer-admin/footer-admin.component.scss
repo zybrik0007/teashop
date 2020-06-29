@@ -27,25 +27,40 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
+
+}
+
+#footerLeft-admin {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+#footerRight-admin {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  flex-grow: 1;
 }
 
 .footerButtons {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: flex-end
+  justify-content: flex-end;
+
 }
 
 #pageItem {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-
 }
+
 #pageItem>a {
-  margin-right: 2%;
-  margin-left: 2%;
+  margin-right: 4%;
+
 }
 .pageAct {
   pointer-events: none;
