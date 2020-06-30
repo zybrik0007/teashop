@@ -6,7 +6,7 @@
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto, sans-serif;
   background: #b5b5b5;
 }
 
@@ -42,6 +42,7 @@
   flex-wrap: nowrap;
   align-items: flex-end;
   flex-grow: 1;
+  color: #000000;
 }
 
 .footerButtons {
@@ -64,5 +65,10 @@
 }
 .pageAct {
   pointer-events: none;
-  color: red;
+  color: #efff00;
+}
+
+.pageBlock {
+  pointer-events: none;
+  color: #847e7e;
 }

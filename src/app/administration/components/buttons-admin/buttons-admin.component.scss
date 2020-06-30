@@ -52,3 +52,23 @@
 .buttonBlock {
   background: #6d6d6d;
 }
+
+#buttonsSearch-admin {
+  margin-left: auto;
+}
+#buttonsSearch-admin>div {
+  border: 1px solid #6d6d6d;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 3px;
+}
+
+#buttonsSearch-admin>div>input {
+  width: 90%;
+  outline: none;
+  border: none;
+}

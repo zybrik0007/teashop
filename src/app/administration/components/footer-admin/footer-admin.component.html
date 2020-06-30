@@ -5,7 +5,7 @@
         <small>
           <label>Сумма записей</label>
           <label>
-            <select>
+            <select (change)="updateRows($event)">
               <option value=20>20</option>
               <option value=50 > 50 </option>
               <option value=100 >100</option>
@@ -17,11 +17,11 @@
     <div id="footerRight-admin" *ngIf="pageDis">
       <div id="footerRightArea-admin">
         <div id="pages" >
-          <a class="footerButtons" (click)="pageButtonFirst()"><small><span class="icon-previous2"></span></small></a>
-          <a class="footerButtons" (click)="pageButtomMinus()"><small><span class="icon-backward2"></span></small></a>
+          <a class="footerButtons" (click)="pageButtonFirst()" [class.pageBlock]="activePage == 1"><small><span class="icon-previous2"></span></small></a>
+          <a class="footerButtons" (click)="pageButtomMinus()" [class.pageBlock]="activePage == 1"><small><span class="icon-backward2"></span></small></a>
           <a id="pageItem" *ngFor="let item of arrayPage"><a [class.pageAct]="item == activePage" (click)=UpdatePage($event)><small>{{item}}</small></a></a>
-          <a class="footerButtons" (click)="pageButtonPlus()"><small><span class="icon-forward3"></span></small></a>
-          <a class="footerButtons" (click)="pageButtonEnd()" ><small><span class="icon-next2"></span></small></a>
+          <a class="footerButtons" (click)="pageButtonPlus()" [class.pageBlock]="activePage == sum"><small><span class="icon-forward3"></span></small></a>
+          <a class="footerButtons" (click)="pageButtonEnd()" [class.pageBlock]="activePage == sum"><small><span class="icon-next2"></span></small></a>
         </div>
       </div>
     </div>

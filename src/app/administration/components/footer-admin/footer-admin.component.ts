@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges} from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {Observable} from 'rxjs';
 
@@ -7,16 +7,24 @@ import {Observable} from 'rxjs';
   templateUrl: './footer-admin.component.html',
   styleUrls: ['./footer-admin.component.scss']
 })
-export class FooterAdminComponent implements OnInit {
+export class FooterAdminComponent implements OnInit, OnChanges {
+
+
 
   @Input() countRows: number;
-  @Input() rows: number;
+  rows: number = 20;
+
+  @Output() rowsUpt: EventEmitter<object> = new EventEmitter<object>();
+  @Output() pageUpt: EventEmitter<object> = new EventEmitter<object>();
+
 
   firstPage: number;
   endPage: number;
   activePage: number;
   arrayPage: number[];
   pageDis: boolean;
+  sum: number;
+
 
   constructor(
     el: ElementRef,
@@ -25,15 +33,26 @@ export class FooterAdminComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit');
-    this.FirstPageDisplay(this.countRows, this.rows);
+    console.log('this.countRows: ', this.countRows);
+    console.log('this.rows: ', this.rows);
+    this.sum = Math.ceil(this.countRows / this.rows);
+    this.FirstPageDisplay();
   }
 
-  FirstPageDisplay(countd, strd) {
-    const sum: number = Math.ceil(countd / strd);
-    this.pageDis = sum > 1;
+  ngOnChanges(changes: SimpleChanges): void {
+    const dataChangeFotter = changes['countRows'];
+    console.log('changes: ', dataChangeFotter);
+    if (!dataChangeFotter['firstChange']) {
+      this.countRows = dataChangeFotter['currentValue'];
+      this.ngOnInit();
+    }
+  }
+
+  /*Первичная инициализця*/
+  FirstPageDisplay() {
+    this.pageDis = this.sum > 1;
     this.firstPage = 1;
-    this.endPage = (sum > 5) ? 5 : sum;
+    this.endPage = (this.sum > 5) ? 5 : this.sum;
     this.activePage = this.firstPage;
     const arrd = [];
     for (let i = this.firstPage; i <= this.endPage; i++) {
@@ -44,19 +63,14 @@ export class FooterAdminComponent implements OnInit {
     this.activePage = 1;
   }
 
+  /*Изменение, при нажатии на странцу*/
   UpdatePageDisplay(clickItem) {
-    const sum: number = Math.ceil(this.countRows / this.rows);
     const arrd = [];
-    //console.log('Upt event', clickItem);
-    //console.log('Upt firstPage', this.firstPage);
-    //console.log('Upt endPage', this.endPage);
-    //console.log('Upt activePage', this.activePage);
-
-    if (clickItem === this.endPage && clickItem !== sum) {
+    if (clickItem === this.endPage && clickItem !== this.sum) {
       this.firstPage = clickItem;
       this.endPage = this.firstPage + 4;
-      if (this.endPage > sum) {
-        this.endPage = sum;
+      if (this.endPage > this.sum) {
+        this.endPage = this.sum;
       }
       if (this.firstPage > 99 || this.endPage > 99) {
         this.endPage = this.endPage - 2;
@@ -97,18 +111,17 @@ export class FooterAdminComponent implements OnInit {
       console.log('Upt 2 arrayPage ', this.arrayPage);
       this.arrayPage = arrd;
     }
-
     this.activePage = clickItem;
-    //console.log('Upt after firstPage', this.firstPage);
-    //console.log('Upt  after endPage', this.endPage);
-    //console.log('Upt  after activePage', this.activePage);
+    this.emitPage();
   }
 
+  /*Нажатие на странцу*/
   UpdatePage(event) {
     const clickItem = Number(event.target.innerText);
     this.UpdatePageDisplay(clickItem);
   }
 
+  /*Нажатие на кнеопку увелечения на одну страницу*/
   pageButtonPlus() {
     const sum: number = Math.ceil(this.countRows / this.rows);
     this.activePage = this.activePage  + 1;
@@ -135,10 +148,11 @@ export class FooterAdminComponent implements OnInit {
     }
     this.arrayPage = [];
     this.arrayPage = arrd;
-
+    this.emitPage();
   }
+
+  /*Нажатие на кнеопку уменьшения на одну страницу*/
   pageButtomMinus() {
-    const sum: number = Math.ceil(this.countRows / this.rows);
     this.activePage = this.activePage - 1;
     if (this.activePage < 1) {
       this.activePage = 1;
@@ -152,11 +166,11 @@ export class FooterAdminComponent implements OnInit {
       this.endPage = this.activePage;
       if (this.firstPage <= 1) {
         this.firstPage = 1;
-        if (sum > 5) {
+        if (this.sum > 5) {
           this.endPage = 5;
         }
         else {
-          this.endPage = sum;
+          this.endPage = this.sum;
         }
       }
       if (this.firstPage > 99 || this.endPage > 99) {
@@ -175,11 +189,13 @@ export class FooterAdminComponent implements OnInit {
       this.arrayPage = [];
       this.arrayPage = arrd;
     }
+    this.emitPage();
   }
+
+  /*Нажатие на кнеопку для вывода последний страницы*/
   pageButtonEnd() {
-    const sum: number = Math.ceil(this.countRows / this.rows);
-    this.activePage = this.endPage = sum;
-    this.firstPage = sum - 4;
+    this.activePage = this.endPage = this.sum;
+    this.firstPage = this.sum - 4;
     if (this.firstPage < 1) {
       this.firstPage = 1;
     }
@@ -198,11 +214,11 @@ export class FooterAdminComponent implements OnInit {
     }
     this.arrayPage = [];
     this.arrayPage = arrd;
+    this.emitPage();
   }
+
+  /*Нажатие на кнеопку для вывода первой страницы*/
   pageButtonFirst() {
-    console.log('Upt firstPage', this.firstPage);
-    console.log('Upt  endPage', this.endPage);
-    console.log('Upt  activePage', this.activePage);
     const sum: number = Math.ceil(this.countRows / this.rows);
     this.activePage = 1;
     this.firstPage = 1;
@@ -218,9 +234,18 @@ export class FooterAdminComponent implements OnInit {
     }
     this.arrayPage = [];
     this.arrayPage = arrd;
-    console.log('Upt after firstPage', this.firstPage);
-    console.log('Upt after endPage', this.endPage);
-    console.log('Upt after  activePage', this.activePage);
+    this.emitPage();
+  }
 
+  /*Отправка измения страниц в главный модуль*/
+  emitPage() {
+    this.pageUpt.emit({page: this.activePage});
+  }
+
+  /*Изменение Квывода количества строк*/
+  updateRows(event) {
+    this.rows = Number(event.target.value);
+    this.ngOnInit();
+    this.rowsUpt.emit({rows: event.target.value});
   }
 }

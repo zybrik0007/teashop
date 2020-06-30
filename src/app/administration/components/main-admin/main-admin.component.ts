@@ -22,16 +22,12 @@ import {StatusService} from '../../services/requests/options/status.service';
 })
 export class MainAdminComponent implements OnInit {
 
-  @Input() rows: number;  /*Количество строк*/
-  @Input() page: number; /*Страница*/
-  @Input() sortName: string; /*Поле сортировки*/
-  @Input() sortValue: string; /*Значение сортировки ASC или DESC*/
-  @Input() searchName: string; /*Значение поля поиск*/
-  @Input() countRows: number;
-
-
-
-  test: string;
+  rows: number;  /*Количество строк*/
+  page: number; /*Страница*/
+  sortName: string; /*Поле сортировки*/
+  sortValue: string; /*Значение сортировки ASC или DESC*/
+  searchName: string; /*Значение поля поиск*/
+  countRows: number;
 
 
   constructor(
@@ -53,8 +49,7 @@ export class MainAdminComponent implements OnInit {
 
     /*Первичная инициализация раздела Купоны*/
     if (this.router.url === '/administration/options/coupons') {
-      this.countRows = 1000;
-      this.rows = 20;
+      this.countRows = 5000000;
       this.getCoupons({
           rows: this.rows,
           page: this.page,
@@ -62,13 +57,11 @@ export class MainAdminComponent implements OnInit {
           sortValue: this.sortValue,
           searchName: this.searchName
         });
-
     }
 
     /*Первичная инициализация раздела Способ оплаты*/
     if (this.router.url === '/administration/options/payment') {
       this.countRows = 40;
-      this.rows = 20;
       this.getPayment({
         rows: this.rows,
         page: this.page,
@@ -76,8 +69,6 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
-      this.test = 'test true';
-      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Способ доставки*/
@@ -91,7 +82,6 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
-      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Цены на доставку*/
@@ -105,7 +95,6 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
-      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Статус заказа*/
@@ -117,7 +106,6 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
-      console.log('test: ', this.test);
     }
 
     /*Первичная инициализация раздела Группы пользователей*/
@@ -129,8 +117,49 @@ export class MainAdminComponent implements OnInit {
         sortValue: this.sortValue,
         searchName: this.searchName
       });
-      console.log('test: ', this.test);
     }
+  }
+
+  UpdatePage(event: object) {
+    const key = Object.keys(event);
+    switch (key[0]) {
+      case('rows'):  {
+        this.rows = Number(event['rows']);
+        this.page = 1;
+        break;
+      }
+      case('page'): {
+        this.page = Number(event['page']);
+        break;
+      }
+      case('search'): {
+        this.searchName = event['search'];
+        this.page = 1;
+        break;
+      }
+      case('sort'): {
+        const objSort = event['sort'];
+        this.sortName = objSort['sortName'];
+        this.sortValue = objSort['sortValue'];
+        break;
+      }
+    }
+
+    if (this.router.url === '/administration/options/coupons') {
+      //this.countRows = 1000000;
+      this.getCoupons({
+        rows: this.rows,
+        page: this.page,
+        sortName: this.sortName,
+        sortValue: this.sortValue,
+        searchName: this.searchName
+      });
+    }
+
+    if (key[0] === 'search') {
+      this.countRows = 11111;
+    }
+
   }
 
 

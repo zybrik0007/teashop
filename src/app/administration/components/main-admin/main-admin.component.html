@@ -10,13 +10,13 @@
       <app-tabs-admin></app-tabs-admin>
     </div>
     <div id="buttons-admin">
-      <app-buttons-admin></app-buttons-admin>
+      <app-buttons-admin (searchUpt)="UpdatePage($event)"></app-buttons-admin>
     </div>
     <div id="table-admin">
-      <app-table-admin></app-table-admin>
+      <app-table-admin (sortOutput)="UpdatePage($event)"></app-table-admin>
     </div>
     <div id="footer-admin">
-      <app-footer-admin [countRows]="countRows" [rows]="rows"></app-footer-admin>
+      <app-footer-admin [countRows]="countRows" (rowsUpt)="UpdatePage($event)" (pageUpt)="UpdatePage($event)" ></app-footer-admin>
     </div>
   </div>
 </div>

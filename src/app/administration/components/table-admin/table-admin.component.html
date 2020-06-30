@@ -3,20 +3,22 @@
     <div id="tablecContent-admin">
       <div id="tableHead-admin">
 
-        <div>
+        <div class="itemSort" data-sort="name" data-val="" (click)="sortUpt($event)">
           <div>
             <div>
               <div><span>Название</span></div>
-              <div class="filterPosition"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition" *ngIf="column=='name' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='name' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
 
-        <div>
+        <div class="itemSort" data-sort="category" data-val="" (click)="sortUpt($event)">
           <div>
             <div>
               <div><span>Категория</span></div>
-              <div class="filterPosition filterDESC"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition" *ngIf="column=='category' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='category' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
