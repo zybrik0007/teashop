@@ -24,7 +24,9 @@ import { TableWebComponent } from './website/components/table-web/table-web.comp
 import { FooterWebComponent } from './website/components/footer-web/footer-web.component';
 import { CabinetWebComponent } from './website/components/cabinet-web/cabinet-web.component';
 import { TableAdminComponent } from './administration/components/table-admin/table-admin.component';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ModalAdminComponent } from './administration/components/modal-admin/modal-admin.component';
+
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     TableWebComponent,
     FooterWebComponent,
     CabinetWebComponent,
-    TableAdminComponent
+    TableAdminComponent,
+    ModalAdminComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

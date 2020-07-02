@@ -1,0 +1,136 @@
+#modal-area {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0, 0.5);
+  font-family: Roboto, sans-serif;
+}
+
+#modal-coupon {
+  position: absolute;
+  width: 400px;
+  height: 570px;
+  margin: auto;
+  left: 0; bottom: 0; right: 0; top: 0;
+}
+
+#modal-coupon>form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background: white;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+
+#modal-coupon-head {
+  width: 100%;
+  height: 50px;
+  background: #eddfec;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-coupon-head>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: #714871;;
+}
+
+#modal-coupon-exit {
+  font-size: small;
+}
+
+#modal-coupon-content {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+#modal-coupon-content>div {
+  width: 90%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+}
+
+#modal-coupon-content>div>div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+#modal-coupon-content>div>div>div {
+  width: 50%;
+}
+
+#modal-coupon-footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  background: #eddfec;
+  margin-top: 3%;
+}
+
+#modal-coupon-footer>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  color: #714871;;
+}
+
+#modal-coupon-footer>div>div {
+  height: 30px;
+  width: 100px;
+  background: #714871;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#modal-coupon-footer>div>div>h4 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#modal-coupon-footer>div>div>h4>button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: inherit;
+  color: #efe4e4;
+}
+
+
