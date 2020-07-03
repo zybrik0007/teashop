@@ -9,6 +9,7 @@
             <div id="modal-coupon-exit"><span class="icon-cross"></span></div>
           </div>
         </div>
+
         <div id="modal-coupon-content">
 
           <div>
@@ -21,75 +22,72 @@
                 <div>
                   <input type="checkbox" formControlName="couponPublication">
                 </div>
-                <div>
-                  <small>Ошибка</small>
-                </div>
               </div>
             </div>
 
             <div id="modal-coupon-code">
               <div>
-                <div><label>Код*</label></div>
+                <div><label>Код<span>*</span></label></div>
               </div>
               <div>
                 <div>
-                  <input type="text" formControlName="couponCode">
+                  <input id="test" type="text" formControlName="couponCode">
                 </div>
-                <div>
-                  <small>Ошибка</small>
+                <div *ngIf="couponForm.get('couponCode').invalid && couponForm.get('couponCode').touched">
+                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.required || couponForm.get('couponCode').errors.trim">Поле Код не заполнено</small>
+                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.maxlength">Поле Код больше 100 символов</small>
                 </div>
               </div>
             </div>
 
             <div id="modal-coupon-type">
               <div>
-                <div><label>Тип*</label></div>
+                <div><label>Тип<span>*</span></label></div>
               </div>
               <div>
-                <div>
-                  <input type="radio" formControlName="couponType">
+                <div class="modal-check">
+                  <label>Процент</label>
+                  <input type="radio"  formControlName="couponType" value="percent">
+                </div>
+                <div class="modal-check">
+                  <label>Значение</label>
+                  <input type="radio"  formControlName="couponType" value="value">
                 </div>
               </div>
             </div>
 
             <div id="modal-coupon-value">
               <div>
-                <div><label>Значение</label></div>
+                <div><label>Значение<span>*</span></label></div>
               </div>
               <div>
                 <div>
-                  <input type="text" formControlName="couponValue">
+                  <input type="number" formControlName="couponValue">
                 </div>
-                <div>
-                  <small>Ошибка</small>
+                <div *ngIf="couponForm.get('couponValue').invalid && couponForm.get('couponValue').touched">
+                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.required">Поле Значение не заполнено или введено не число</small>
                 </div>
               </div>
             </div>
 
             <div id="modal-coupon-data-start">
               <div>
-                <div><label>Дата начала</label></div>
+                <div><label>Дата начала<span>*</span></label></div>
               </div>
               <div>
                 <div>
                   <input type="date" formControlName="couponDateStart">
-                </div>
-                <div>
-                  <small>Ошибка</small>
                 </div>
               </div>
             </div>
 
             <div id="modal-coupon-data-end">
               <div>
-                <div><label>Дата завершения</label></div>
+                <div><label>Дата завершения<span>*</span></label></div>
               </div>
               <div>
                 <div>
                   <input type="date" formControlName="couponDateEnd">
-                </div>
-                <div>
-                  <small>Ошибка</small>
                 </div>
               </div>
             </div>
@@ -102,9 +100,6 @@
                 <div>
                   <input type="text" formControlName="couponClient">
                 </div>
-                <div>
-                  <small>Ошибка</small>
-                </div>
               </div>
             </div>
 
@@ -116,12 +111,8 @@
                 <div>
                   <input type="checkbox" formControlName="couponFinish">
                 </div>
-                <div>
-                  <small>Ошибка</small>
-                </div>
               </div>
             </div>
-
 
         </div>
 
@@ -130,7 +121,7 @@
         <div id="modal-coupon-footer">
           <div>
             <div>
-              <h4><button type="submit">Сохранить</button></h4>
+              <h4><button id="coupon-sub" type="submit" [disabled]="couponForm.invalid">Сохранить</button></h4>
             </div>
           </div>
         </div>
