@@ -3,4 +3,5 @@ export class TabsDisplayAdminInterface {
   url: string;
   tabArr: string[][];
   name: string[];
+  id: string[];
 }

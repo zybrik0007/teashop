@@ -12,6 +12,7 @@ export class TabsAdminComponent implements OnInit {
   routerActive: TabsDisplayAdminInterface[];
   linkValue: string[][];
   linkName: string[];
+  linkId: string[];
   routerTrue: string;
   routerArr: string[];
 
@@ -23,12 +24,14 @@ export class TabsAdminComponent implements OnInit {
         ['/administration', 'orders' , 'orders'],
         ['/administration', 'orders' , 'statistics']
       ],
-      name: ['Заказы', 'Статистика']
+      name: ['Заказы', 'Статистика'],
+      id: ['orders-admin-orders', 'orders-admin-statistics']
     },
     {
       url: '/administration/goods',
       tabArr: [['/administration' , 'goods' , 'goods']],
-      name: ['Товары']
+      name: ['Товары'],
+      id: ['goods-admin-goods']
     },
     {
       url: '/administration/category',
@@ -36,12 +39,14 @@ export class TabsAdminComponent implements OnInit {
         ['/administration' , 'category' , 'category'],
         ['/administration' , 'category' , 'subcategory']
       ],
-      name: ['Категории', 'Субкатегории']
+      name: ['Категории', 'Субкатегории'],
+      id: ['category-admin-category', 'category-admin-subcategory']
     },
     {
       url: '/administration/clients',
       tabArr: [['/administration' , 'clients' , 'clients']],
-      name: ['Клиенты']
+      name: ['Клиенты'],
+      id: ['clients-admin-clients']
     },
     {
       url: '/administration/options',
@@ -53,7 +58,8 @@ export class TabsAdminComponent implements OnInit {
         ['/administration' , 'options' , 'status'],
         ['/administration' , 'options' , 'groups']
       ],
-      name: ['Купоны', 'Способ оплаты', 'Способ доставки', 'Цены на доставку', 'Статус заказа', 'Группы пользователей']
+      name: ['Купоны', 'Способ оплаты', 'Способ доставки', 'Цены на доставку', 'Статус заказа', 'Группы пользователей'],
+      id: ['options-admin-coupons', 'options-admin-payment', 'options-admin-delivery', 'options-admin-price', 'options-admin-status', 'options-admin-groups']
     },
     {
       url: '/administration/setting',
@@ -61,7 +67,8 @@ export class TabsAdminComponent implements OnInit {
         ['/administration' , 'setting' , 'setting'],
         ['/administration' , 'setting' , 'administrators']
       ],
-      name: ['Настройки', 'Администраторы']
+      name: ['Настройки', 'Администраторы'],
+      id: ['setting-admin-setting', 'setting-admin-administrators']
     },
   ];
 
@@ -79,6 +86,7 @@ export class TabsAdminComponent implements OnInit {
     this.routerActive = this.tabsObj.filter(el => el.url === this.routerTrue);
     this.linkValue = this.routerActive[0].tabArr;
     this.linkName = this.routerActive[0].name;
+    this.linkId = this.routerActive[0].id;
   }
 
 }

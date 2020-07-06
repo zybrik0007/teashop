@@ -49,4 +49,33 @@
   height: 30px;
 }
 
+@media screen and (max-width: 650px){
+  #tabs-admin {
+    height: 30px;
+  }
+}
 
+@media screen and (max-width: 400px){
+  #tabs-admin {
+    height: 20px;
+  }
+}
+
+@media screen and (max-width: 620px){
+  #buttons-admin {
+    width: 100%;
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 650px){
+  #footer-admin {
+
+  }
+}
+
+@media screen and (max-width: 550px){
+  #footer-admin {
+    height: 20px;
+  }
+}

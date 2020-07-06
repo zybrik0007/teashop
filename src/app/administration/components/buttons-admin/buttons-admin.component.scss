@@ -15,7 +15,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-
 }
 
 #buttonsChange-admin {
@@ -71,4 +70,26 @@
   width: 90%;
   outline: none;
   border: none;
+}
+
+
+@media screen and (max-width: 650px){
+  #buttons-admin {
+    width: 100%;
+    height: 50px;
+  }
+  #buttonsRow-admin{
+    width: 95%;
+    height: 32px;
+  }
+
+  #buttonsChange-admin {
+    width: 102px;
+  }
+
+  #buttonsSearch-admin>div {
+    height: 30px;
+    width: 100px;
+  }
+
 }

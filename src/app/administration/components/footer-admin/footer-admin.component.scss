@@ -35,6 +35,12 @@
   flex-direction: column;
   flex-wrap: nowrap;
 }
+#footerLeftArea-admin {
+  white-space: nowrap;
+}
+#footerLeftArea-admin>small>small>label {
+  margin-left: 2%;
+}
 
 #footerRight-admin {
   display: flex;
@@ -71,4 +77,40 @@
 .pageBlock {
   pointer-events: none;
   color: #847e7e;
+}
+
+@media screen and (max-width: 650px){
+  #footerArea-admin {
+    font-size: 80%;
+  }
+  select {
+    font-size: 80%;
+  }
+}
+
+@media screen and (max-width: 550px){
+  #footerArea-admin {
+    font-size: 70%;
+  }
+  select {
+    font-size: 70%;
+  }
+}
+
+@media screen and (max-width: 450px){
+  #footerArea-admin {
+    font-size: 50%;
+  }
+  select {
+    font-size: 70%;
+  }
+}
+
+@media screen and (max-width: 312px){
+  #footerArea-admin {
+    font-size: 50%;
+  }
+  select {
+    font-size: 50%;
+  }
 }

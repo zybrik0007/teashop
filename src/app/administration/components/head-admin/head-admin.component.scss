@@ -83,3 +83,22 @@
 #headExit-admin {
   color:#a42ae2;
 }
+
+
+@media screen and (max-width: 450px){
+  #headArea-admin {
+    font-size: 80%;
+  }
+  #headName-admin>span {
+    font-size: 80%;
+  }
+}
+
+@media screen and (max-width: 360px){
+  #headArea-admin {
+    font-size: 60%;
+  }
+  #headName-admin>span {
+    font-size: 60%;
+  }
+}

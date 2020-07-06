@@ -5,6 +5,7 @@
   height: 50px;
   width: 100%;
   font-family: Roboto, sans-serif;
+  white-space: nowrap;
 }
 
 #tabsRow-admin {
@@ -14,14 +15,14 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  font-size: small;
+  font-size: 100%;
   align-items: flex-end;
 }
 
 #tabsRow-admin>div {
   height: 40px;
   width: 15%;
-  margin-left: 15px;
+  margin-left: 1%;
   color: #714871;
 }
 #tabsRow-admin>div>div {
@@ -49,3 +50,113 @@
   background: #eddfec;
   color: #714871;
 }
+
+
+@media screen and (max-width: 1450px) {
+
+  #tabsRow-admin>#options-admin-coupons {
+    width: 8%;
+  }
+
+  #tabsRow-admin>#options-admin-payment {
+    width: 15%;
+  }
+
+  #tabsRow-admin>#options-admin-delivery {
+    width: 16%;
+  }
+
+  #tabsRow-admin>#options-admin-price {
+    width: 16%;
+  }
+
+  #tabsRow-admin>#options-admin-status {
+    width: 13%;
+  }
+
+  #tabsRow-admin>#options-admin-groups {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+
+  #tabsRow-admin>#options-admin-coupons {
+    width: 8%;
+  }
+
+  #tabsRow-admin>#options-admin-payment {
+    width: 15%;
+  }
+
+  #tabsRow-admin>#options-admin-delivery {
+    width: 17%;
+  }
+
+  #tabsRow-admin>#options-admin-price {
+    width: 17%;
+  }
+
+  #tabsRow-admin>#options-admin-status {
+    width: 14%;
+  }
+
+  #tabsRow-admin>#options-admin-groups {
+    width: 22%;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  #tabsRow-admin {
+    font-size: 80%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #tabsRow-admin {
+    font-size: 70%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  #tabsRow-admin {
+    font-size: 50%;
+  }
+  #tabsArea-admin {
+    height: 30px;
+  }
+  #tabsRow-admin {
+    height: 30px;
+  }
+  #tabsRow-admin>div {
+    height: 25px;
+  }
+
+}
+
+@media screen and (max-width: 460px) {
+  #tabsRow-admin {
+    font-size: 30%;
+  }
+}
+
+@media screen and (max-width: 400px){
+  #tabsArea-admin {
+    height: 20px;
+  }
+  #tabsRow-admin {
+    height: 20px;
+  }
+  #tabsRow-admin>div {
+    height: 15px;
+  }
+
+}
+
+@media screen and (max-width: 350px) {
+  #tabsRow-admin {
+    font-size: 30%;
+    text-overflow: ellipsis;
+  }
+}
+

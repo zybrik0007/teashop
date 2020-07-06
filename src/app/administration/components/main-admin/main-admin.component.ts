@@ -28,7 +28,7 @@ export class MainAdminComponent implements OnInit {
   sortValue: string; /*Значение сортировки ASC или DESC*/
   searchName: string; /*Значение поля поиск*/
   countRows: number;
-  modal: boolean = true; /*Активация модального окна*/
+  modal: boolean = false; /*Активация модального окна*/
 
 
   constructor(
