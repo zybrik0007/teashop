@@ -229,8 +229,9 @@ export class MainAdminComponent implements OnInit {
     /***** *****/
 
     add() {
-      this.modal = true;
-      console.log('test');
-      this.modalNameParent = 'add-coupon';
+      if (this.router.url === '/administration/options/coupons') {
+        this.modal = true;
+        this.modalNameParent = 'add-coupon';
+      }
     }
 }

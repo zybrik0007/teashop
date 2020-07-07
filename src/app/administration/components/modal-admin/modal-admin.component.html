@@ -34,8 +34,9 @@
                   <input id="test" type="text" formControlName="couponCode">
                 </div>
                 <div *ngIf="couponForm.get('couponCode').invalid && couponForm.get('couponCode').touched">
-                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.required || couponForm.get('couponCode').errors.trim">Поле Код не заполнено</small>
-                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.maxlength">Поле Код больше 100 символов</small>
+                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.required || couponForm.get('couponCode').errors.trim">Ввиедите код</small>
+                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.maxlength">Код больше 100 символов</small>
+                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.code">Код может содержать только латинские буквы и цифры</small>
                 </div>
               </div>
             </div>
@@ -65,7 +66,7 @@
                   <input type="number" formControlName="couponValue">
                 </div>
                 <div *ngIf="couponForm.get('couponValue').invalid && couponForm.get('couponValue').touched">
-                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.required">Поле Значение не заполнено или введено не число</small>
+                  <small class="errorForm" *ngIf="couponForm.get('couponValue').errors.required">Введите число</small>
                 </div>
               </div>
             </div>
@@ -78,6 +79,9 @@
                 <div>
                   <input type="date" formControlName="couponDateStart">
                 </div>
+                <div *ngIf="couponForm.get('couponDateStart').invalid && couponForm.get('couponDateStart').touched">
+                  <small class="errorForm" *ngIf="couponForm.get('couponDateStart').errors.required">Введите дату начала</small>
+                </div>
               </div>
             </div>
 
@@ -88,6 +92,9 @@
               <div>
                 <div>
                   <input type="date" formControlName="couponDateEnd">
+                </div>
+                <div *ngIf="couponForm.get('couponDateEnd').invalid && couponForm.get('couponDateEnd').touched">
+                  <small class="errorForm" *ngIf="couponForm.get('couponDateEnd').errors.required">Введите дату окончания</small>
                 </div>
               </div>
             </div>

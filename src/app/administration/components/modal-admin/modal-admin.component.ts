@@ -25,11 +25,11 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     const now = this.today();
     this.couponForm = new FormGroup({
       couponPublication: new FormControl(''),
-      couponCode: new FormControl('', [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100)]),
+      couponCode: new FormControl('', [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100), ValidatorAdministration.code]),
       couponType: new FormControl('percent'),
       couponValue: new FormControl('', [Validators.required]),
-      couponDateStart: new FormControl(now),
-      couponDateEnd: new FormControl(now),
+      couponDateStart: new FormControl('', [Validators.required]),
+      couponDateEnd: new FormControl('', [Validators.required]),
       couponClient: new FormControl(''),
       couponFinish: new FormControl('')
     });
