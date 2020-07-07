@@ -33,15 +33,12 @@ export class FooterAdminComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log('this.countRows: ', this.countRows);
-    console.log('this.rows: ', this.rows);
     this.sum = Math.ceil(this.countRows / this.rows);
     this.FirstPageDisplay();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges) {
     const dataChangeFotter = changes['countRows'];
-    console.log('changes: ', dataChangeFotter);
     if (!dataChangeFotter['firstChange']) {
       this.countRows = dataChangeFotter['currentValue'];
       this.ngOnInit();

@@ -175,5 +175,9 @@ input {
 }
 
 
-
+@media screen and (max-width: 460px){
+    #modal-area {
+      width: 460px;
+    }
+}
 

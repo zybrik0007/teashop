@@ -1,6 +1,6 @@
 
 <div id="modal-area">
-  <div id="modal-coupon">
+  <div id="modal-coupon" *ngIf="modal==='coupon'">
 
       <form [formGroup]="couponForm" (ngSubmit)="couponSubmit()">
         <div id="modal-coupon-head">

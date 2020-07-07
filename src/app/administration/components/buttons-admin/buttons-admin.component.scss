@@ -50,6 +50,7 @@
 }
 .buttonBlock {
   background: #6d6d6d;
+  pointer-events: none;
 }
 
 #buttonsSearch-admin {
@@ -70,6 +71,14 @@
   width: 90%;
   outline: none;
   border: none;
+}
+
+.buttonActive:hover {
+  background: #af67af;
+}
+
+.buttonActive:active {
+  background: #734473;
 }
 
 

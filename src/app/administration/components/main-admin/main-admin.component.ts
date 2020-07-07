@@ -29,6 +29,7 @@ export class MainAdminComponent implements OnInit {
   searchName: string; /*Значение поля поиск*/
   countRows: number;
   modal: boolean = false; /*Активация модального окна*/
+  modalNameParent: string  = 'testmodal';
 
 
   constructor(
@@ -147,7 +148,6 @@ export class MainAdminComponent implements OnInit {
     }
 
     if (this.router.url === '/administration/options/coupons') {
-      //this.countRows = 1000000;
       this.getCoupons({
         rows: this.rows,
         page: this.page,
@@ -227,4 +227,10 @@ export class MainAdminComponent implements OnInit {
   }
 
     /***** *****/
+
+    add() {
+      this.modal = true;
+      console.log('test');
+      this.modalNameParent = 'add-coupon';
+    }
 }

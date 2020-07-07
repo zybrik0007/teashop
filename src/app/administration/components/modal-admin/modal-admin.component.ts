@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {pipe} from 'rxjs';
 import {ValidatorAdministration} from '../../validators/validator-administration';
@@ -8,11 +8,14 @@ import {ValidatorAdministration} from '../../validators/validator-administration
   templateUrl: './modal-admin.component.html',
   styleUrls: ['./modal-admin.component.scss']
 })
-export class ModalAdminComponent implements OnInit {
+export class ModalAdminComponent implements OnInit, OnChanges {
 
-  nameHead: string = 'Добавить купон';
+  @Input()modalNameChild: string;
+  nameHead: string;
+  modal: string;
 
   couponForm: FormGroup;
+
 
 
 
@@ -30,6 +33,16 @@ export class ModalAdminComponent implements OnInit {
       couponClient: new FormControl(''),
       couponFinish: new FormControl('')
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('modal test');
+    const dataChangeModal = changes['modalNameChild'];
+    console.log('dataChange', changes);
+    if (dataChangeModal['currentValue'] === 'add-coupon') {
+      this.modal = 'coupon';
+      this.nameHead = 'Добавить купон';
+    }
   }
 
   /*Функция вычисления сегодняшенго дня*/

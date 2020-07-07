@@ -8,6 +8,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class ButtonsAdminComponent implements OnInit {
 
   @Output() searchUpt: EventEmitter<object> = new EventEmitter<object>();
+  @Output() add: EventEmitter<object> = new EventEmitter<object>();
   timeItem: any;
   timeOut(event) {
     this.timeItem = setTimeout(() => {
@@ -29,6 +30,10 @@ export class ButtonsAdminComponent implements OnInit {
     if (event.target.value.trim() !== '' || event.target.value === '') {
       this.timeOut(event.target.value);
     }
+  }
+
+  addItem() {
+    this.add.emit();
   }
 
 }
