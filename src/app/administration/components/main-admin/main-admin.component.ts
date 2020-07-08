@@ -1,5 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {} from 'ngx-quill';
 
 import {CouponsGetInterface} from '../../interfaces/requests/options/requests.coupons.interface';
 import {PaymentGetInterface} from '../../interfaces/requests/options/requests.payment.interface';
@@ -28,7 +29,7 @@ export class MainAdminComponent implements OnInit {
   sortValue: string; /*Значение сортировки ASC или DESC*/
   searchName: string; /*Значение поля поиск*/
   countRows: number;
-  modal: boolean = false; /*Активация модального окна*/
+  modal: boolean = true; /*Активация модального окна*/
   modalNameParent: string  = 'testmodal';
 
 

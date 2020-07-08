@@ -1,12 +1,11 @@
 
 <div id="modal-area">
   <div id="modal-coupon" *ngIf="modal==='coupon'">
-
       <form [formGroup]="couponForm" (ngSubmit)="couponSubmit()">
         <div id="modal-coupon-head">
           <div>
             <div><h4>{{nameHead}}</h4></div>
-            <div id="modal-coupon-exit"><span class="icon-cross"></span></div>
+            <div class="modal-exit"><span class="icon-cross"></span></div>
           </div>
         </div>
 
@@ -62,8 +61,10 @@
                 <div><label>Значение<span>*</span></label></div>
               </div>
               <div>
-                <div>
+                <div class="coupVal">
                   <input type="number" formControlName="couponValue">
+                  <div *ngIf="couponForm.get('couponType').value === 'percent'">%</div>
+                  <div  *ngIf="couponForm.get('couponType').value === 'value'">руб.</div>
                 </div>
                 <div *ngIf="couponForm.get('couponValue').invalid && couponForm.get('couponValue').touched">
                   <small class="errorForm" *ngIf="couponForm.get('couponValue').errors.required">Введите число</small>
@@ -134,4 +135,92 @@
         </div>
       </form>
   </div>
+
+  <div id="modal-payment">
+    <form [formGroup]="paymentForm">
+
+      <div id="modal-payment-head">
+        <div>
+          <div><h4>{{nameHead}}</h4></div>
+          <div class="modal-exit"><span class="icon-cross"></span></div>
+        </div>
+      </div>
+      <div id="modal-payment-content">
+        <div>
+          <div id="modal-payment-publication">
+            <div>
+              <div><label>Публикация</label></div>
+            </div>
+            <div>
+              <div>
+                <input type="checkbox" >
+              </div>
+            </div>
+          </div>
+          <div id="modal-payment-type">
+            <div>
+              <div><label>Тип оплаты<span>*</span></label></div>
+            </div>
+            <div>
+              <div>
+                <select>
+                  <option value="cash">Наличные</option>
+                  <option value="yandex">Яндекс</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="modal-payment-code">
+            <div>
+              <div><label>Код</label></div>
+            </div>
+            <div>
+              <div>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+          <div id="modal-payment-name">
+            <div>
+              <div><label>Название<span>*</span></label></div>
+            </div>
+            <div>
+              <div>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+          <div id="modal-payment-pseudonym">
+            <div>
+              <div><label>Псевдоним<span>*</span></label></div>
+            </div>
+            <div>
+              <div>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+          <div id="modal-payment-editor">
+            <div>
+              <div><label>Описание<span>*</span></label></div>
+            </div>
+            <div class="editor">
+              <div>
+                <quill-editor></quill-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="modal-payment-footer">
+        <div>
+          <div>
+            <h4><button id="payment-sub" type="submit" [disabled]="couponForm.invalid">Сохранить</button></h4>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+
+

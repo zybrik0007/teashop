@@ -5,3 +5,7 @@ export class PaymentGetInterface {
   sortValue: string;
   searchName: string;
 }
+
+export class PaymentPutInterface {
+
+}

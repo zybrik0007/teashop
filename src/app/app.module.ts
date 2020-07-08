@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { TransferHttpCacheModule } from '@nguniversal/common'; // HERE
+import { QuillModule } from 'ngx-quill';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -26,6 +27,7 @@ import { CabinetWebComponent } from './website/components/cabinet-web/cabinet-we
 import { TableAdminComponent } from './administration/components/table-admin/table-admin.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ModalAdminComponent } from './administration/components/modal-admin/modal-admin.component';
+import { TranslitDirective } from './administration/directeves/translit.directive';
 
 
 
@@ -49,7 +51,8 @@ import { ModalAdminComponent } from './administration/components/modal-admin/mod
     FooterWebComponent,
     CabinetWebComponent,
     TableAdminComponent,
-    ModalAdminComponent
+    ModalAdminComponent,
+    TranslitDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -58,7 +61,11 @@ import { ModalAdminComponent } from './administration/components/modal-admin/mod
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuillModule.forRoot()
+  ],
+  exports: [
+    QuillModule
   ],
   providers: [],
   bootstrap: [AppComponent]

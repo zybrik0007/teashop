@@ -8,6 +8,7 @@
   font-family: Roboto, sans-serif;
 }
 
+/*Купоны*/
 #modal-coupon {
   position: absolute;
   width: 400px;
@@ -51,7 +52,7 @@
   color: #714871;;
 }
 
-#modal-coupon-exit {
+.modal-exit {
   font-size: small;
 }
 
@@ -158,6 +159,173 @@ small {
   width: 50%;
 }
 
+.coupVal{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.coupVal>input {
+  width: 70%;
+}
+
+.coupVal>div {
+  width: 30%;
+  margin-left: 2%;
+  color: black;
+}
+
+/*************/
+
+
+/*Способ оплаты*/
+#modal-payment {
+  position: absolute;
+  width: 800px;
+  height: 570px;
+  margin: auto;
+  left: 0; bottom: 0; right: 0; top: 0;
+}
+
+#modal-payment>form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background: white;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#modal-payment-head {
+  width: 100%;
+  height: 50px;
+  background: #eddfec;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-payment-head>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: #714871;;
+}
+
+#modal-payment-content {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  color: #714871;
+}
+#modal-payment-content>div {
+  width: 90%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+}
+
+#modal-payment-content>div>div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+#modal-payment-content>div>div>div {
+  width: 50%;
+}
+#modal-payment-content>div>div>div>div>label>span {
+  color: red;
+}
+
+
+
+
+
+
+#modal-payment-footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  background: #eddfec;
+  margin-top: 3%;
+}
+
+#modal-payment-footer>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  color: #714871;;
+}
+
+#modal-payment-footer>div>div {
+  height: 30px;
+  width: 100px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#modal-payment-footer>div>div>h4 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#modal-payment-footer>div>div>h4>button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #714871;
+  color: #efe4e4;
+}
+#modal-payment-footer>div>div>h4>button:disabled {
+  background: #847e7e;
+}
+
+.editor {
+  width: 400px;
+  height: 300px;
+}
+.editor>div {
+  width: 400px;
+  height: 300px;
+}
+.editor>div>quill-editor {
+  width: 400px;
+  height: 300px;
+}
+
+
+
+
 input {
   &.ng-invalid.ng-touched {
     border: 1px solid red;
@@ -173,7 +341,6 @@ input {
 .errorForm {
   color: red;
 }
-
 
 @media screen and (max-width: 460px){
     #modal-area {
