@@ -5,3 +5,8 @@ export class PriceGetInterface {
   sortValue: string;
   searchName: string;
 }
+
+export class PricePutInterface {
+  name: string;
+  price: number;
+}

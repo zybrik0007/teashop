@@ -7,6 +7,7 @@ import {ValidatorAdministration} from '../../validators/validator-administration
 import {CouponsPutInterface} from '../../interfaces/requests/options/requests.coupons.interface';
 import {PaymentPutInterface} from '../../interfaces/requests/options/requests.payment.interface';
 import {DeliveryPutInterface} from '../../interfaces/requests/options/requests.delivery.interface';
+import {PricePutInterface} from '../../interfaces/requests/options/requests.price.interface';
 
 @Component({
   selector: 'app-modal-admin',
@@ -22,13 +23,15 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   timeItem: any; /*Тамут для заполнения поля Псевдоним*/
 
 
-  couponPut: CouponsPutInterface; /*Определение премнной для модальногог окна Купоны*/
-  paymentPut: PaymentPutInterface; /*Определение премнной для модальногог окна Способ оплаты*/
-  deliveryPut: DeliveryPutInterface; /*Определение премнной для модальногог окна Способ доставки*/
+  couponPut: CouponsPutInterface; /*Определение премнной для модального окна Купоны*/
+  paymentPut: PaymentPutInterface; /*Определение премнной для модального окна Способ оплаты*/
+  deliveryPut: DeliveryPutInterface; /*Определение премнной для модального окна Способ доставки*/
+  pricePut: PricePutInterface; /*Определение премнной для модального окна Цена на доставку*/
 
   couponForm: FormGroup; /*Форма Купоны*/
   paymentForm: FormGroup; /*Форма Способы оплаты*/
   deliveryForm: FormGroup; /*Форма Способы доставки*/
+  priceForm: FormGroup; /*Форма Цены доставки*/
 
   constructor() { }
 
@@ -63,11 +66,19 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     /*Инициализвция модального окна добавления, редактирвания способа доставки*/
     if (this.modal === 'delivery') {
       this.deliveryForm = new FormGroup({
-        deliveryPublication: new FormControl(''),
-        deliveryName: new FormControl(''),
-        deliveryPseudonym: new FormControl(''),
-        deliveryPayment: new FormControl(''),
-        deliveryDescription: new FormControl('')
+        deliveryPublication: new FormControl(this.deliveryPut.publication),
+        deliveryName: new FormControl(this.deliveryPut.name),
+        deliveryPseudonym: new FormControl(this.deliveryPut.pseudonym),
+        deliveryPayment: new FormControl(this.deliveryPut.payment),
+        deliveryDescription: new FormControl(this.deliveryPut.description)
+      });
+    }
+
+    /*Инициализвция модального окна добавления, редактирвания цены доставки*/
+    if (this.modal === 'price') {
+      this.priceForm = new FormGroup({
+        priceName: new FormControl(this.pricePut.name),
+        pricePrice: new FormControl(this.pricePut.price)
       });
     }
 
@@ -107,7 +118,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       };
     }
 
-    /*Определение значений при открытии на редактирование или добавления Способа оплаты*/
+    /*Определение значений при открытии на редактирование или добавления Способа доставки*/
     if (dataChangeModal['currentValue'] === 'add-delivery') {
       this.modal = 'delivery';
       this.nameHead = 'Добавить cпособ оплаты';
@@ -118,6 +129,16 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         sort: null,
         payment: [''],
         description: ''
+      };
+    }
+
+    /*Определение значений при открытии на редактирование или добавления Цены на доставку*/
+    if (dataChangeModal['currentValue'] === 'add-price') {
+      this.modal = 'price';
+      this.nameHead = 'Добавить цену доставки';
+      this.pricePut = {
+        name: '',
+        price: null
       };
     }
   }

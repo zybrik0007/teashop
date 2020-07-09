@@ -29,8 +29,7 @@ export class MainAdminComponent implements OnInit {
   sortValue: string; /*Значение сортировки ASC или DESC*/
   searchName: string; /*Значение поля поиск*/
   countRows: number;
-  modal: boolean = false
-  ; /*Активация модального окна*/
+  modal: boolean = false; /*Активация модального окна*/
   modalNameParent: string  = 'testmodal';
 
 
@@ -238,6 +237,14 @@ export class MainAdminComponent implements OnInit {
       if (this.router.url === '/administration/options/payment') {
         this.modal = true;
         this.modalNameParent = 'add-payment';
+      }
+      if (this.router.url === '/administration/options/delivery') {
+        this.modal = true;
+        this.modalNameParent = 'add-delivery';
+      }
+      if (this.router.url === '/administration/options/price') {
+        this.modal = true;
+        this.modalNameParent = 'add-price';
       }
     }
 }
