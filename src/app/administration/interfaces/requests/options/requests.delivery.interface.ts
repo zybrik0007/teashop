@@ -5,3 +5,12 @@ export class DeliveryGetInterface {
   sortValue: string;
   searchName: string;
 }
+
+export class DeliveryPutInterface {
+  publication: boolean;
+  name: string;
+  pseudonym: string;
+  sort: number;
+  payment: string[];
+  description: string;
+}

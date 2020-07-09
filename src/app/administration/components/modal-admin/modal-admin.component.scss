@@ -174,14 +174,13 @@ small {
   margin-left: 2%;
   color: black;
 }
-
 /*************/
 
 
 /*Способ оплаты*/
 #modal-payment {
   position: absolute;
-  width: 800px;
+  width: 500px;
   height: 570px;
   margin: auto;
   left: 0; bottom: 0; right: 0; top: 0;
@@ -222,8 +221,9 @@ small {
 }
 
 #modal-payment-content {
+  position: relative;
   width: 100%;
-  flex-grow: 1;
+  height: 470px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -231,17 +231,38 @@ small {
   justify-content: center;
   color: #714871;
 }
+
 #modal-payment-content>div {
-  width: 90%;
-  height: 95%;
+  width: 100%;
+  height: 100%;
+}
+#modal-payment-content>div>div {
+  position: absolute;
+  width: 100%;
+  height: 470px;
+}
+
+#modal-payment-content>div>div>div {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: flex-start;
-
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+#modal-payment-content>div>div>div>div {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
-#modal-payment-content>div>div {
+#modal-payment-content>div>div>div>div>div  {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -251,17 +272,20 @@ small {
   padding-bottom: 3%;
 }
 
-#modal-payment-content>div>div>div {
+.nameRow {
+  width: 30%;
+}
+.valueRow {
+  width: 70%;
+  color: black;
+}
+
+#modal-payment-content>div>div>div>div>div>div {
   width: 50%;
 }
-#modal-payment-content>div>div>div>div>label>span {
+#modal-payment-content>div>div>div>div>div>div>div>label>span {
   color: red;
 }
-
-
-
-
-
 
 #modal-payment-footer {
   width: 100%;
@@ -299,6 +323,7 @@ small {
   height: 100%;
 }
 
+
 #modal-payment-footer>div>div>h4>button {
   width: 100%;
   height: 100%;
@@ -310,19 +335,166 @@ small {
   background: #847e7e;
 }
 
-.editor {
-  width: 400px;
-  height: 300px;
-}
-.editor>div {
-  width: 400px;
-  height: 300px;
-}
-.editor>div>quill-editor {
-  width: 400px;
-  height: 300px;
+/**************/
+
+/*Способ доставки*/
+#modal-payment {
+  position: absolute;
+  width: 500px;
+  height: 570px;
+  margin: auto;
+  left: 0; bottom: 0; right: 0; top: 0;
 }
 
+#modal-payment>form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background: white;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#modal-payment-head {
+  width: 100%;
+  height: 50px;
+  background: #eddfec;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-payment-head>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: #714871;;
+}
+
+#modal-payment-content {
+  position: relative;
+  width: 100%;
+  height: 470px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  color: #714871;
+}
+
+#modal-payment-content>div {
+  width: 100%;
+  height: 100%;
+}
+#modal-payment-content>div>div {
+  position: absolute;
+  width: 100%;
+  height: 470px;
+}
+
+#modal-payment-content>div>div>div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+#modal-payment-content>div>div>div>div {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+#modal-payment-content>div>div>div>div>div  {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.nameRow {
+  width: 30%;
+}
+.valueRow {
+  width: 70%;
+  color: black;
+}
+
+#modal-payment-content>div>div>div>div>div>div {
+  width: 50%;
+}
+#modal-payment-content>div>div>div>div>div>div>div>label>span {
+  color: red;
+}
+
+#modal-payment-footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  background: #eddfec;
+  margin-top: 3%;
+}
+
+#modal-payment-footer>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  color: #714871;;
+}
+
+#modal-payment-footer>div>div {
+  height: 30px;
+  width: 100px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#modal-payment-footer>div>div>h4 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+#modal-payment-footer>div>div>h4>button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #714871;
+  color: #efe4e4;
+}
+#modal-payment-footer>div>div>h4>button:disabled {
+  background: #847e7e;
+}
+/*************/
 
 
 
@@ -347,4 +519,8 @@ input {
       width: 460px;
     }
 }
-
+@media screen and (max-width: 500px){
+  #modal-payment {
+    width: 400px;
+  }
+}

@@ -136,7 +136,7 @@
       </form>
   </div>
 
-  <div id="modal-payment">
+  <div id="modal-payment" *ngIf="modal==='payment'">
     <form [formGroup]="paymentForm">
 
       <div id="modal-payment-head">
@@ -147,66 +147,107 @@
       </div>
       <div id="modal-payment-content">
         <div>
-          <div id="modal-payment-publication">
-            <div>
-              <div><label>Публикация</label></div>
-            </div>
+          <div>
             <div>
               <div>
-                <input type="checkbox" >
-              </div>
-            </div>
-          </div>
-          <div id="modal-payment-type">
-            <div>
-              <div><label>Тип оплаты<span>*</span></label></div>
-            </div>
-            <div>
-              <div>
-                <select>
-                  <option value="cash">Наличные</option>
-                  <option value="yandex">Яндекс</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div id="modal-payment-code">
-            <div>
-              <div><label>Код</label></div>
-            </div>
-            <div>
-              <div>
-                <input type="text">
-              </div>
-            </div>
-          </div>
-          <div id="modal-payment-name">
-            <div>
-              <div><label>Название<span>*</span></label></div>
-            </div>
-            <div>
-              <div>
-                <input type="text">
-              </div>
-            </div>
-          </div>
-          <div id="modal-payment-pseudonym">
-            <div>
-              <div><label>Псевдоним<span>*</span></label></div>
-            </div>
-            <div>
-              <div>
-                <input type="text">
-              </div>
-            </div>
-          </div>
-          <div id="modal-payment-editor">
-            <div>
-              <div><label>Описание<span>*</span></label></div>
-            </div>
-            <div class="editor">
-              <div>
-                <quill-editor></quill-editor>
+                <div id="modal-payment-publication">
+                  <div class="nameRow">
+                    <div><label>Публикация</label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <input type="checkbox" formControlName="paymentPublication">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-payment-type">
+                  <div class="nameRow">
+                    <div><label>Тип оплаты<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <select formControlName="paymentType">
+                        <option value="cash">Наличные</option>
+                        <option value="yandex">Яндекс</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-payment-code">
+                  <div class="nameRow">
+                    <div><label>Код</label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <input type="text" formControlName="paymentCode">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-payment-name">
+                  <div class="nameRow">
+                    <div><label>Название<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <input type="text" formControlName="paymentName" (keyup)="translit($event)">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-payment-pseudonym">
+                  <div class="nameRow">
+                    <div><label>Псевдоним<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <input type="text" formControlName="paymentPseudonym" [value]="pseudonym">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-payment-editor">
+                  <div class="nameRow">
+                    <div><label>Описание<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <quill-editor formControlName="paymentDescription">
+                        <div quill-editor-toolbar>
+                          <span class="ql-formats">
+                            <button class="ql-bold" [title]="'Bold'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <button class="ql-italic" [title]="'Italic'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-color" [title]="'Color'">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="blue"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-align" [title]="'Align'">
+                              <option selected></option>
+                              <option value="center"></option>
+                              <option value="right"></option>
+                              <option value="justify"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-size" [title]="'Size'">
+                              <option selected></option>
+                              <option value="small"></option>
+                              <option value="false"></option>
+                              <option value="large"></option>
+                              <option value="huge"></option>
+                            </select>
+                          </span>
+                        </div>
+                      </quill-editor>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -215,12 +256,148 @@
       <div id="modal-payment-footer">
         <div>
           <div>
-            <h4><button id="payment-sub" type="submit" [disabled]="couponForm.invalid">Сохранить</button></h4>
+            <h4><button id="payment-sub" type="submit" [disabled]="paymentForm.invalid">Сохранить</button></h4>
           </div>
         </div>
       </div>
     </form>
   </div>
+
+  <div id="modal-delivery">
+    <form [formGroup]="deliveryForm">
+
+      <div id="modal-delivery-head">
+        <div>
+          <div><h4>{{nameHead}}</h4></div>
+          <div class="modal-exit"><span class="icon-cross"></span></div>
+        </div>
+      </div>
+
+      <div id="modal-delivery-content">
+        <div>
+          <div>
+            <div>
+              <div>
+                <div id="modal-delivery-publication">
+                  <div class="nameRow">
+                    <div><label>Публикация</label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <input type="checkbox" formControlName="deliveryPublication">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-delivery-type">
+                  <div class="nameRow">
+                    <div><label>Тип оплаты<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <select>
+                        <option value="cash">Наличные</option>
+                        <option value="yandex">Яндекс</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-delivery-code">
+                  <div class="nameRow">
+                    <div><label>Код</label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <input type="text" >
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div>
+                    <div>
+                      <label>Название<span>*</span></label>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <input type="text" formControlName="deliveryName" (keyup)="translit($event)">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div id="modal-delivery-pseudonym">
+                  <div class="nameRow">
+                    <div><label>Псевдоним<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <input type="text" formControlName="deliveryPseudonym" [value]="pseudonym">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-delivery-editor">
+                  <div class="nameRow">
+                    <div><label>Описание<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow">
+                    <div>
+                      <quill-editor formControlName="deliveryDescription">
+                        <div quill-editor-toolbar>
+                          <span class="ql-formats">
+                            <button class="ql-bold" [title]="'Bold'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <button class="ql-italic" [title]="'Italic'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-color" [title]="'Color'">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="blue"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-align" [title]="'Align'">
+                              <option selected></option>
+                              <option value="center"></option>
+                              <option value="right"></option>
+                              <option value="justify"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-size" [title]="'Size'">
+                              <option selected></option>
+                              <option value="small"></option>
+                              <option value="false"></option>
+                              <option value="large"></option>
+                              <option value="huge"></option>
+                            </select>
+                          </span>
+                        </div>
+                      </quill-editor>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-delivery-footer">
+        <div>
+          <div>
+            <h4><button id="delivery-sub" type="submit" >Сохранить</button></h4>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
 </div>
 
 

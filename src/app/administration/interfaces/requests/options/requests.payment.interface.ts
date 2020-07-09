@@ -7,5 +7,10 @@ export class PaymentGetInterface {
 }
 
 export class PaymentPutInterface {
-
+  publication: boolean;
+  type: string;
+  code: string;
+  name: string;
+  pseudonym: string;
+  description: string;
 }
