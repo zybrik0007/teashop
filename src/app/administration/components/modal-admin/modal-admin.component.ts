@@ -8,6 +8,8 @@ import {CouponsPutInterface} from '../../interfaces/requests/options/requests.co
 import {PaymentPutInterface} from '../../interfaces/requests/options/requests.payment.interface';
 import {DeliveryPutInterface} from '../../interfaces/requests/options/requests.delivery.interface';
 import {PricePutInterface} from '../../interfaces/requests/options/requests.price.interface';
+import {StatusPutInterface} from '../../interfaces/requests/options/requests.status.interface';
+import {GroupPutInterface} from '../../interfaces/requests/options/requests.groups.interface';
 
 @Component({
   selector: 'app-modal-admin',
@@ -23,15 +25,19 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   timeItem: any; /*Тамут для заполнения поля Псевдоним*/
 
 
-  couponPut: CouponsPutInterface; /*Определение премнной для модального окна Купоны*/
-  paymentPut: PaymentPutInterface; /*Определение премнной для модального окна Способ оплаты*/
-  deliveryPut: DeliveryPutInterface; /*Определение премнной для модального окна Способ доставки*/
-  pricePut: PricePutInterface; /*Определение премнной для модального окна Цена на доставку*/
+  couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
+  paymentPut: PaymentPutInterface; /*Определение перемнной для модального окна Способ оплаты*/
+  deliveryPut: DeliveryPutInterface; /*Определение перемнной для модального окна Способ доставки*/
+  pricePut: PricePutInterface; /*Определение перемнной для модального окна Цена на доставку*/
+  statusPut: StatusPutInterface; /*Определение перемнной для модального окна Статус заказа*/
+  groupPut: GroupPutInterface; /*Определение перемнной для модального окна Группа пользователей*/
 
   couponForm: FormGroup; /*Форма Купоны*/
   paymentForm: FormGroup; /*Форма Способы оплаты*/
   deliveryForm: FormGroup; /*Форма Способы доставки*/
   priceForm: FormGroup; /*Форма Цены доставки*/
+  statusForm: FormGroup; /*Форма статуса заказа*/
+  groupForm: FormGroup; /*Форма группа пользователей*/
 
   constructor() { }
 
@@ -79,6 +85,24 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       this.priceForm = new FormGroup({
         priceName: new FormControl(this.pricePut.name),
         pricePrice: new FormControl(this.pricePut.price)
+      });
+    }
+
+    /*Инициализвция модального окна добавления, редактирвания статуса заказа*/
+    if (this.modal === 'status') {
+      this.statusForm = new FormGroup({
+        statusName: new FormControl(this.statusPut.name),
+        statusCode: new FormControl(this.statusPut.code)
+      });
+    }
+
+    /*Инициализвция модального окна добавления, редактирвания статуса заказа*/
+    if (this.modal === 'group') {
+      this.groupForm = new FormGroup({
+        groupDefault: new FormControl(this.groupPut.default),
+        groupName: new FormControl(this.groupPut.name),
+        groupDiscount: new FormControl(this.groupPut.discount),
+        groupDescription: new FormControl(this.groupPut.description)
       });
     }
 
@@ -139,6 +163,28 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       this.pricePut = {
         name: '',
         price: null
+      };
+    }
+
+    /*Определение значений при открытии на редактирование или добавления Статуса заказа*/
+    if (dataChangeModal['currentValue'] === 'add-status') {
+      this.modal = 'status';
+      this.nameHead = 'Добавить статус заказа';
+      this.statusPut = {
+        name: '',
+        code: ''
+      };
+    }
+
+    /*Определение значений при открытии на редактирование или добавления Группы пользователей*/
+    if (dataChangeModal['currentValue'] === 'add-group') {
+      this.modal = 'group';
+      this.nameHead = 'Добавить группу пользователей';
+      this.groupPut = {
+        default: false,
+        name: '',
+        discount: null,
+        description: ''
       };
     }
   }

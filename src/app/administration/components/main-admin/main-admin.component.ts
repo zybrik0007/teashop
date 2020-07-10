@@ -246,5 +246,13 @@ export class MainAdminComponent implements OnInit {
         this.modal = true;
         this.modalNameParent = 'add-price';
       }
+      if (this.router.url === '/administration/options/status') {
+        this.modal = true;
+        this.modalNameParent = 'add-status';
+      }
+      if (this.router.url === '/administration/options/groups') {
+        this.modal = true;
+        this.modalNameParent = 'add-group';
+      }
     }
 }

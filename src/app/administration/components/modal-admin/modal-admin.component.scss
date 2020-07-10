@@ -428,7 +428,7 @@ small {
 #modal-price {
   position: absolute;
   width: 500px;
-  height: 270px;
+  height: 200px;
   margin: auto;
   left: 0; bottom: 0; right: 0; top: 0;
 }
@@ -559,6 +559,275 @@ small {
 }
 /*********/
 
+/*Статус заказа*/
+#modal-status {
+  position: absolute;
+  width: 500px;
+  height: 200px;
+  margin: auto;
+  left: 0; bottom: 0; right: 0; top: 0;
+}
+#modal-status>form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background: white;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#modal-status-head {
+  width: 100%;
+  height: 50px;
+  background: #eddfec;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+#modal-status-head>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: #714871;;
+}
+#modal-status-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  color: #714871;
+}
+#modal-status-content>div {
+  width: 100%;
+  height: 100%;
+}
+#modal-status-content>div>div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#modal-status-content>div>div>div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+#modal-status-content>div>div>div>div {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+#modal-status-content>div>div>div>div>div  {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+#modal-status-content>div>div>div>div>div>div>div>label>span{
+  color: red;
+}
+#modal-status-footer{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  background: #eddfec;
+  margin-top: 3%;
+}
+#modal-status-footer>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  color: #714871;;
+}
+#modal-status-footer>div>div {
+  height: 30px;
+  width: 100px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#modal-status-footer>div>div>h4 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+#modal-status-footer>div>div>h4>button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #714871;
+  color: #efe4e4;
+}
+#modal-status-footer>div>div>h4>button:disabled {
+  background: #847e7e;
+}
+/***********/
+
+/*Способ доставки*/
+#modal-group {
+  position: absolute;
+  width: 500px;
+  height: 570px;
+  margin: auto;
+  left: 0; bottom: 0; right: 0; top: 0;
+}
+#modal-group >form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  background: white;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#modal-group-head {
+  width: 100%;
+  height: 50px;
+  background: #eddfec;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+#modal-group-head>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  color: #714871;;
+}
+#modal-group-content {
+  position: relative;
+  width: 100%;
+  height: 470px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  color: #714871;
+}
+#modal-group-content>div {
+  width: 100%;
+  height: 100%;
+}
+#modal-group-content>div>div {
+  position: absolute;
+  width: 100%;
+  height: 470px;
+}
+#modal-group-content>div>div>div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+#modal-group-content>div>div>div>div {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+#modal-group-content>div>div>div>div>div  {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+#modal-group-content>div>div>div>div>div>div>div>label>span {
+  color: red;
+}
+#modal-group-footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  background: #eddfec;
+  margin-top: 3%;
+}
+#modal-group-footer>div {
+  width: 95%;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  color: #714871;;
+}
+#modal-group-footer>div>div {
+  height: 30px;
+  width: 100px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+#modal-group-footer>div>div>h4 {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+#modal-group-footer>div>div>h4>button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #714871;
+  color: #efe4e4;
+}
+#modal-group-footer>div>div>h4>button:disabled {
+  background: #847e7e;
+}
+/*************/
 
 
 
@@ -598,11 +867,20 @@ input {
       width: 460px;
     }
 }
-@media screen and (max-width: 500px){
+@media screen and (max-width: 500px) {
   #modal-payment {
     width: 400px;
   }
   #modal-delivery {
+    width: 400px;
+  }
+  #modal-price {
+    width: 400px;
+  }
+  #modal-status {
+    width: 400px;
+  }
+  #modal-group {
     width: 400px;
   }
 }

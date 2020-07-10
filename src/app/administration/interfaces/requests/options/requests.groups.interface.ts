@@ -5,3 +5,10 @@ export class GroupsGetInterface {
   sortValue: string;
   searchName: string;
 }
+
+export class GroupPutInterface {
+  default: boolean;
+  name: string;
+  discount: number;
+  description: string;
+}

@@ -1,5 +1,6 @@
 
 <div id="modal-area">
+
   <div id="modal-coupon" *ngIf="modal==='coupon'">
       <form [formGroup]="couponForm" (ngSubmit)="couponSubmit()">
         <div id="modal-coupon-head">
@@ -455,6 +456,170 @@
     </form>
   </div>
 
+  <div id="modal-status" *ngIf="modal==='status'">
+    <form [formGroup]="deliveryForm">
+
+      <div id="modal-status-head">
+        <div>
+          <div><h4>{{nameHead}}</h4></div>
+          <div class="modal-exit"><span class="icon-cross"></span></div>
+        </div>
+      </div>
+
+      <div id="modal-status-content">
+        <div>
+          <div>
+            <div>
+              <div>
+                <div id="modal-status-name">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>Название<span>*</span></label>
+                    </div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="statusName">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-status-code">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>Код<span>*</span></label>
+                    </div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="statusCode">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-status-footer">
+        <div>
+          <div>
+            <h4><button id="status-sub" type="submit" >Сохранить</button></h4>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div id="modal-group" *ngIf="modal==='group'">
+    <form [formGroup]="groupForm">
+
+      <div id="modal-group-head">
+        <div>
+          <div><h4>{{nameHead}}</h4></div>
+          <div class="modal-exit"><span class="icon-cross"></span></div>
+        </div>
+      </div>
+
+      <div id="modal-group-content">
+        <div>
+          <div>
+            <div>
+              <div>
+                <div id="modal-group-publication">
+                  <div class="nameRow-30">
+                    <div><label>По умолчанию</label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="checkbox" formControlName="groupDefault">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-group-name">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>Название<span>*</span></label>
+                    </div>
+                  </div>
+                  <div lass="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="groupName">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-group-pseudonym">
+                  <div class="nameRow-30">
+                    <div><label>Скидка<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="number" formControlName="groupDiscount">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-group-editor">
+                  <div class="nameRow-30">
+                    <div><label>Описание<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <quill-editor>
+                        <div quill-editor-toolbar>
+                          <span class="ql-formats">
+                            <button class="ql-bold" [title]="'Bold'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <button class="ql-italic" [title]="'Italic'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-color" [title]="'Color'">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="blue"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-align" [title]="'Align'">
+                              <option selected></option>
+                              <option value="center"></option>
+                              <option value="right"></option>
+                              <option value="justify"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-size" [title]="'Size'">
+                              <option selected></option>
+                              <option value="small"></option>
+                              <option value="false"></option>
+                              <option value="large"></option>
+                              <option value="huge"></option>
+                            </select>
+                          </span>
+                        </div>
+                      </quill-editor>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-group-footer">
+        <div>
+          <div>
+            <h4><button id="group-sub" type="submit" >Сохранить</button></h4>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
 
 </div>
 

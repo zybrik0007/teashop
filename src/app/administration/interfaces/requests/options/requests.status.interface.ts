@@ -5,3 +5,8 @@ export class StatusGetInterface {
   sortValue: string;
   searchName: string;
 }
+
+export class StatusPutInterface {
+  name: string;
+  code: string;
+}
