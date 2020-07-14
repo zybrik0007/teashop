@@ -11,6 +11,5 @@ export class PaymentPutInterface {
   type: string;
   code: string;
   name: string;
-  pseudonym: string;
   description: string;
 }

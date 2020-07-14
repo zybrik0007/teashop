@@ -62,9 +62,9 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       this.paymentForm = new FormGroup({
         paymentPublication: new FormControl(this.paymentPut.publication),
         paymentType: new FormControl(this.paymentPut.type),
-        paymentCode: new FormControl(this.paymentPut.code),
-        paymentName: new FormControl(this.paymentPut.name),
-        paymentPseudonym: new FormControl(this.paymentPut.pseudonym),
+        paymentCode: new FormControl(this.paymentPut.code, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100),
+          ValidatorAdministration.code]),
+        paymentName: new FormControl(this.paymentPut.name, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100)]),
         paymentDescription: new FormControl(this.paymentPut.description)
       });
     }
@@ -73,9 +73,11 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (this.modal === 'delivery') {
       this.deliveryForm = new FormGroup({
         deliveryPublication: new FormControl(this.deliveryPut.publication),
-        deliveryName: new FormControl(this.deliveryPut.name),
-        deliveryPseudonym: new FormControl(this.deliveryPut.pseudonym),
-        deliveryPayment: new FormControl(this.deliveryPut.payment),
+        deliveryPayment: new FormControl(this.deliveryPut.payment, [Validators.required, ValidatorAdministration.arrType]),
+        deliveryCode: new FormControl(this.deliveryPut.code, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100),
+          ValidatorAdministration.code]),
+        deliveryName: new FormControl(this.deliveryPut.name, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100)]),
+        deliverySort: new FormControl(this.deliveryPut.sort),
         deliveryDescription: new FormControl(this.deliveryPut.description)
       });
     }
@@ -137,7 +139,6 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         type: 'cash',
         code: '',
         name: '',
-        pseudonym: '',
         description: ''
       };
     }
@@ -145,13 +146,13 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     /*Определение значений при открытии на редактирование или добавления Способа доставки*/
     if (dataChangeModal['currentValue'] === 'add-delivery') {
       this.modal = 'delivery';
-      this.nameHead = 'Добавить cпособ оплаты';
+      this.nameHead = 'Добавить cпособ доставки';
       this.deliveryPut = {
         publication: false,
-        name: '',
-        pseudonym: '',
-        sort: null,
         payment: [''],
+        code: '',
+        name: '',
+        sort: null,
         description: ''
       };
     }
@@ -205,8 +206,16 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   }
 
   /*Отправка формы*/
-  couponSubmit() {
-    console.log('Form: ', this.couponForm);
+  FormSubmit(event) {
+    if (event === 'coupon') {
+      console.log('Form Coupon: ', this.couponForm);
+    }
+    if (event === 'payment') {
+      console.log('Form Payment: ', this.paymentForm);
+    }
+    if (event === 'delivery') {
+      console.log('Form Delivery: ', this.deliveryForm);
+    }
   }
 
   /*Функция таймаута для заполения Псевдонима на основании имени*/

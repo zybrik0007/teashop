@@ -8,9 +8,9 @@ export class DeliveryGetInterface {
 
 export class DeliveryPutInterface {
   publication: boolean;
-  name: string;
-  pseudonym: string;
-  sort: number;
   payment: string[];
+  code: string;
+  name: string;
+  sort: number;
   description: string;
 }

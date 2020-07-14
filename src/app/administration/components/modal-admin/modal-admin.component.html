@@ -2,7 +2,7 @@
 <div id="modal-area">
 
   <div id="modal-coupon" *ngIf="modal==='coupon'">
-      <form [formGroup]="couponForm" (ngSubmit)="couponSubmit()">
+      <form [formGroup]="couponForm" (ngSubmit)="FormSubmit('coupon')">
         <div id="modal-coupon-head">
           <div>
             <div><h4>{{nameHead}}</h4></div>
@@ -138,7 +138,7 @@
   </div>
 
   <div id="modal-payment" *ngIf="modal==='payment'">
-    <form [formGroup]="paymentForm">
+    <form [formGroup]="paymentForm" (ngSubmit)="FormSubmit('payment')">
 
       <div id="modal-payment-head">
         <div>
@@ -177,11 +177,16 @@
                 </div>
                 <div id="modal-payment-code">
                   <div class="nameRow-30">
-                    <div><label>Код</label></div>
+                    <div><label>Код<span>*</span></label></div>
                   </div>
                   <div class="valueRow-70">
                     <div>
                       <input type="text" formControlName="paymentCode">
+                    </div>
+                    <div *ngIf="paymentForm.get('paymentCode').invalid && paymentForm.get('paymentCode').touched">
+                      <small class="errorForm" *ngIf="paymentForm.get('paymentCode').errors.required || paymentForm.get('paymentCode').errors.trim">Введите код</small>
+                      <small class="errorForm" *ngIf="paymentForm.get('paymentCode').errors.maxlength">Код больше 100 символов</small>
+                      <small class="errorForm" *ngIf="paymentForm.get('paymentCode').errors.code">Код может содерржать только число или латинские буквы</small>
                     </div>
                   </div>
                 </div>
@@ -191,23 +196,17 @@
                   </div>
                   <div class="valueRow-70">
                     <div>
-                      <input type="text" formControlName="paymentName" (keyup)="translit($event)">
+                      <input type="text" formControlName="paymentName">
                     </div>
-                  </div>
-                </div>
-                <div id="modal-payment-pseudonym">
-                  <div class="nameRow-30">
-                    <div><label>Псевдоним<span>*</span></label></div>
-                  </div>
-                  <div class="valueRow-70">
-                    <div>
-                      <input type="text" formControlName="paymentPseudonym" [value]="pseudonym">
+                    <div *ngIf="paymentForm.get('paymentName').invalid && paymentForm.get('paymentName').touched">
+                      <small class="errorForm" *ngIf="paymentForm.get('paymentName').errors.required || paymentForm.get('paymentName').errors.trim">Введите код</small>
+                      <small class="errorForm" *ngIf="paymentForm.get('paymentName').errors.maxlength">Название больше 100 символов</small>
                     </div>
                   </div>
                 </div>
                 <div id="modal-payment-editor">
                   <div class="nameRow-30">
-                    <div><label>Описание<span>*</span></label></div>
+                    <div><label>Описание</label></div>
                   </div>
                   <div class="valueRow-70">
                     <div>
@@ -267,7 +266,7 @@
   </div>
 
   <div id="modal-delivery" *ngIf="modal==='delivery'">
-    <form [formGroup]="deliveryForm">
+    <form [formGroup]="deliveryForm" (ngSubmit)="FormSubmit('delivery')">
 
       <div id="modal-delivery-head">
         <div>
@@ -297,21 +296,29 @@
                   </div>
                   <div class="valueRow-70">
                     <div>
-                      <select multiple size="3">
-                        <option value="">Выберите способ оплаты</option>
+                      <select multiple size="6" formControlName="deliveryPayment">
+                        <option value="" disabled>Выберите способ оплаты</option>
                         <option value="cash">Наличные</option>
                         <option value="yandex">Яндекс</option>
                       </select>
+                    </div>
+                    <div *ngIf="deliveryForm.get('deliveryPayment').invalid && deliveryForm.get('deliveryPayment').touched">
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryPayment').errors.required">Выберите тип оплаты</small>
                     </div>
                   </div>
                 </div>
                 <div id="modal-delivery-code">
                   <div class="nameRow-30">
-                    <div><label>Код</label></div>
+                    <div><label>Код<span>*</span></label></div>
                   </div>
                   <div class="valueRow-70">
                     <div>
-                      <input type="text" >
+                      <input type="text" formControlName="deliveryCode">
+                    </div>
+                    <div *ngIf="deliveryForm.get('deliveryCode').invalid && deliveryForm.get('deliveryCode').touched">
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryCode').errors.required || deliveryForm.get('deliveryCode').errors.trim">Ввиедите код</small>
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryCode').errors.maxlength">Код больше 100 символов</small>
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryCode').errors.code">Код может содержать только латинские буквы и цифры</small>
                     </div>
                   </div>
                 </div>
@@ -323,23 +330,17 @@
                   </div>
                   <div lass="valueRow-70">
                     <div>
-                      <input type="text" formControlName="deliveryName" (keyup)="translit($event)">
+                      <input type="text" formControlName="deliveryName">
                     </div>
-                  </div>
-                </div>
-                <div id="modal-delivery-pseudonym">
-                  <div class="nameRow-30">
-                    <div><label>Псевдоним<span>*</span></label></div>
-                  </div>
-                  <div class="valueRow-70">
-                    <div>
-                      <input type="text" formControlName="deliveryPseudonym" [value]="pseudonym">
+                    <div *ngIf="deliveryForm.get('deliveryName').invalid && deliveryForm.get('deliveryName').touched">
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryName').errors.required || deliveryForm.get('deliveryName').errors.trim">Введите название</small>
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryName').errors.maxlength">Название больше 100 символов</small>
                     </div>
                   </div>
                 </div>
                 <div id="modal-delivery-editor">
                   <div class="nameRow-30">
-                    <div><label>Описание<span>*</span></label></div>
+                    <div><label>Описание</label></div>
                   </div>
                   <div class="valueRow-70">
                     <div>
@@ -391,7 +392,7 @@
       <div id="modal-delivery-footer">
         <div>
           <div>
-            <h4><button id="delivery-sub" type="submit" >Сохранить</button></h4>
+            <h4><button id="delivery-sub" type="submit" [disabled]="deliveryForm.invalid">Сохранить</button></h4>
           </div>
         </div>
       </div>
