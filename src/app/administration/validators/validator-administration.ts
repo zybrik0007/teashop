@@ -29,7 +29,7 @@ export class ValidatorAdministration {
     for (const elem of arr) {
       if (!regexp.test(elem)) {
         return {
-          code: true
+          named: true
         };
       }
     }
@@ -39,7 +39,16 @@ export class ValidatorAdministration {
   static arrType(control: FormControl): { [key: string]: boolean } {
     if (control.value.length === 1 && control.value[0].length === 0) {
       return {
-        trim: true
+        arrType: true
+      };
+    }
+    return null;
+  }
+
+  static inbreed(control: FormControl): { [key: string]: boolean } {
+    if (!Number.isInteger(control.value)) {
+      return {
+        inbreed: true
       };
     }
     return null;

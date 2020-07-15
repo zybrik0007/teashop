@@ -428,7 +428,7 @@ small {
 #modal-price {
   position: absolute;
   width: 500px;
-  height: 200px;
+  height: 230px;
   margin: auto;
   left: 0; bottom: 0; right: 0; top: 0;
 }
@@ -857,6 +857,18 @@ input {
     border-radius: 3px;
   }
  }
+
+select {
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+    border-radius: 3px;
+  }
+
+  &.ng-valid.ng-touched {
+    border: 1px solid green;
+    border-radius: 3px;
+  }
+}
 
 .errorForm {
   color: red;

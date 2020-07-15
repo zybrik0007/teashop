@@ -34,9 +34,10 @@
                   <input id="test" type="text" formControlName="couponCode">
                 </div>
                 <div *ngIf="couponForm.get('couponCode').invalid && couponForm.get('couponCode').touched">
-                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.required || couponForm.get('couponCode').errors.trim">Ввиедите код</small>
+                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.required ">Ввиедите код</small>
                   <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.maxlength">Код больше 100 символов</small>
-                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.code">Код может содержать только латинские буквы и цифры</small>
+                  <small class="errorForm" *ngIf="couponForm.get('couponCode').errors.code || couponForm.get('couponCode').errors.trim
+                  && !couponForm.get('couponCode').errors.required">Код может содержать только латинские буквы и цифры</small>
                 </div>
               </div>
             </div>
@@ -130,7 +131,10 @@
         <div id="modal-coupon-footer">
           <div>
             <div>
-              <h4><button id="coupon-sub" type="submit" [disabled]="couponForm.invalid">Сохранить</button></h4>
+              <h4>
+                <button type="submit" *ngIf="but === 'add'" [disabled]="couponForm.invalid">Создать</button>
+                <button type="submit" *ngIf="but === 'edit'" [disabled]="couponForm.invalid">Сохранить</button>
+              </h4>
             </div>
           </div>
         </div>
@@ -184,9 +188,11 @@
                       <input type="text" formControlName="paymentCode">
                     </div>
                     <div *ngIf="paymentForm.get('paymentCode').invalid && paymentForm.get('paymentCode').touched">
-                      <small class="errorForm" *ngIf="paymentForm.get('paymentCode').errors.required || paymentForm.get('paymentCode').errors.trim">Введите код</small>
+                      <small class="errorForm" *ngIf="paymentForm.get('paymentCode').errors.required">Введите код</small>
                       <small class="errorForm" *ngIf="paymentForm.get('paymentCode').errors.maxlength">Код больше 100 символов</small>
-                      <small class="errorForm" *ngIf="paymentForm.get('paymentCode').errors.code">Код может содерржать только число или латинские буквы</small>
+                      <small class="errorForm"
+                             *ngIf="paymentForm.get('paymentCode').errors.code ||
+                             paymentForm.get('paymentCode').errors.trim && !paymentForm.get('paymentCode').errors.required">Код может содерржать только число или латинские буквы</small>
                     </div>
                   </div>
                 </div>
@@ -201,6 +207,20 @@
                     <div *ngIf="paymentForm.get('paymentName').invalid && paymentForm.get('paymentName').touched">
                       <small class="errorForm" *ngIf="paymentForm.get('paymentName').errors.required || paymentForm.get('paymentName').errors.trim">Введите код</small>
                       <small class="errorForm" *ngIf="paymentForm.get('paymentName').errors.maxlength">Название больше 100 символов</small>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-payment-sort">
+                  <div class="nameRow-30">
+                    <div><label>Сортировка<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="number" formControlName="paymentSort">
+                    </div>
+                    <div *ngIf="paymentForm.get('paymentSort').invalid && paymentForm.get('paymentSort').touched">
+                      <small class="errorForm" *ngIf="paymentForm.get('paymentSort').errors.required">Введите номер сортировки</small>
+                      <small class="errorForm" *ngIf="paymentForm.get('paymentSort').errors.inbreed && !paymentForm.get('paymentSort').errors.required">Номер сортировки не целое число</small>
                     </div>
                   </div>
                 </div>
@@ -258,7 +278,10 @@
       <div id="modal-payment-footer">
         <div>
           <div>
-            <h4><button id="payment-sub" type="submit" [disabled]="paymentForm.invalid">Сохранить</button></h4>
+            <h4>
+              <button *ngIf="but === 'add'" type="submit" [disabled]="paymentForm.invalid">Создать</button>
+              <button *ngIf="but === 'edit'" type="submit" [disabled]="paymentForm.invalid">Сохранить</button>
+            </h4>
           </div>
         </div>
       </div>
@@ -316,9 +339,10 @@
                       <input type="text" formControlName="deliveryCode">
                     </div>
                     <div *ngIf="deliveryForm.get('deliveryCode').invalid && deliveryForm.get('deliveryCode').touched">
-                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryCode').errors.required || deliveryForm.get('deliveryCode').errors.trim">Ввиедите код</small>
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryCode').errors.required">Ввиедите код</small>
                       <small class="errorForm" *ngIf="deliveryForm.get('deliveryCode').errors.maxlength">Код больше 100 символов</small>
-                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryCode').errors.code">Код может содержать только латинские буквы и цифры</small>
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliveryCode').errors.code || deliveryForm.get('deliveryCode').errors.trim
+                      && !deliveryForm.get('deliveryCode').errors.required">Код может содержать только латинские буквы и цифры</small>
                     </div>
                   </div>
                 </div>
@@ -335,6 +359,22 @@
                     <div *ngIf="deliveryForm.get('deliveryName').invalid && deliveryForm.get('deliveryName').touched">
                       <small class="errorForm" *ngIf="deliveryForm.get('deliveryName').errors.required || deliveryForm.get('deliveryName').errors.trim">Введите название</small>
                       <small class="errorForm" *ngIf="deliveryForm.get('deliveryName').errors.maxlength">Название больше 100 символов</small>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-delivery-sort">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>Сортировка<span>*</span></label>
+                    </div>
+                  </div>
+                  <div lass="valueRow-70">
+                    <div>
+                      <input type="number" formControlName="deliverySort">
+                    </div>
+                    <div *ngIf="deliveryForm.get('deliverySort').invalid && deliveryForm.get('deliverySort').touched">
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliverySort').errors.required">Введите номер сортировки</small>
+                      <small class="errorForm" *ngIf="deliveryForm.get('deliverySort').errors.inbreed && !deliveryForm.get('deliverySort').errors.required">Номер сортировки не целое число</small>
                     </div>
                   </div>
                 </div>
@@ -392,7 +432,10 @@
       <div id="modal-delivery-footer">
         <div>
           <div>
-            <h4><button id="delivery-sub" type="submit" [disabled]="deliveryForm.invalid">Сохранить</button></h4>
+            <h4>
+              <button *ngIf="but === 'add'" type="submit" [disabled]="deliveryForm.invalid">Создать</button>
+              <button *ngIf="but === 'edit'" type="submit" [disabled]="deliveryForm.invalid">Сохранить</button>
+            </h4>
           </div>
         </div>
       </div>
@@ -401,7 +444,7 @@
   </div>
 
   <div id="modal-price" *ngIf="modal==='price'">
-    <form [formGroup]="deliveryForm">
+    <form [formGroup]="priceForm" (ngSubmit)="FormSubmit('price')">
 
       <div id="modal-price-head">
         <div>
@@ -423,20 +466,26 @@
                   </div>
                   <div class="valueRow-70">
                     <div>
-                      <select formControlName="priceName">
+                      <select  formControlName="priceName">
                         <option value="cash">Наличные</option>
                         <option value="yandex">Яндекс</option>
                       </select>
                     </div>
+                    <div *ngIf="priceForm.get('priceName').invalid && priceForm.get('priceName').touched">
+                      <small class="errorForm" *ngIf="priceForm.get('priceName').errors.required">Выберите название</small>
+                    </div>
                   </div>
                 </div>
-                <div id="modal-price-pseudonym">
+                <div id="modal-price-price">
                   <div class="nameRow-30">
                     <div><label>Цена<span>*</span></label></div>
                   </div>
                   <div class="valueRow-70">
                     <div>
                       <input type="number" formControlName="pricePrice">
+                    </div>
+                    <div *ngIf="priceForm.get('pricePrice').invalid && priceForm.get('pricePrice').touched">
+                      <small class="errorForm" *ngIf="priceForm.get('pricePrice').errors.required">Выберите цену</small>
                     </div>
                   </div>
                 </div>
@@ -449,7 +498,10 @@
       <div id="modal-price-footer">
         <div>
           <div>
-            <h4><button id="price-sub" type="submit" >Сохранить</button></h4>
+            <h4>
+              <button *ngIf="but === 'add'" type="submit" [disabled]="priceForm.invalid">Создать</button>
+              <button *ngIf="but === 'edit'" type="submit" [disabled]="priceForm.invalid">Сохранить</button>
+            </h4>
           </div>
         </div>
       </div>
@@ -457,8 +509,8 @@
     </form>
   </div>
 
-  <div id="modal-status" *ngIf="modal==='status'">
-    <form [formGroup]="deliveryForm">
+  <div id="modal-status" *ngIf="modal==='status'" >
+    <form [formGroup]="statusForm" (ngSubmit)="FormSubmit('status')">
 
       <div id="modal-status-head">
         <div>
@@ -482,6 +534,10 @@
                     <div>
                       <input type="text" formControlName="statusName">
                     </div>
+                    <div *ngIf="statusForm.get('statusName').invalid && statusForm.get('statusName').touched">
+                      <small class="errorForm" *ngIf="statusForm.get('statusName').errors.required || statusForm.get('statusName').errors.trim">Выберите название</small>
+                      <small class="errorForm" *ngIf="statusForm.get('statusName').errors.maxlength">Название больше 100 символов</small>
+                    </div>
                   </div>
                 </div>
                 <div id="modal-status-code">
@@ -494,6 +550,12 @@
                     <div>
                       <input type="text" formControlName="statusCode">
                     </div>
+                    <div *ngIf="statusForm.get('statusCode').invalid && statusForm.get('statusCode').touched">
+                      <small class="errorForm" *ngIf="statusForm.get('statusCode').errors.required">Введите код</small>
+                      <small class="errorForm" *ngIf="statusForm.get('statusCode').errors.maxlength">Код больше 100 символов</small>
+                      <small class="errorForm" *ngIf="statusForm.get('statusCode').errors.code || statusForm.get('statusCode').errors.trim
+                      && !statusForm.get('statusCode').errors.required">Код может содержать только латинские буквы и цифры</small>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -505,7 +567,10 @@
       <div id="modal-status-footer">
         <div>
           <div>
-            <h4><button id="status-sub" type="submit" >Сохранить</button></h4>
+            <h4>
+              <button *ngIf="but === 'add'" type="submit" [disabled]="statusForm.invalid">Создать</button>
+              <button *ngIf="but === 'edit'" type="submit" [disabled]="statusForm.invalid">Сохранить</button>
+            </h4>
           </div>
         </div>
       </div>
@@ -614,7 +679,10 @@
       <div id="modal-group-footer">
         <div>
           <div>
-            <h4><button id="group-sub" type="submit" >Сохранить</button></h4>
+            <h4>
+              <button *ngIf="but === 'add'" type="submit" >Создать</button>
+              <button *ngIf="but === 'edit'" type="submit" >Сохранить</button>
+            </h4>
           </div>
         </div>
       </div>

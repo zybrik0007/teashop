@@ -21,6 +21,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   @Input()modalNameChild: string;
   nameHead: string; /*Название заглавия модального окна*/
   modal: string; /*Определение какое модальное окно активруется.*/
+  but: string; /*Определение кнопки Submit*/
   pseudonym: string; /*Значение для поля Псевдоним*/
   timeItem: any; /*Тамут для заполнения поля Псевдоним*/
 
@@ -65,6 +66,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         paymentCode: new FormControl(this.paymentPut.code, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100),
           ValidatorAdministration.code]),
         paymentName: new FormControl(this.paymentPut.name, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100)]),
+        paymentSort: new FormControl(this.paymentPut.sort, [Validators.required, ValidatorAdministration.inbreed]),
         paymentDescription: new FormControl(this.paymentPut.description)
       });
     }
@@ -77,7 +79,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         deliveryCode: new FormControl(this.deliveryPut.code, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100),
           ValidatorAdministration.code]),
         deliveryName: new FormControl(this.deliveryPut.name, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100)]),
-        deliverySort: new FormControl(this.deliveryPut.sort),
+        deliverySort: new FormControl(this.deliveryPut.sort, [Validators.required, ValidatorAdministration.inbreed]),
         deliveryDescription: new FormControl(this.deliveryPut.description)
       });
     }
@@ -85,16 +87,17 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     /*Инициализвция модального окна добавления, редактирвания цены доставки*/
     if (this.modal === 'price') {
       this.priceForm = new FormGroup({
-        priceName: new FormControl(this.pricePut.name),
-        pricePrice: new FormControl(this.pricePut.price)
+        priceName: new FormControl(this.pricePut.name, [Validators.required]),
+        pricePrice: new FormControl(this.pricePut.price, [Validators.required])
       });
     }
 
     /*Инициализвция модального окна добавления, редактирвания статуса заказа*/
     if (this.modal === 'status') {
       this.statusForm = new FormGroup({
-        statusName: new FormControl(this.statusPut.name),
-        statusCode: new FormControl(this.statusPut.code)
+        statusName: new FormControl(this.statusPut.name, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100)]),
+        statusCode: new FormControl(this.statusPut.code, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100),
+          ValidatorAdministration.code])
       });
     }
 
@@ -118,6 +121,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (dataChangeModal['currentValue'] === 'add-coupon') {
       this.modal = 'coupon';
       this.nameHead = 'Добавить купон';
+      this.but = 'add';
       this.couponPut = {
         publication: false,
         code: '',
@@ -134,11 +138,13 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (dataChangeModal['currentValue'] === 'add-payment') {
       this.modal = 'payment';
       this.nameHead = 'Добавить cпособ оплаты';
+      this.but = 'add';
       this.paymentPut = {
         publication: false,
         type: 'cash',
         code: '',
         name: '',
+        sort: null,
         description: ''
       };
     }
@@ -147,6 +153,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (dataChangeModal['currentValue'] === 'add-delivery') {
       this.modal = 'delivery';
       this.nameHead = 'Добавить cпособ доставки';
+      this.but = 'add';
       this.deliveryPut = {
         publication: false,
         payment: [''],
@@ -161,6 +168,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (dataChangeModal['currentValue'] === 'add-price') {
       this.modal = 'price';
       this.nameHead = 'Добавить цену доставки';
+      this.but = 'add';
       this.pricePut = {
         name: '',
         price: null
@@ -171,6 +179,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (dataChangeModal['currentValue'] === 'add-status') {
       this.modal = 'status';
       this.nameHead = 'Добавить статус заказа';
+      this.but = 'add';
       this.statusPut = {
         name: '',
         code: ''
@@ -181,6 +190,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (dataChangeModal['currentValue'] === 'add-group') {
       this.modal = 'group';
       this.nameHead = 'Добавить группу пользователей';
+      this.but = 'add';
       this.groupPut = {
         default: false,
         name: '',
@@ -215,6 +225,12 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     }
     if (event === 'delivery') {
       console.log('Form Delivery: ', this.deliveryForm);
+    }
+    if (event === 'price') {
+      console.log('Form Price: ', this.priceForm);
+    }
+    if (event === 'status') {
+      console.log('Form Status: ', this.statusForm);
     }
   }
 

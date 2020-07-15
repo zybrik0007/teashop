@@ -11,5 +11,6 @@ export class PaymentPutInterface {
   type: string;
   code: string;
   name: string;
+  sort: null;
   description: string;
 }
