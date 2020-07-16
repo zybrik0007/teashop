@@ -27,7 +27,8 @@ import { CabinetWebComponent } from './website/components/cabinet-web/cabinet-we
 import { TableAdminComponent } from './administration/components/table-admin/table-admin.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ModalAdminComponent } from './administration/components/modal-admin/modal-admin.component';
-import { TranslitDirective } from './administration/directeves/translit.directive';
+import { ModaltransferDirective } from './administration/directives/modaltransfer.directive';
+
 
 
 
@@ -52,7 +53,7 @@ import { TranslitDirective } from './administration/directeves/translit.directiv
     CabinetWebComponent,
     TableAdminComponent,
     ModalAdminComponent,
-    TranslitDirective
+    ModaltransferDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

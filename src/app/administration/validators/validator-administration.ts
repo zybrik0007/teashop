@@ -54,4 +54,13 @@ export class ValidatorAdministration {
     return null;
   }
 
+  static percent(control: FormControl): { [key: string]: boolean } {
+    if (control.value > 100) {
+      return {
+        percent: true
+      };
+    }
+    return null;
+  }
+
 }

@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {pipe} from 'rxjs';
+import {Observable, pipe, fromEvent} from 'rxjs';
 
 
 import {ValidatorAdministration} from '../../validators/validator-administration';
@@ -39,6 +39,8 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   priceForm: FormGroup; /*Форма Цены доставки*/
   statusForm: FormGroup; /*Форма статуса заказа*/
   groupForm: FormGroup; /*Форма группа пользователей*/
+
+
 
   constructor() { }
 
@@ -105,8 +107,8 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (this.modal === 'group') {
       this.groupForm = new FormGroup({
         groupDefault: new FormControl(this.groupPut.default),
-        groupName: new FormControl(this.groupPut.name),
-        groupDiscount: new FormControl(this.groupPut.discount),
+        groupName: new FormControl(this.groupPut.name, [Validators.required, ValidatorAdministration.trim, Validators.maxLength(100)]),
+        groupDiscount: new FormControl(this.groupPut.discount, [Validators.required, ValidatorAdministration.percent]),
         groupDescription: new FormControl(this.groupPut.description)
       });
     }
@@ -277,4 +279,41 @@ export class ModalAdminComponent implements OnInit, OnChanges {
 
 
 
+  transfer(event) {
+    const modal = document.getElementById('modal-coupon');
+    let x = event['clientX'];
+    let y = event['clientY'];
+    fromEvent(modal, 'mousemove').subscribe(el => {
+      console.log(el);
+      const updateX = el['clientX'];
+      const updateY = el['clientY'];
+      console.log('x', x);
+      console.log('y', y);
+      console.log('updateX', updateX);
+      console.log('updateY', updateY);
+      if (x > updateX) {
+        let upt = x - updateX;
+        console.log('upt- ', upt);
+        x = updateX;
+        modal.style.left = modal.offsetLeft - upt + 'px';
+        upt = 0;
+      }
+      if (x < updateX) {
+        let upt = updateX - x;
+        console.log('upt+ ', upt);
+        x = updateX;
+        modal.style.left = modal.offsetLeft + upt + 'px';
+        upt = 0;
+      }
+
+      fromEvent(document, 'mouseup').subscribe(e => {
+        modal.style.left = modal.offsetLeft + 'px';
+        x = updateX;
+      });
+
+    });
+
+
+
+  }
 }

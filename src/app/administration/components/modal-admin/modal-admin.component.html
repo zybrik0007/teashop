@@ -3,12 +3,12 @@
 
   <div id="modal-coupon" *ngIf="modal==='coupon'">
       <form [formGroup]="couponForm" (ngSubmit)="FormSubmit('coupon')">
-        <div id="modal-coupon-head">
+        <div id="modal-coupon-head" (mousedown)="transfer($event)">
           <div>
             <div><h4>{{nameHead}}</h4></div>
             <div class="modal-exit"><span class="icon-cross"></span></div>
           </div>
-        </div>
+        </div  >
 
         <div id="modal-coupon-content">
 
@@ -613,15 +613,23 @@
                     <div>
                       <input type="text" formControlName="groupName">
                     </div>
+                    <div *ngIf="groupForm.get('groupName').invalid && groupForm.get('groupName').touched">
+                      <small class="errorForm" *ngIf="groupForm.get('groupName').errors.required || groupForm.get('groupName').errors.trim">Введите название</small>
+                      <small class="errorForm" *ngIf="groupForm.get('groupName').errors.maxlength">Название больше 100 символов</small>
+                    </div>
                   </div>
                 </div>
-                <div id="modal-group-pseudonym">
+                <div id="modal-group-discount">
                   <div class="nameRow-30">
                     <div><label>Скидка<span>*</span></label></div>
                   </div>
                   <div class="valueRow-70">
-                    <div>
-                      <input type="number" formControlName="groupDiscount">
+                    <div class="coupVal">
+                      <input type="number" formControlName="groupDiscount"><div>%</div>
+                    </div>
+                    <div *ngIf="groupForm.get('groupDiscount').invalid && groupForm.get('groupDiscount').touched">
+                      <small class="errorForm" *ngIf="groupForm.get('groupDiscount').errors.required">Введите размер скидки</small>
+                      <small class="errorForm" *ngIf="groupForm.get('groupDiscount').errors.percent">Введено больше 100 процентов</small>
                     </div>
                   </div>
                 </div>
@@ -680,8 +688,8 @@
         <div>
           <div>
             <h4>
-              <button *ngIf="but === 'add'" type="submit" >Создать</button>
-              <button *ngIf="but === 'edit'" type="submit" >Сохранить</button>
+              <button *ngIf="but === 'add'" type="submit" [disabled]="groupForm.invalid">Создать</button>
+              <button *ngIf="but === 'edit'" type="submit" [disabled]="groupForm.invalid">Сохранить</button>
             </h4>
           </div>
         </div>

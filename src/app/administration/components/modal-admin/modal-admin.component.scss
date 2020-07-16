@@ -563,7 +563,7 @@ small {
 #modal-status {
   position: absolute;
   width: 500px;
-  height: 200px;
+  height: 210px;
   margin: auto;
   left: 0; bottom: 0; right: 0; top: 0;
 }
@@ -627,7 +627,6 @@ small {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  overflow-y: auto;
 }
 #modal-status-content>div>div>div>div {
   width: 95%;
