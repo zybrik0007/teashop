@@ -1,9 +1,9 @@
 
-<div id="modal-area">
+<div id="modal-area" >
 
-  <div id="modal-coupon" *ngIf="modal==='coupon'">
+  <div id="modal-coupon" *ngIf="modal==='coupon'" cdkDragBoundary="#modal-area" cdkDrag>
       <form [formGroup]="couponForm" (ngSubmit)="FormSubmit('coupon')">
-        <div id="modal-coupon-head" (mousedown)="transfer($event)">
+        <div id="modal-coupon-head" cdkDragHandle>
           <div>
             <div><h4>{{nameHead}}</h4></div>
             <div class="modal-exit"><span class="icon-cross"></span></div>
@@ -141,10 +141,11 @@
       </form>
   </div>
 
-  <div id="modal-payment" *ngIf="modal==='payment'">
+
+  <div id="modal-payment" *ngIf="modal==='payment'" cdkDragBoundary="#modal-area" cdkDrag>
     <form [formGroup]="paymentForm" (ngSubmit)="FormSubmit('payment')">
 
-      <div id="modal-payment-head">
+      <div id="modal-payment-head" cdkDragHandle>
         <div>
           <div><h4>{{nameHead}}</h4></div>
           <div class="modal-exit"><span class="icon-cross"></span></div>
@@ -288,10 +289,10 @@
     </form>
   </div>
 
-  <div id="modal-delivery" *ngIf="modal==='delivery'">
+  <div id="modal-delivery" *ngIf="modal==='delivery'" cdkDragBoundary="#modal-area" cdkDrag>
     <form [formGroup]="deliveryForm" (ngSubmit)="FormSubmit('delivery')">
 
-      <div id="modal-delivery-head">
+      <div id="modal-delivery-head" cdkDragHandle>
         <div>
           <div><h4>{{nameHead}}</h4></div>
           <div class="modal-exit"><span class="icon-cross"></span></div>
@@ -443,10 +444,10 @@
     </form>
   </div>
 
-  <div id="modal-price" *ngIf="modal==='price'">
+  <div id="modal-price" *ngIf="modal==='price'" cdkDragBoundary="#modal-area" cdkDrag>
     <form [formGroup]="priceForm" (ngSubmit)="FormSubmit('price')">
 
-      <div id="modal-price-head">
+      <div id="modal-price-head" cdkDragHandle>
         <div>
           <div><h4>{{nameHead}}</h4></div>
           <div class="modal-exit"><span class="icon-cross"></span></div>
@@ -509,10 +510,10 @@
     </form>
   </div>
 
-  <div id="modal-status" *ngIf="modal==='status'" >
+  <div id="modal-status" *ngIf="modal==='status'" cdkDragBoundary="#modal-area" cdkDrag>
     <form [formGroup]="statusForm" (ngSubmit)="FormSubmit('status')">
 
-      <div id="modal-status-head">
+      <div id="modal-status-head" cdkDragHandle>
         <div>
           <div><h4>{{nameHead}}</h4></div>
           <div class="modal-exit"><span class="icon-cross"></span></div>
@@ -578,10 +579,10 @@
     </form>
   </div>
 
-  <div id="modal-group" *ngIf="modal==='group'">
+  <div id="modal-group" *ngIf="modal==='group'" cdkDragBoundary="#modal-area" cdkDrag>
     <form [formGroup]="groupForm">
 
-      <div id="modal-group-head">
+      <div id="modal-group-head" cdkDragHandle>
         <div>
           <div><h4>{{nameHead}}</h4></div>
           <div class="modal-exit"><span class="icon-cross"></span></div>

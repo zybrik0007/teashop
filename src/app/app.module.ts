@@ -4,6 +4,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { TransferHttpCacheModule } from '@nguniversal/common'; // HERE
 import { QuillModule } from 'ngx-quill';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -57,16 +59,18 @@ import { ModaltransferDirective } from './administration/directives/modaltransfe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    TransferHttpCacheModule, // AND HERE
+    TransferHttpCacheModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    QuillModule.forRoot()
+    DragDropModule,
+    QuillModule.forRoot(),
   ],
   exports: [
-    QuillModule
+    DragDropModule,
+    QuillModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
