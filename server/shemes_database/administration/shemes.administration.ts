@@ -97,12 +97,6 @@ export const Coupon = <MyModelStatic> sequel.define('coupon', {
     unique: true,
     allowNull: false
   },
-  /*Псевдоним*/
-  pseudonym: {
-    type: DataTypes.STRING,
-    unique: true,
-    allowNull: false
-  },
   /*Тип*/
   type: {
     type: DataTypes.BOOLEAN,

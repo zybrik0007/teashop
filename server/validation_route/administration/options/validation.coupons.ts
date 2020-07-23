@@ -114,7 +114,7 @@ export class CouponsValidation {
       if (!validationd.typeNumber(req['value'])) {
         return [false, ErrorValidation.ErrorCouponNumberValue];
       }
-      if (!validationd.zeroNotBig(req['value'])) {
+      if (validationd.zeroNotBig(req['value'])) {
         return [false, ErrorValidation.ErrorCouponZeroValue];
       }
     }
@@ -125,6 +125,9 @@ export class CouponsValidation {
       }
       if (validationd.percentBig(req['value'])) {
         return [false, ErrorValidation.ErrorCouponPercentValue];
+      }
+      if (validationd.zeroNotBig(req['value'])) {
+        return [false, ErrorValidation.ErrorCouponZeroValue];
       }
     }
     /*Проверка параметра даты начала*/
@@ -145,9 +148,16 @@ export class CouponsValidation {
     if (validationd.dateComparison(req['dateStart'], req['dateEnd'])) {
       return [false, ErrorValidation.ErrorCouponDateValidation];
     }
-
-
-
+    /*Проверка параметра ID клиента*/
+    if (req['client'] !== null) {
+      if (!validationd.integerNum(req['client'])) {
+        return [false, ErrorValidation.ErrorCouponIntegerClient];
+      }
+    }
+    /*Проверка параметра Заверщить, после использования*/
+    if (!validationd.typeBoolean(req['publication'])) {
+      return [false, ErrorValidation.ErrorCouponBooleanPublication];
+    }
   }
 }
 

@@ -116,7 +116,7 @@ export class ValidationRequestsAdmin {
 
   /*Значение больше или равно нулю*/
   zeroNotBig(req): boolean {
-    return Number(req) >= 0;
+    return Number(req) < 0;
   }
 
   /*Проверка, что не больше 100*/

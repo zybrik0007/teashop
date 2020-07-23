@@ -33,7 +33,7 @@ routerCoupons.get(
   }
 );
 
-routerCoupons.post('/post', () => {
+routerCoupons.put('', () => {
   console.log('post');
 });
 

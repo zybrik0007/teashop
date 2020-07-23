@@ -108,7 +108,10 @@
               </div>
               <div class="nameRow-50">
                 <div>
-                  <input type="text" formControlName="couponClient">
+                  <input type="number" formControlName="couponClient">
+                </div>
+                <div *ngIf="couponForm.get('couponClient').invalid && couponForm.get('couponClient').touched">
+                  <small class="errorForm" *ngIf="couponForm.get('couponClient').errors.inbreed">Введено не целое число</small>
                 </div>
               </div>
             </div>

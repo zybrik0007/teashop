@@ -56,7 +56,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         couponValue: new FormControl(this.couponPut.value, [Validators.required]),
         couponDateStart: new FormControl(this.couponPut.dateStart, [Validators.required]),
         couponDateEnd: new FormControl(this.couponPut.dateEnd, [Validators.required]),
-        couponClient: new FormControl(this.couponPut.client),
+        couponClient: new FormControl(this.couponPut.client, [ValidatorAdministration.inbreed]),
         couponFinish: new FormControl(this.couponPut.finish)
       });
     }

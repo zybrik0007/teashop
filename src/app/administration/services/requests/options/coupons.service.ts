@@ -28,7 +28,7 @@ export class CouponsService {
   getCouponsService(req: CouponsGetInterface): Observable<object> {
 
     /*Определение url*/
-    const url: string = '/api/coupons/get';
+    const url: string = '/api/coupons';
 
     /*Определение Headers*/
     const headers = this.getCouponsHeaders();
