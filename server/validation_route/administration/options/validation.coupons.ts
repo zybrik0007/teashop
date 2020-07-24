@@ -6,12 +6,12 @@ import {ErrorValidation} from '../../../errors/ErrorValidation';
 const validationd = new ValidationRequestsAdmin();
 /*Проверка запрсов на валидность данных разделе Купоны*/
 export class CouponsValidation {
-  getCoupons(req): boolean {
+  getCoupons(req): [boolean, string] {
     if (!validationd.typeObj(req)) {
       return false;
     }
-    if (!validationd.objRows(req)) {
-      return false;
+    if (!req.hasOwnProperty('rows')) {
+      return [false, ErrorValidation.ErrorRows];
     }
     if (!validationd.objPage(req)) {
       return false;

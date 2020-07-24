@@ -99,13 +99,13 @@ export const Coupon = <MyModelStatic> sequel.define('coupon', {
   },
   /*Тип*/
   type: {
-    type: DataTypes.BOOLEAN,
+    type: DataTypes.STRING,
     unique: false,
     allowNull: false
   },
   /*Значение*/
   value: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.FLOAT(10, 2),
     unique: false,
     allowNull: false
   },

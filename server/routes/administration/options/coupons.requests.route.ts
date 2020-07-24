@@ -14,7 +14,7 @@ export const routerCoupons = express.Router();
 /*Роутеры для раздела купонов Администрирования сайта*/
 
 routerCoupons.get(
-  '/get',
+  '',
   // tslint:disable-next-line:only-arrow-functions
   async function(
     req,
@@ -22,6 +22,11 @@ routerCoupons.get(
     next): Promise<any> {
     console.log('router IN');
     console.log('req: ', req.query);
+    try {
+      const reqValidation = await validation.
+    } catch (e) {
+
+    }
     /*
     const resValid = await validation.getCoupons(req.query);
     if (!resValid) {

@@ -48,11 +48,10 @@ export class MainAdminComponent implements OnInit {
     this.page = 1;
     this.sortName = 'id';
     this.sortValue = 'ASC';
-    this.searchName = 'test false';
+    this.searchName = '';
 
     /*Первичная инициализация раздела Купоны*/
     if (this.router.url === '/administration/options/coupons') {
-      this.countRows = 5000000;
       this.getCoupons({
           rows: this.rows,
           page: this.page,
@@ -157,11 +156,6 @@ export class MainAdminComponent implements OnInit {
         searchName: this.searchName
       });
     }
-
-    if (key[0] === 'search') {
-      this.countRows = 11111;
-    }
-
   }
 
 
