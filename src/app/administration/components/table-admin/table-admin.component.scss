@@ -19,12 +19,12 @@
   flex-wrap: nowrap;
 }
 
-#tableContent-admin {
+.tableContent-admin {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
 }
-#tableHead-admin {
+.tableHead-admin {
   position: sticky;
   top: 0;
   height: 30px;
@@ -36,13 +36,13 @@
   border-bottom: 1px solid #b5b5b5;
 }
 
-#tableHead-admin>div {
+.tableHead-admin>div {
   width: 50%;
   height: 100%;
   border-right: 1px solid #b5b5b5;
 }
 
-#tableHead-admin>div>div {
+.tableHead-admin>div>div {
   width: 100%;
   height: 30px;
   display: flex;
@@ -52,7 +52,7 @@
   justify-content: center;
 }
 
-#tableHead-admin>div>div>div {
+.tableHead-admin>div>div>div {
   width: 90%;
   display: flex;
   flex-direction: row;

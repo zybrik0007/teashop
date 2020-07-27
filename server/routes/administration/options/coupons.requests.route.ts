@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import {CouponsValidation} from '../../../validation_route/administration/options/validation.coupons';
 import {environment} from '../../../../src/environments/environment';
+import {ErrorValidation} from '../../../errors/ErrorValidation';
+import {ErrorDB} from '../../../errors/ErrorDB';
 
 const validation = new CouponsValidation();
 const express = require('express');
@@ -13,6 +15,7 @@ export const routerCoupons = express.Router();
 
 /*Роутеры для раздела купонов Администрирования сайта*/
 
+/*Вывод таблицы купонов*/
 routerCoupons.get(
   '',
   // tslint:disable-next-line:only-arrow-functions
@@ -22,19 +25,38 @@ routerCoupons.get(
     next): Promise<any> {
     console.log('router IN');
     console.log('req: ', req.query);
+    /*Проверка валидации данных*/
     try {
-      const reqValidation = await validation.
+      const reqValidation = await validation.getCoupons(req);
+      if (!reqValidation[0]) {
+        const error: string = JSON.stringify({error: reqValidation[1]});
+        res.setHeader('Content-Type', 'application/json');
+        res.status(501);
+        res.send(error);
+      }
+      else {
+        next();
+      }
     } catch (e) {
-
+      const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(501);
+      res.send(error);
     }
-    /*
-    const resValid = await validation.getCoupons(req.query);
-    if (!resValid) {
-      res.status(400).send(environment.errorValidationServer);
-    };
-    */
-    const DBreq = await CouponsReqDB.getCouponDB(req.query);
-    console.log('DBreq: ', DBreq);
+    /*Выборка из базы данных*/
+    try {
+      const reqDb = await CouponsReqDB.getCouponDB(req.query);
+      const response = JSON.stringify(reqDb);
+      console.log('DBreq: ', reqDb);
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200);
+      res.send(response);
+    } catch (e) {
+      const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(500);
+      res.send(error);
+    }
   }
 );
 

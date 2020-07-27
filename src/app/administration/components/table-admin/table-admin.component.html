@@ -1,24 +1,55 @@
 <div id="tableAr-admin">
   <div id="tableArea-admin">
-    <div id="tablecContent-admin">
-      <div id="tableHead-admin">
+    <div class="tableContent-admin" *ngIf="activeURL==='coupon'">
 
-        <div class="itemSort" data-sort="name" data-val="" (click)="sortUpt($event)">
+      <div class="tableHead-admin">
+
+        <div class="itemSort" data-sort="code" data-val="" (click)="sortUpt($event)">
           <div>
             <div>
-              <div><span>Название</span></div>
-              <div class="filterPosition" *ngIf="column=='name' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div><span>Код</span></div>
+              <div class="filterPosition" *ngIf="column=='code' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
               <div class="filterPosition filterDESC" *ngIf="column=='name' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
 
-        <div class="itemSort" data-sort="category" data-val="" (click)="sortUpt($event)">
+        <div class="itemSort" data-sort="value" data-val="" (click)="sortUpt($event)">
           <div>
             <div>
-              <div><span>Категория</span></div>
-              <div class="filterPosition" *ngIf="column=='category' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
-              <div class="filterPosition filterDESC" *ngIf="column=='category' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+              <div><span>Значение</span></div>
+              <div class="filterPosition" *ngIf="column=='value' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='value' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="itemSort" data-sort="dateStart" data-val="" (click)="sortUpt($event)">
+          <div>
+            <div>
+              <div><span>Дата начала</span></div>
+              <div class="filterPosition" *ngIf="column=='dateStart' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='dateStart' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="itemSort" data-sort="dateEnd" data-val="" (click)="sortUpt($event)">
+          <div>
+            <div>
+              <div><span>Дата начала</span></div>
+              <div class="filterPosition" *ngIf="column=='dateEnd' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='dateEnd' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="itemSort" data-sort="dateEnd" data-val="" (click)="sortUpt($event)">
+          <div>
+            <div>
+              <div><span>Для клиента</span></div>
+              <div class="filterPosition" *ngIf="column=='dateEnd' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='dateEnd' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
@@ -32,78 +63,7 @@
           </div>
         </div>
       </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="tableBlock-admin">
-        <div>
-          <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
-          </div>
-        </div>
-      </div>
+
 
     </div>
   </div>

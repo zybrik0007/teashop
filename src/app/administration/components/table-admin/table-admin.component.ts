@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-table-admin',
@@ -9,6 +10,7 @@ export class TableAdminComponent implements OnInit {
 
   column: string = 'id';
   columnValue: string = 'ASC';
+  activeURL: string;
 
   @Output() sortOutput: EventEmitter<object> = new EventEmitter<object>();
 
@@ -17,9 +19,14 @@ export class TableAdminComponent implements OnInit {
   ElementsSort: HTMLCollectionOf<Element> = document.getElementsByClassName('itemSort');
 
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
+    if (this.router.url === '/administration/options/coupons') {
+      this.activeURL = 'coupon';
+    }
   }
 
   sortUpt(event) {

@@ -83,8 +83,8 @@ export class ValidationRequestsAdmin {
   /*Проверка свойства sortName для таблицы Купоны*/
   sortNameCoupons(req): boolean {
     return (req === 'id' || req === 'code' || req === 'value' ||
-      req === 'name' || req === 'startDate' || req === 'endDate' ||
-      req === 'completion' || req === 'publication' || req === 'clientId');
+      req === 'dateStart' || req === 'dateEnd' ||
+      req === 'finish' || req === 'publication' || req === 'client');
   }
 
   /*Проверка свойства Rows*/

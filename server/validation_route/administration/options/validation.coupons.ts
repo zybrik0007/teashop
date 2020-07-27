@@ -6,59 +6,70 @@ import {ErrorValidation} from '../../../errors/ErrorValidation';
 const validationd = new ValidationRequestsAdmin();
 /*Проверка запрсов на валидность данных разделе Купоны*/
 export class CouponsValidation {
+  rows;
+  page;
+  sortName;
+  sortValue;
+  searchName;
   getCoupons(req): [boolean, string] {
     if (!validationd.typeObj(req)) {
-      return false;
+      return [false, ErrorValidation.ErrorTypeGet];
     }
     if (!req.hasOwnProperty('rows')) {
       return [false, ErrorValidation.ErrorRows];
     }
-    if (!validationd.objPage(req)) {
-      return false;
+    if (!req.hasOwnProperty('page')) {
+      return [false, ErrorValidation.ErrorPage];
     }
-    if (!validationd.objSearchName(req)) {
-      return false;
+    if (!req.hasOwnProperty('sortName')) {
+      return [false, ErrorValidation.ErrorSortName];
     }
-    if (!validationd.objSortName(req)) {
-      return false;
+    if (!req.hasOwnProperty('sortName')) {
+      return [false, ErrorValidation.ErrorSortValue];
     }
-    if (!validationd.objSortValue(req)) {
-      return false;
+    if (!req.hasOwnProperty('sortValue')) {
+      return [false, ErrorValidation.ErrorSortValue];
     }
-    if (!validationd.typeStr(req[`rows`])) {
-      return false;
+    if (!req.hasOwnProperty('searchName')) {
+      return [false, ErrorValidation.ErrorSearchName];
     }
-    if (!validationd.rowsValidation(req[`rows`])) {
-      return false;
+    if (!validationd.typeStr(req['rows'])) {
+      return [false, ErrorValidation.ErrorStringRows];
     }
-    if (!validationd.typeStr(req[`page`])) {
-      return false;
+    if (!validationd.rowsValidation(req['rows'])) {
+      return [false, ErrorValidation.ErrorValueRows];
     }
-    if (!validationd.trimStr(req[`page`])) {
-      return false;
+    if (!validationd.typeStr(req['page'])) {
+      return [false, ErrorValidation.ErrorStringPage];
     }
-    if (!validationd.integerNum(req[`page`])) {
-      return false;
+    if (!validationd.trimStr(req['page'])) {
+      return [false, ErrorValidation.ErrorTrimPage];
     }
-    if (!validationd.zeroNum(req[`page`])) {
-      return false;
+    if (!validationd.integerNum(req['page'])) {
+      return [false, ErrorValidation.ErrorIntegerPage];
     }
-    if (!validationd.zeroBigger(req[`page`])) {
-      return false;
+    if (validationd.zeroNum(req['page'])) {
+      return [false, ErrorValidation.ErrorZeroPage];
     }
-    if (!validationd.typeStr(req[`sortName`])) {
-      return false;
+    if (!validationd.zeroBigger(req['page'])) {
+      return [false, ErrorValidation.ErrorBiggerZeroPage];
     }
-    if (!validationd.sortNameCoupons(req[`sortName`])) {
-      return false;
+    if (!validationd.typeStr(req['sortName'])) {
+      return [false, ErrorValidation.ErrorStringSortName];
     }
-    if (!validationd.typeStr(req[`sortValue`])) {
-      return false;
+    if (!validationd.sortNameCoupons(req['sortName'])) {
+      return [false, ErrorValidation.ErrorValueSortName];
     }
-    if (!validationd.sortValueValidation(req[`sortValue`])) {
-      return false;
+    if (!validationd.typeStr(req['sortValue'])) {
+      return [false, ErrorValidation.ErrorStringSortValue];
     }
-    return validationd.typeStr(req[`searchName`]);
+    if (!validationd.sortValueValidation(req['sortValue'])) {
+      return [false, ErrorValidation.ErrorValueSortValue];
+    }
+    if (!validationd.typeStr(req['searchName'])) {
+      return [false, ErrorValidation.ErrorStringSearchName];
+    }
+    return [true, ''];
   }
 
   /*Проверка запроса добавления купона*/
