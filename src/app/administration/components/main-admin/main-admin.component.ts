@@ -31,7 +31,7 @@ export class MainAdminComponent implements OnInit {
   countRows: number;
   modal: boolean = false; /*Активация модального окна*/
   modalNameParent: string  = 'testmodal';
-  arrTable: [object];
+  arrTable: object[];
 
 
   constructor(
@@ -168,10 +168,11 @@ export class MainAdminComponent implements OnInit {
     this.couponsService.getCouponsService(getParameter)
       .subscribe(
         res => {
-          console.log('res: ', res);
           if (res['status'] === 200) {
-            this.countRows = Number(res['body'][0]);
-            this.arrTable = res['body'];
+            const response = JSON.parse(res['body']['response']);
+            this.countRows = Number(response[0]);
+            this.arrTable = response.shift();
+            console.log('this.arrTable: ', this.arrTable);
           } else {
             console.log('Error Response Parse');
           }

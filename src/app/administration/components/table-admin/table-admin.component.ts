@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,6 +11,8 @@ export class TableAdminComponent implements OnInit {
   column: string = 'id';
   columnValue: string = 'ASC';
   activeURL: string;
+
+  @Input() arrTable: object[];
 
   @Output() sortOutput: EventEmitter<object> = new EventEmitter<object>();
 

@@ -12,8 +12,8 @@
     <div id="buttons-admin">
       <app-buttons-admin (searchUpt)="UpdatePage($event)" (add)="add()"></app-buttons-admin>
     </div>
-    <div id="table-admin">
-      <app-table-admin (sortOutput)="UpdatePage($event)"></app-table-admin>
+    <div id="table-admin" >
+      <app-table-admin (sortOutput)="UpdatePage($event)" [arrTable]="arrTable"></app-table-admin>
     </div>
     <div id="footer-admin">
       <app-footer-admin [countRows]="countRows" (rowsUpt)="UpdatePage($event)" (pageUpt)="UpdatePage($event)" ></app-footer-admin>

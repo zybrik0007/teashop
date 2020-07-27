@@ -15,7 +15,7 @@ export class CouponsValidation {
     if (!validationd.typeObj(req)) {
       return [false, ErrorValidation.ErrorTypeGet];
     }
-    if (!req.hasOwnProperty('rows')) {
+    if (!req.hasOwnProperty(`rows`)) {
       return [false, ErrorValidation.ErrorRows];
     }
     if (!req.hasOwnProperty('page')) {

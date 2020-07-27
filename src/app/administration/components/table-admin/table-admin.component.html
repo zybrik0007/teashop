@@ -9,7 +9,7 @@
             <div>
               <div><span>Код</span></div>
               <div class="filterPosition" *ngIf="column=='code' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
-              <div class="filterPosition filterDESC" *ngIf="column=='name' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='code' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
@@ -37,29 +37,43 @@
         <div class="itemSort" data-sort="dateEnd" data-val="" (click)="sortUpt($event)">
           <div>
             <div>
-              <div><span>Дата начала</span></div>
-              <div class="filterPosition" *ngIf="column=='dateEnd' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
-              <div class="filterPosition filterDESC" *ngIf="column=='dateEnd' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="itemSort" data-sort="dateEnd" data-val="" (click)="sortUpt($event)">
-          <div>
-            <div>
               <div><span>Для клиента</span></div>
               <div class="filterPosition" *ngIf="column=='dateEnd' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
               <div class="filterPosition filterDESC" *ngIf="column=='dateEnd' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
+
+        <div class="itemSort" data-sort="client" data-val="" (click)="sortUpt($event)">
+          <div>
+            <div>
+              <div><span>Для клиента</span></div>
+              <div class="filterPosition" *ngIf="column=='client' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='client' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="itemSort" data-sort="used" data-val="" (click)="sortUpt($event)">
+          <div>
+            <div>
+              <div><span>Завершен</span></div>
+              <div class="filterPosition" *ngIf="column=='used' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='used' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="tableBlock-admin">
+      <div class="tableBlock-admin" *ngFor="let item of arrTable">
         <div>
           <div>
-            <div><span>1</span></div>
-            <div><span>4</span></div>
+            <div><span>{{item['code']}}</span></div>
+            <div><span>{{item['code']}}</span></div>
+            <div><span>{{item['code']}}</span></div>
+            <div><span>{{item['code']}}</span></div>
+            <div><span>{{item['code']}}</span></div>
+            <div><span>{{item['code']}}</span></div>
           </div>
         </div>
       </div>

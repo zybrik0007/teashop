@@ -27,7 +27,7 @@ routerCoupons.get(
     console.log('req: ', req.query);
     /*Проверка валидации данных*/
     try {
-      const reqValidation = await validation.getCoupons(req);
+      const reqValidation = await validation.getCoupons(req.query);
       if (!reqValidation[0]) {
         const error: string = JSON.stringify({error: reqValidation[1]});
         res.setHeader('Content-Type', 'application/json');
@@ -50,7 +50,7 @@ routerCoupons.get(
       console.log('DBreq: ', reqDb);
       res.setHeader('Content-Type', 'application/json');
       res.status(200);
-      res.send(response);
+      res.send({response});
     } catch (e) {
       const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
       res.setHeader('Content-Type', 'application/json');

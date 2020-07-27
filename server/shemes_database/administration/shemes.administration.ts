@@ -127,8 +127,15 @@ export const Coupon = <MyModelStatic> sequel.define('coupon', {
     unique: false,
     allowNull: true
   },
+
   /*Завершить полсе испольхования*/
-  completion: {
+  finish: {
+    type: DataTypes.BOOLEAN,
+    unique: false,
+    allowNull: false
+  },
+  /*Использован*/
+  used: {
     type: DataTypes.BOOLEAN,
     unique: false,
     allowNull: false
