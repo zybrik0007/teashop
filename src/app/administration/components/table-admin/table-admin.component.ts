@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import {Router} from '@angular/router';
   templateUrl: './table-admin.component.html',
   styleUrls: ['./table-admin.component.scss']
 })
-export class TableAdminComponent implements OnInit {
+export class TableAdminComponent implements OnInit, OnChanges {
 
   column: string = 'id';
   columnValue: string = 'ASC';
@@ -28,7 +28,12 @@ export class TableAdminComponent implements OnInit {
   ngOnInit(): void {
     if (this.router.url === '/administration/options/coupons') {
       this.activeURL = 'coupon';
+      console.log('arrTable Table ngOnInit: ', this.arrTable);
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('arrTable Table ngOnChanges: ', changes);
   }
 
   sortUpt(event) {
