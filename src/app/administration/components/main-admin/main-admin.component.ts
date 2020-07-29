@@ -171,7 +171,7 @@ export class MainAdminComponent implements OnInit {
           if (res['status'] === 200) {
             const response = JSON.parse(res['body']['response']);
             this.countRows = Number(response[0]);
-            this.arrTable = response.shift();
+            this.arrTable = response;
             console.log('this.arrTable: ', this.arrTable);
           } else {
             console.log('Error Response Parse');

@@ -11,6 +11,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
   column: string = 'id';
   columnValue: string = 'ASC';
   activeURL: string;
+  endItem: number;
 
   @Input() arrTable: object[];
 
@@ -33,7 +34,12 @@ export class TableAdminComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('arrTable Table ngOnChanges: ', changes);
+    const changeData = changes['arrTable'];
+    const arrChangesData = changeData['currentValue'];
+    const endArr = arrChangesData.pop();
+    this.endItem = endArr['count'];
+    this.arrTable = arrChangesData;
+    this.ngOnInit();
   }
 
   sortUpt(event) {

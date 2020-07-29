@@ -17,7 +17,7 @@ export const routerCoupons = express.Router();
 
 /*Вывод таблицы купонов*/
 routerCoupons.get(
-  '',
+  '/',
   // tslint:disable-next-line:only-arrow-functions
   async function(
     req,
@@ -52,6 +52,7 @@ routerCoupons.get(
       res.status(200);
       res.send({response});
     } catch (e) {
+      console.log('e: ', e);
       const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
       res.setHeader('Content-Type', 'application/json');
       res.status(500);
