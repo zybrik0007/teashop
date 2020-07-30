@@ -78,13 +78,15 @@
       <div class="tableBlock-admin"  *ngFor="let item of arrTable" [id]="item['id']">
         <div>
           <div *ngIf="endItem !== 0">
-            <div><span class="columnCenter" class="columnCenter columnFalse" [ngClass]="{columnTrue: item['publication']}"><span class="icon-checkmark"></span></span></div>
+            <div><span class="columnCenter" [ngClass]="{columnTrue: item['publication'],
+            columnFalse: !item['publication']}"><span class="icon-checkmark"></span></span></div>
             <div><span>{{item['code']}}</span></div>
-            <div><span>{{item['value']}}</span></div>
+            <div><span>{{item['value']}}<span *ngIf="item['type'] === 'percent'"> %</span></span></div>
             <div><span>{{item['startDate'] | date: 'dd.MM.yyyy'}}</span></div>
             <div><span>{{item['endDate'] | date: 'dd.MM.yyyy'}}</span></div>
             <div><span>{{item['clientId']}}</span></div>
-            <div><span class="columnCenter columnFalse" [ngClass]="{columnTrue: item['used'] === true}"><span class="icon-checkmark"></span></span></div>
+            <div><span class="columnCenter" [ngClass]="{columnTrue: item['used'],
+            columnFalse: !item['used']}"><span class="icon-checkmark"></span></span></div>
           </div>
           <div *ngIf="endItem === 0">
             <div><span>Нет данных для отображения</span></div>
