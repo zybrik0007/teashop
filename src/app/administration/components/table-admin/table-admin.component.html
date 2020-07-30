@@ -34,32 +34,32 @@
           </div>
         </div>
 
-        <div class="itemSort" data-sort="dateStart" data-val="" (click)="sortUpt($event)">
+        <div class="itemSort" data-sort="startDate" data-val="" (click)="sortUpt($event)">
           <div>
             <div>
               <div><span>Дата начала</span></div>
-              <div class="filterPosition" *ngIf="column=='dateStart' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
-              <div class="filterPosition filterDESC" *ngIf="column=='dateStart' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition" *ngIf="column=='startDate' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='startDate' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
 
-        <div class="itemSort" data-sort="dateEnd" data-val="" (click)="sortUpt($event)">
+        <div class="itemSort" data-sort="endDate" data-val="" (click)="sortUpt($event)">
           <div>
             <div>
               <div><span>Дата окончания</span></div>
-              <div class="filterPosition" *ngIf="column=='dateEnd' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
-              <div class="filterPosition filterDESC" *ngIf="column=='dateEnd' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition" *ngIf="column=='endDate' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='endDate' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
 
-        <div class="itemSort" data-sort="client" data-val="" (click)="sortUpt($event)">
+        <div class="itemSort" data-sort="clientId" data-val="" (click)="sortUpt($event)">
           <div>
             <div>
               <div><span>Для клиента</span></div>
-              <div class="filterPosition" *ngIf="column=='client' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
-              <div class="filterPosition filterDESC" *ngIf="column=='client' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition" *ngIf="column=='clientId' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='clientId' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
             </div>
           </div>
         </div>
@@ -81,8 +81,8 @@
             <div><span class="columnCenter" class="columnCenter columnFalse" [ngClass]="{columnTrue: item['publication']}"><span class="icon-checkmark"></span></span></div>
             <div><span>{{item['code']}}</span></div>
             <div><span>{{item['value']}}</span></div>
-            <div><span>{{item['startDate'] | date: 'dd MM yyyy'}}</span></div>
-            <div><span>{{item['endDate' | date: 'dd MM yyyy']}}</span></div>
+            <div><span>{{item['startDate'] | date: 'dd.MM.yyyy'}}</span></div>
+            <div><span>{{item['endDate'] | date: 'dd.MM.yyyy'}}</span></div>
             <div><span>{{item['clientId']}}</span></div>
             <div><span class="columnCenter columnFalse" [ngClass]="{columnTrue: item['used'] === true}"><span class="icon-checkmark"></span></span></div>
           </div>
