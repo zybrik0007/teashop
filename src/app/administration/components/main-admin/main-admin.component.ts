@@ -32,6 +32,7 @@ export class MainAdminComponent implements OnInit {
   modal: boolean = false; /*Активация модального окна*/
   modalNameParent: string  = 'testmodal';
   arrTable: object[];
+  loader: boolean = false;
 
 
   constructor(
@@ -165,6 +166,7 @@ export class MainAdminComponent implements OnInit {
   /*Купоны*/
   /*Выборка купонов для таблицы Купоны*/
   getCoupons(getParameter: CouponsGetInterface) {
+    this.loader = true;
     this.couponsService.getCouponsService(getParameter)
       .subscribe(
         res => {
@@ -181,6 +183,7 @@ export class MainAdminComponent implements OnInit {
           console.log('Error Client: ', error);
         }
         );
+    this.loader = false;
   }
 
   /*Способ оплаты*/

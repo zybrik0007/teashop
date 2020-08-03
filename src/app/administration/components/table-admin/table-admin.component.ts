@@ -12,6 +12,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
   columnValue: string = 'ASC';
   activeURL: string;
   endItem: number;
+  loaderTable: boolean = false;
 
   @Input() arrTable: object[];
 
@@ -34,12 +35,14 @@ export class TableAdminComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.loaderTable = true;
     const changeData = changes['arrTable'];
     const arrChangesData = changeData['currentValue'];
     const endArr = arrChangesData.pop();
     this.endItem = endArr['count'];
     this.arrTable = arrChangesData;
     this.ngOnInit();
+    this.loaderTable = false;
   }
 
   sortUpt(event) {
