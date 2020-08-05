@@ -6,11 +6,8 @@ import {ErrorValidation} from '../../../errors/ErrorValidation';
 const validationd = new ValidationRequestsAdmin();
 /*Проверка запрсов на валидность данных разделе Купоны*/
 export class CouponsValidation {
-  rows;
-  page;
-  sortName;
-  sortValue;
-  searchName;
+
+  /*Проверка запроса купонов, для главной таблицы*/
   getCoupons(req): [boolean, string] {
     if (!validationd.typeObj(req)) {
       return [false, ErrorValidation.ErrorTypeGet];

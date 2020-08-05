@@ -170,6 +170,40 @@ export class MainAdminComponent implements OnInit {
     this.couponsService.getCouponsService(getParameter)
       .subscribe(
         res => {
+          this.loader = true;
+          try {
+            if (res['status'] === 200) {
+              const response = JSON.parse(res['body']['response']);
+              this.countRows = Number(response[0]);
+              this.arrTable = response;
+              console.log('this.arrTable: ', this.arrTable);
+            }
+            else if (res['status'] === 500) {
+              const error = JSON.parse(res['body']['response']);
+              console.log('error 500: ', error);
+            }
+            else if (res['status'] === 501) {
+              const error = JSON.parse(res['body']['response']);
+              console.log('error 501: ', error);
+            }
+          } catch (err) {
+            console.log('Error parse');
+          }
+          this.loader = false;
+        },
+        error => {
+          console.log('Error Client: ', error);
+        }
+        );
+
+  }
+
+  /*Способ оплаты*/
+  /*Выборка сопособ оплаты для таблицы Способы оплаты*/
+  getPayment(getParameter: PaymentGetInterface) {
+    this.paymentService.getPaymentService(getParameter)
+      .subscribe(
+        res => {
           if (res['status'] === 200) {
             const response = JSON.parse(res['body']['response']);
             this.countRows = Number(response[0]);
@@ -182,17 +216,6 @@ export class MainAdminComponent implements OnInit {
         error => {
           console.log('Error Client: ', error);
         }
-        );
-    this.loader = false;
-  }
-
-  /*Способ оплаты*/
-  /*Выборка сопособ оплаты для таблицы Способы оплаты*/
-  getPayment(getParameter: PaymentGetInterface) {
-    this.paymentService.getPaymentService(getParameter)
-      .subscribe(
-        res => {},
-        error => {}
       );
   }
 
