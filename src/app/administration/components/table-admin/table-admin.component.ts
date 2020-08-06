@@ -11,7 +11,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
   column: string = 'id';
   columnValue: string = 'ASC';
   activeURL: string;
-  endItem: number;
+  endItem: boolean;
   loaderTable: boolean = false;
 
   @Input() arrTable: object[];
@@ -31,18 +31,26 @@ export class TableAdminComponent implements OnInit, OnChanges {
     if (this.router.url === '/administration/options/coupons') {
       this.activeURL = 'coupon';
       console.log('arrTable Table ngOnInit: ', this.arrTable);
+      console.log('this.endItem ngOnInit:', this.endItem);
     }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.loaderTable = true;
-    const changeData = changes['arrTable'];
-    const arrChangesData = changeData['currentValue'];
-    const endArr = arrChangesData.pop();
-    this.endItem = endArr['count'];
-    this.arrTable = arrChangesData;
-    this.ngOnInit();
-    this.loaderTable = false;
+    if (this.router.url === '/administration/options/coupons') {
+      this.loaderTable = true;
+      const changeData = changes['arrTable'];
+      const arrChangesData = changeData['currentValue'];
+      const endArr = arrChangesData.pop();
+      if (endArr['count'] === 0) {
+        this.endItem = true;
+        this.ngOnInit();
+      }
+      else {
+        this.endItem = false;
+        this.arrTable = arrChangesData;
+        this.ngOnInit();
+      }
+    }
   }
 
   sortUpt(event) {

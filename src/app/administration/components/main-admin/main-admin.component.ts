@@ -186,6 +186,9 @@ export class MainAdminComponent implements OnInit {
               const error = JSON.parse(res['body']['response']);
               console.log('error 501: ', error);
             }
+            else {
+              console.log(res['status'], 'неизвестная ошибка');
+            }
           } catch (err) {
             console.log('Error parse');
           }

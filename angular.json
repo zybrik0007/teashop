@@ -170,6 +170,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "teashop"
+    }
+  },
+  "defaultProject": "teashop",
+  "cli": {
+    "analytics": "84e282ab-3fed-4778-af09-4afffbde93b7"
+  }
 }
