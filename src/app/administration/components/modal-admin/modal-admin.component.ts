@@ -11,6 +11,8 @@ import {DeliveryPutInterface} from '../../interfaces/requests/options/requests.d
 import {PricePutInterface} from '../../interfaces/requests/options/requests.price.interface';
 import {StatusPutInterface} from '../../interfaces/requests/options/requests.status.interface';
 import {GroupPutInterface} from '../../interfaces/requests/options/requests.groups.interface';
+import {Router} from "@angular/router";
+import {CouponsService} from "../../services/requests/options/coupons.service";
 
 @Component({
   selector: 'app-modal-admin',
@@ -25,6 +27,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   but: string; /*Определение кнопки Submit*/
   pseudonym: string; /*Значение для поля Псевдоним*/
   timeItem: any; /*Тамут для заполнения поля Псевдоним*/
+  loader: boolean = false;
 
 
   couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
@@ -43,7 +46,9 @@ export class ModalAdminComponent implements OnInit, OnChanges {
 
 
 
-  constructor() { }
+  constructor(
+    private couponsService: CouponsService,
+  ) { }
 
   ngOnInit(): void {
     /*Инициализвция модального окна добавления, редактирвания купона*/
@@ -221,6 +226,28 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   /*Отправка формы*/
   FormSubmit(event) {
     if (event === 'coupon') {
+      const formResponseCoupon: object = this.couponForm['FormGroup'];
+      const formValueCoupon: object = formResponseCoupon['value'];
+      if (this.but === 'add') {
+        const requestPutCoupon: CouponsPutInterface = {
+          publication: formValueCoupon['couponPublication'],
+          code: formValueCoupon['couponCode'],
+          type: formValueCoupon['couponType'],
+          value: formValueCoupon['couponValue'],
+          dateStart: formValueCoupon['couponDateStart'],
+          dateEnd: formValueCoupon['couponDateEnd'],
+          client: formValueCoupon['couponClient'],
+          finish: formValueCoupon['couponFinish'],
+        };
+        this.couponsService.putCouponsService(requestPutCoupon)
+          .subscribe(
+            res => {
+              this.loader = true},
+            error => {}
+          );
+
+
+      }
       console.log('Form Coupon: ', this.couponForm);
     }
     if (event === 'payment') {

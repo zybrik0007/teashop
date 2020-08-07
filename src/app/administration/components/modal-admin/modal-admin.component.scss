@@ -874,6 +874,19 @@ select {
   color: red;
 }
 
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid #bd97bd;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
 @media screen and (max-width: 460px){
     #modal-area {
       width: 460px;

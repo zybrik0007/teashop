@@ -195,7 +195,9 @@ export class MainAdminComponent implements OnInit {
           this.loader = false;
         },
         error => {
+          this.loader = true;
           console.log('Error Client: ', error);
+          this.loader = false;
         }
         );
 
