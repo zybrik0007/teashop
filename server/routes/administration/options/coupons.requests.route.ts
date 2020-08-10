@@ -91,7 +91,10 @@ routerCoupons.put('', async (
     console.log(searchCode);
 
   } catch (e) {
-
+    const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(501);
+    res.send(error);
   }
 
 
