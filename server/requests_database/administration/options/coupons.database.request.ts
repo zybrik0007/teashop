@@ -2,6 +2,7 @@ import {Sequelize, Op} from 'sequelize';
 
 
 import {Coupon} from '../../../shemes_database/administration/shemes.administration';
+import {parse} from "ts-node";
 
 /*Класс по работе запросов купонов и БД*/
 export class CouponDB {
@@ -45,6 +46,7 @@ export class CouponDB {
         code: req['code']
       }
     });
-    return dublicateCoupon;
+    const test = JSON.parse(JSON.stringify(dublicateCoupon));
+    return test;
   }
 }
