@@ -52,12 +52,14 @@ export class CouponDB {
       publication: req['publication'],
       code: req['code'],
       type: req['type'],
-      value: req['type'],
-      dateStart: req['dateStart'],
-      dateEnd: req['dateEnd'],
+      value: req['value'],
+      startDate:  req['dateStart'],
+      endDate: req['dateEnd'],
       clientId: req['client'],
       finish: req['finish'],
       used: 0
     });
+    const putCouponValues = putCoupon['dataValues'];
+    return putCouponValues;
   }
 }

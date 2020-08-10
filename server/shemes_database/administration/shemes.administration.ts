@@ -111,13 +111,13 @@ export const Coupon = <MyModelStatic> sequel.define('coupon', {
   },
   /*Дата начала*/
   startDate: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATE(6),
     unique: false,
     allowNull: false
   },
   /*Дата окончания*/
   endDate: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATE(6),
     unique: false,
     allowNull: false
   },

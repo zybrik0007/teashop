@@ -62,14 +62,14 @@ routerCoupons.get(
 );
 
 /*Добавление купона*/
-routerCoupons.put('', async (
+routerCoupons.put('/', async (
   req,
   res,
   next) => {
   console.log('post');
   /*Проверка валидации данных*/
   try {
-    const reqValidation = await validation.getCoupons(req.body);
+    const reqValidation = await validation.putCoupons(req.body);
     if (!reqValidation[0]) {
       const error: string = JSON.stringify({error: reqValidation[1]});
       res.setHeader('Content-Type', 'application/json');
@@ -89,10 +89,14 @@ routerCoupons.put('', async (
   try {
     const searchCode = await CouponsReqDB.searchDublicateCouponDB(req.body);
     const searchCodeValue = searchCode[0];
-    console.log(searchCode);
-    if (searchCode['count'] === 0) {
-      const putCoupon = CouponsReqDB.putCouponDB(req);
-      next();
+    console.log(typeof (searchCodeValue['count']));
+    if (searchCodeValue['count'] === 0) {
+      console.log(searchCode['count']);
+      const putCoupon = await CouponsReqDB.putCouponDB(req.body);
+      console.log('putCoupon: ', putCoupon['id']);
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200);
+      res.send({id: putCoupon['id']});
     } else {
       const error: string = JSON.stringify({error: ErrorDB.ErrorDbCouponCode});
       res.setHeader('Content-Type', 'application/json');
@@ -101,6 +105,7 @@ routerCoupons.put('', async (
     }
 
   } catch (e) {
+    console.log('d');
     console.log('e: ', e);
     const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
     res.setHeader('Content-Type', 'application/json');
