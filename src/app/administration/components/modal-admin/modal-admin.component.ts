@@ -226,8 +226,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   /*Отправка формы*/
   FormSubmit(event) {
     if (event === 'coupon') {
-      const formResponseCoupon: object = this.couponForm['FormGroup'];
-      const formValueCoupon: object = formResponseCoupon['value'];
+      const formValueCoupon: object = this.couponForm['value'];
       if (this.but === 'add') {
         const requestPutCoupon: CouponsPutInterface = {
           publication: formValueCoupon['couponPublication'],
@@ -242,7 +241,9 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         this.couponsService.putCouponsService(requestPutCoupon)
           .subscribe(
             res => {
-              this.loader = true},
+              this.loader = true;
+
+            },
             error => {}
           );
 
