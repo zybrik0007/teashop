@@ -46,7 +46,7 @@ export class ValidatorAdministration {
   }
 
   static inbreed(control: FormControl): { [key: string]: boolean } {
-    if (control.value !== null) {
+    if (control.value.trim() !== '') {
       if (!Number.isInteger(control.value)) {
         return {
           inbreed: true
