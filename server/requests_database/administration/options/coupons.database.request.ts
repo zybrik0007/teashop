@@ -1,8 +1,7 @@
-import {Sequelize, Op} from 'sequelize';
+import {Op, Sequelize} from 'sequelize';
 
 
 import {Coupon} from '../../../shemes_database/administration/shemes.administration';
-import {parse} from "ts-node";
 
 /*Класс по работе запросов купонов и БД*/
 export class CouponDB {
@@ -46,7 +45,19 @@ export class CouponDB {
         code: req['code']
       }
     });
-    const test = JSON.parse(JSON.stringify(dublicateCoupon));
-    return test;
+    return JSON.parse(JSON.stringify(dublicateCoupon));
+  }
+  async putCouponDB(req) {
+    const putCoupon = await Coupon.create({
+      publication: req['publication'],
+      code: req['code'],
+      type: req['type'],
+      value: req['type'],
+      dateStart: req['dateStart'],
+      dateEnd: req['dateEnd'],
+      clientId: req['client'],
+      finish: req['finish'],
+      used: 0
+    });
   }
 }

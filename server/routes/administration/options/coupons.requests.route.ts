@@ -88,7 +88,17 @@ routerCoupons.put('', async (
   /*Добавление в базу данных*/
   try {
     const searchCode = await CouponsReqDB.searchDublicateCouponDB(req.body);
+    const searchCodeValue = searchCode[0];
     console.log(searchCode);
+    if (searchCode['count'] === 0) {
+      const putCoupon = CouponsReqDB.putCouponDB(req);
+      next();
+    } else {
+      const error: string = JSON.stringify({error: ErrorDB.ErrorDbCouponCode});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(500);
+      res.send(error);
+    }
 
   } catch (e) {
     console.log('e: ', e);
