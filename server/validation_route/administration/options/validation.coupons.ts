@@ -166,6 +166,7 @@ export class CouponsValidation {
     if (!validationd.typeBoolean(req['publication'])) {
       return [false, ErrorValidation.ErrorCouponBooleanPublication];
     }
+    return [true, ''];
   }
 }
 

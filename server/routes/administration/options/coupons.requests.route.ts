@@ -61,8 +61,40 @@ routerCoupons.get(
   }
 );
 
-routerCoupons.put('', () => {
+/*Добавление купона*/
+routerCoupons.put('', async (
+  req,
+  res,
+  next) => {
   console.log('post');
+  /*Проверка валидации данных*/
+  try {
+    const reqValidation = await validation.getCoupons(req.body);
+    if (!reqValidation[0]) {
+      const error: string = JSON.stringify({error: reqValidation[1]});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(501);
+      res.send(error);
+    }
+    else {
+      next();
+    }
+  } catch (e) {
+    const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(501);
+    res.send(error);
+  }
+  /*Добавление в базу данных*/
+  try {
+    const searchCode = await CouponsReqDB.searchDublicateCouponDB(req.body);
+    console.log(searchCode);
+
+  } catch (e) {
+
+  }
+
+
 });
 
 

@@ -38,13 +38,13 @@ export class CouponDB {
     return getCouponPars;
   }
 
-  async putCouponDB(req) {
+  async searchDublicateCouponDB(req) {
     const dublicateCoupon = await Coupon.findAll({
       attributes: [[Sequelize.fn('COUNT', Sequelize.col('*')), 'count']],
       where: {
         code: req['code']
       }
     });
-    const dublicateCouponPars = JSON.parse(JSON.stringify(dublicateCoupon));
+    return dublicateCoupon;
   }
 }
