@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, pipe, fromEvent} from 'rxjs';
 
@@ -11,8 +11,8 @@ import {DeliveryPutInterface} from '../../interfaces/requests/options/requests.d
 import {PricePutInterface} from '../../interfaces/requests/options/requests.price.interface';
 import {StatusPutInterface} from '../../interfaces/requests/options/requests.status.interface';
 import {GroupPutInterface} from '../../interfaces/requests/options/requests.groups.interface';
-import {Router} from "@angular/router";
-import {CouponsService} from "../../services/requests/options/coupons.service";
+import {Router} from '@angular/router';
+import {CouponsService} from '../../services/requests/options/coupons.service';
 
 @Component({
   selector: 'app-modal-admin',
@@ -22,12 +22,16 @@ import {CouponsService} from "../../services/requests/options/coupons.service";
 export class ModalAdminComponent implements OnInit, OnChanges {
 
   @Input()modalNameChild: string;
+  @Output()closeModal: EventEmitter<object> = new EventEmitter<object>();
+  @Output()closeModalFalse: EventEmitter<object> = new EventEmitter<object>();
   nameHead: string; /*Название заглавия модального окна*/
   modal: string; /*Определение какое модальное окно активруется.*/
   but: string; /*Определение кнопки Submit*/
   pseudonym: string; /*Значение для поля Псевдоним*/
   timeItem: any; /*Тамут для заполнения поля Псевдоним*/
   loader: boolean = false;
+  errorAr: boolean = true;
+  errorText: string = '';
 
 
   couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
@@ -241,10 +245,25 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         this.couponsService.putCouponsService(requestPutCoupon)
           .subscribe(
             res => {
-              this.loader = true;
-
+              if (res['status'] === 200) {
+                this.modalTrue();
+              } else {
+                this.errorAr = false;
+                this.errorText = 'Неизвестная ошибка сервера';
+                console.log(res);
+              }
             },
-            error => {}
+            error => {
+              if (error['status'] === 500 || error['status'] === 501){
+                this.errorAr = false;
+                const textEr = error['error'];
+                this.errorText = textEr['error'];
+              } else {
+                this.errorAr = false;
+                this.errorText = 'Неизвестная ошибка сервера';
+                console.log(error);
+              }
+            }
           );
 
 
@@ -304,6 +323,20 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   translit(event) {
     this.timeClear();
     this.timeOut(event.target.value);
+  }
+
+  /*Фугкция закрытия модального окна Ошибки*/
+    closeError() {
+      this.errorAr = true;
+      this.errorText = '';
+    }
+  /*Функция вызываемы, при закртиые модального окна, после положительного результата запроса*/
+  modalTrue() {
+    this.closeModal.emit({});
+  }
+
+  modalFalse() {
+    this.closeModalFalse.emit({});
   }
 
 

@@ -30,7 +30,7 @@ export class MainAdminComponent implements OnInit {
   searchName: string; /*Значение поля поиск*/
   countRows: number;
   modal: boolean = false; /*Активация модального окна*/
-  modalNameParent: string  = 'testmodal';
+  modalNameParent: string  = '';
   arrTable: object[];
   loader: boolean = false;
 
@@ -49,7 +49,7 @@ export class MainAdminComponent implements OnInit {
     this.rows = 20;
     this.page = 1;
     this.sortName = 'id';
-    this.sortValue = 'ASC';
+    this.sortValue = 'DESC';
     this.searchName = '';
 
     /*Первичная инициализация раздела Купоны*/
@@ -174,7 +174,9 @@ export class MainAdminComponent implements OnInit {
           try {
             if (res['status'] === 200) {
               const response = JSON.parse(res['body']['response']);
-              this.countRows = Number(response[0]);
+              const count = response.pop();
+              this.countRows = Number(count['count']);
+              console.log('this.countRows:', this.countRows);
               this.arrTable = response;
               console.log('this.arrTable: ', this.arrTable);
             }
@@ -292,4 +294,17 @@ export class MainAdminComponent implements OnInit {
         this.modalNameParent = 'add-group';
       }
     }
+  closeModalEditor() {
+      this.loader = true;
+      this.modal = false;
+      this.modalNameParent = '';
+      this.ngOnInit();
+      this.loader = false;
+  }
+  closeModal() {
+    this.loader = true;
+    this.modal = false;
+    this.modalNameParent = '';
+    this.loader = false;
+  }
 }

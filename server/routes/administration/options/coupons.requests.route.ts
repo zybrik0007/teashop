@@ -76,9 +76,6 @@ routerCoupons.put('/', async (
       res.status(501);
       res.send(error);
     }
-    else {
-      next();
-    }
   } catch (e) {
     const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
     res.setHeader('Content-Type', 'application/json');

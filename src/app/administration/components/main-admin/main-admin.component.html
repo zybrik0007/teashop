@@ -21,7 +21,7 @@
   </div>
 </div>
 <div>
-  <app-modal-admin *ngIf="modal" [modalNameChild]="modalNameParent"></app-modal-admin>
+  <app-modal-admin *ngIf="modal" [modalNameChild]="modalNameParent" (closeModal)="closeModalEditor()" (closeModalFalse)="closeModal()"></app-modal-admin>
 </div>
 <div class="loader" *ngIf="loader"></div>
 
