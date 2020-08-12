@@ -13,6 +13,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
   activeURL: string;
   endItem: boolean;
   loaderTable: boolean = false;
+  arrEditor: number[] = [];
 
   @Input() arrTable: object[];
 
@@ -73,5 +74,9 @@ export class TableAdminComponent implements OnInit, OnChanges {
       }
     }
     this.sortOutput.emit({sort: {sortName: this.column, sortValue: this.columnValue}});
+  }
+
+  EditTable(event) {
+    console.log(event);
   }
 }
