@@ -75,7 +75,7 @@
         </div>
       </div>
 
-      <div class="tableBlock-admin" *ngFor="let item of arrTable" [id]="item['id']" data-active="disable" (click)="EditTable($event)">
+      <div class="tableBlock-admin" *ngFor="let item of arrTable" [id]="item['id']" data-active="disable" (click)="EditTable($event)" appTableEditor>
         <div>
           <div >
             <div><span>Нет данных для отображения</span></div>

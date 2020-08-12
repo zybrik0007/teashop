@@ -30,6 +30,7 @@ import { TableAdminComponent } from './administration/components/table-admin/tab
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ModalAdminComponent } from './administration/components/modal-admin/modal-admin.component';
 import { ModaltransferDirective } from './administration/directives/modaltransfer.directive';
+import { TableEditorDirective } from './administration/directives/table-editor.directive';
 
 
 
@@ -55,7 +56,8 @@ import { ModaltransferDirective } from './administration/directives/modaltransfe
     CabinetWebComponent,
     TableAdminComponent,
     ModalAdminComponent,
-    ModaltransferDirective
+    ModaltransferDirective,
+    TableEditorDirective
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
