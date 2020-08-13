@@ -75,9 +75,13 @@
         </div>
       </div>
 
-      <div class="tableBlock-admin" *ngFor="let item of arrTable" [id]="item['id']" data-active="disable" (click)="EditTable(item['id'])" appTableEditor>
+      <div class="tableBlock-admin"
+           appTableEditor
+           *ngFor="let item of arrTable"
+           [id]="item['id']" data-active="disable"
+           (click)="EditTable(item['id'])">
         <div>
-          <div >
+          <div>
             <div><span>Нет данных для отображения</span></div>
             <div><span class="columnCenter" [ngClass]="{columnTrue: item['publication'],
             columnFalse: !item['publication']}"><span class="icon-checkmark"></span></span></div>

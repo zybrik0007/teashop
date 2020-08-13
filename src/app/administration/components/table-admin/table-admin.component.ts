@@ -18,7 +18,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
   @Input() arrTable: object[];
 
   @Output() sortOutput: EventEmitter<object> = new EventEmitter<object>();
-  @Output() clickBut: EventEmitter<number> = new EventEmitter<number>();
+  @Output() clickBut: EventEmitter<number[]> = new EventEmitter<number[]>();
 
 
   /*Заглавие всех столбцов*/
@@ -80,9 +80,12 @@ export class TableAdminComponent implements OnInit, OnChanges {
   EditTable(id) {
     if (this.arrEditor.includes(id)) {
       this.arrEditor = this.arrEditor.filter(item => item !== id);
+      this.clickBut.emit(this.arrEditor);
     } else {
       this.arrEditor.push(id);
+      this.clickBut.emit(this.arrEditor);
     }
+
 
     console.log('id: ', id);
     console.log('this.arrEditor ', this.arrEditor);

@@ -33,6 +33,9 @@ export class MainAdminComponent implements OnInit {
   modalNameParent: string  = '';
   arrTable: object[];
   loader: boolean = false;
+  arrRowsArr: number[];
+  arrRowsCount: number;
+
 
 
   constructor(
@@ -307,4 +310,11 @@ export class MainAdminComponent implements OnInit {
     this.modalNameParent = '';
     this.loader = false;
   }
+
+  /*Изменение выделенных строк и изменение активности кнопок*/
+  UpdateArrRowsArr(arr: number[]) {
+    this.arrRowsArr = arr;
+    this.arrRowsCount = this.arrRowsArr.length;
+  }
+
 }

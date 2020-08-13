@@ -19,7 +19,6 @@ export class TableEditorDirective {
       this.element.nativeElement.dataset['active'] = 'disable';
       this.renderer.setStyle(this.element.nativeElement, 'background', '');
     }
-    console.log(this);
   }
 
 }
