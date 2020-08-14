@@ -5,7 +5,7 @@ import {Observable, pipe, fromEvent} from 'rxjs';
 
 
 import {ValidatorAdministration} from '../../validators/validator-administration';
-import {CouponsPutInterface} from '../../interfaces/requests/options/requests.coupons.interface';
+import {CouponPostIdInterface, CouponsPutInterface} from '../../interfaces/requests/options/requests.coupons.interface';
 import {PaymentPutInterface} from '../../interfaces/requests/options/requests.payment.interface';
 import {DeliveryPutInterface} from '../../interfaces/requests/options/requests.delivery.interface';
 import {PricePutInterface} from '../../interfaces/requests/options/requests.price.interface';
@@ -22,8 +22,10 @@ import {CouponsService} from '../../services/requests/options/coupons.service';
 export class ModalAdminComponent implements OnInit, OnChanges {
 
   @Input()modalNameChild: string;
+  @Input() rowId: number;
   @Output()closeModal: EventEmitter<object> = new EventEmitter<object>();
   @Output()closeModalFalse: EventEmitter<object> = new EventEmitter<object>();
+  @Output() error: EventEmitter<object> = new EventEmitter<object>();
   nameHead: string; /*Название заглавия модального окна*/
   modal: string; /*Определение какое модальное окно активруется.*/
   but: string; /*Определение кнопки Submit*/
@@ -126,10 +128,11 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+
     /*Определение изменений, при создании или редактирование*/
     const dataChangeModal = changes['modalNameChild'];
 
-    /*Определение значений при открытии на редактирование или добавления Купона*/
+    /*Определение значений при открытии на добавления Купона*/
     if (dataChangeModal['currentValue'] === 'add-coupon') {
       this.modal = 'coupon';
       this.nameHead = 'Добавить купон';
@@ -146,7 +149,29 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       };
     }
 
-    /*Определение значений при открытии на редактирование или добавления Способа оплаты*/
+    /*Определение значение при открыти на редактирование Купона*/
+    if (dataChangeModal['currentValue'] === 'edit-coupon') {
+      const dataId = changes['rowId'];
+      console.log('dataId: ', dataId);
+      const requestId: CouponPostIdInterface = {
+        id: dataId['currentValue']
+      };
+      this.modal = 'coupon';
+      this.nameHead = 'Редактировать купон';
+      this.but = 'edit';
+      this.couponsService.postIdCouponsService(requestId)
+        .subscribe(
+          res => {
+            console.log('resID:', res);
+          },
+          error => {
+            console.log('errorID:', error);
+          }
+        );
+    }
+
+
+    /*Определение значений при открытии на добавления  Способа оплаты*/
     if (dataChangeModal['currentValue'] === 'add-payment') {
       this.modal = 'payment';
       this.nameHead = 'Добавить cпособ оплаты';
@@ -161,7 +186,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       };
     }
 
-    /*Определение значений при открытии на редактирование или добавления Способа доставки*/
+    /*Определение значений при открытии на добавления  Способа доставки*/
     if (dataChangeModal['currentValue'] === 'add-delivery') {
       this.modal = 'delivery';
       this.nameHead = 'Добавить cпособ доставки';
@@ -176,7 +201,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       };
     }
 
-    /*Определение значений при открытии на редактирование или добавления Цены на доставку*/
+    /*Определение значений при открытии на добавления Цены на доставку*/
     if (dataChangeModal['currentValue'] === 'add-price') {
       this.modal = 'price';
       this.nameHead = 'Добавить цену доставки';
@@ -187,7 +212,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       };
     }
 
-    /*Определение значений при открытии на редактирование или добавления Статуса заказа*/
+    /*Определение значений при открытии на добавления  Статуса заказа*/
     if (dataChangeModal['currentValue'] === 'add-status') {
       this.modal = 'status';
       this.nameHead = 'Добавить статус заказа';
@@ -198,7 +223,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       };
     }
 
-    /*Определение значений при открытии на редактирование или добавления Группы пользователей*/
+    /*Определение значений при открытии на добавления Группы пользователей*/
     if (dataChangeModal['currentValue'] === 'add-group') {
       this.modal = 'group';
       this.nameHead = 'Добавить группу пользователей';
@@ -232,6 +257,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (event === 'coupon') {
       const formValueCoupon: object = this.couponForm['value'];
       if (this.but === 'add') {
+        this.loader = true;
         const requestPutCoupon: CouponsPutInterface = {
           publication: formValueCoupon['couponPublication'],
           code: formValueCoupon['couponCode'],
@@ -248,25 +274,19 @@ export class ModalAdminComponent implements OnInit, OnChanges {
               if (res['status'] === 200) {
                 this.modalTrue();
               } else {
-                this.errorAr = false;
-                this.errorText = 'Неизвестная ошибка сервера';
-                console.log(res);
+                this.error.emit({error: 'Неизвестная ошибка сервера'});
               }
             },
             error => {
               if (error['status'] === 500 || error['status'] === 501){
-                this.errorAr = false;
                 const textEr = error['error'];
-                this.errorText = textEr['error'];
+                this.error.emit({error: textEr['error']});
               } else {
-                this.errorAr = false;
-                this.errorText = 'Неизвестная ошибка сервера';
-                console.log(error);
+                this.error.emit({error: 'Неизвестная ошибка сервера'});
               }
             }
           );
-
-
+        this.loader = false;
       }
       console.log('Form Coupon: ', this.couponForm);
     }
@@ -325,11 +345,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     this.timeOut(event.target.value);
   }
 
-  /*Фугкция закрытия модального окна Ошибки*/
-    closeError() {
-      this.errorAr = true;
-      this.errorText = '';
-    }
+
   /*Функция вызываемы, при закртиые модального окна, после положительного результата запроса*/
   modalTrue() {
     this.closeModal.emit({});

@@ -12,6 +12,7 @@
     <div id="buttons-admin">
       <app-buttons-admin (searchUpt)="UpdatePage($event)"
                          (add)="add()"
+                         (edit)="edit()"
                          [arrRowsActive]="arrRowsCount"
       ></app-buttons-admin>
     </div>
@@ -27,8 +28,40 @@
   </div>
 </div>
 <div>
-  <app-modal-admin *ngIf="modal" [modalNameChild]="modalNameParent" (closeModal)="closeModalEditor()" (closeModalFalse)="closeModal()"></app-modal-admin>
+  <app-modal-admin
+    *ngIf="modal"
+    [modalNameChild]="modalNameParent"
+    [rowId]="rowId"
+    (closeModal)="closeModalEditor()"
+    (closeModalFalse)="closeModal()"
+    (error)="errorModal($event)"
+  ></app-modal-admin>
 </div>
 <div class="loader" *ngIf="loader"></div>
+<div id="area-error"
+     class="modalErrorAreaClass"
+     [ngClass]="{errorDisplay: error}">
+  <div id="modal-error" cdkDragBoundary="#area-error" cdkDrag>
+    <div>
+      <div id="error-head" cdkDragHandle>
+        <div>
+          <div><h4>Ошибка</h4></div>
+        </div>
+      </div>
+      <div id="error-body">
+        <div><div>{{errorText}}</div></div>
+      </div>
+      <div id="error-footer">
+        <div>
+          <div>
+            <h4>
+              <button type="button" (click)="closeError()">OK</button>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 

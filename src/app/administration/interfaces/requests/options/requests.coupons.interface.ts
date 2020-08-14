@@ -16,3 +16,7 @@ export class CouponsPutInterface {
   client: number;
   finish: boolean;
 }
+
+export class CouponPostIdInterface {
+  id: number;
+}

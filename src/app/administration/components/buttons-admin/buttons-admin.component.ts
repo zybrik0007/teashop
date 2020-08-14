@@ -16,17 +16,8 @@ export class ButtonsAdminComponent implements OnInit, OnChanges {
   @Input() arrRowsActive: number;
   @Output() searchUpt: EventEmitter<object> = new EventEmitter<object>();
   @Output() add: EventEmitter<object> = new EventEmitter<object>();
+  @Output() edit: EventEmitter<object> = new EventEmitter<object>();
   timeItem: any;
-
-  ButtonEditClass = {
-    buttonActive: this.EditButtonActive,
-    buttonBlock: !this.EditButtonActive
-  };
-
-  ButtonDeleteClass = {
-    buttonActive: this.DeleteButtonActive,
-    buttonBlock: !this.DeleteButtonActive
-  };
 
   timeOut(event) {
     this.timeItem = setTimeout(() => {
@@ -38,8 +29,7 @@ export class ButtonsAdminComponent implements OnInit, OnChanges {
     clearTimeout(this.timeItem);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('butChange:', changes);
@@ -68,6 +58,12 @@ export class ButtonsAdminComponent implements OnInit, OnChanges {
 
   addItem() {
     this.add.emit();
+  }
+
+  editItem() {
+    if (this.arrRowsActive === 1) {
+      this.edit.emit();
+    }
   }
 
 }

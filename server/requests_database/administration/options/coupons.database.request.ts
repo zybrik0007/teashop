@@ -62,4 +62,12 @@ export class CouponDB {
     const putCouponValues = putCoupon['dataValues'];
     return putCouponValues;
   }
+
+  async postCouponIdDB(req) {
+    const postCouponId = await Coupon.findOne({
+      where: {id: req['id']}
+    });
+    const postCouponIdParse = JSON.parse(JSON.stringify(postCouponId));
+    return postCouponIdParse;
+  }
 }

@@ -702,31 +702,9 @@
     </form>
   </div>
 
-  <div class="loader" *ngIf="loader"></div>
+  <div class="loaderModal" *ngIf="loader"></div>
 </div>
 
-<div id="area-error" [ngClass]="{errorDisplay: errorAr}" (click)="closeError()">
-  <div id="modal-error">
-    <div>
-      <div id="error-head">
-        <div>
-          <div><h4>Ошибка</h4></div>
-        </div>
-      </div>
-      <div id="error-body">
-        <div>{{errorText}}</div>
-      </div>
-      <div id="error-footer">
-        <div>
-          <div>
-            <h4>
-              <button type="button" (click)="closeError()">OK</button>
-            </h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 

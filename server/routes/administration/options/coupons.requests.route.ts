@@ -23,8 +23,6 @@ routerCoupons.get(
     req,
     res,
     next): Promise<any> {
-    console.log('router IN');
-    console.log('req: ', req.query);
     /*Проверка валидации данных*/
     try {
       const reqValidation = await validation.getCoupons(req.query);
@@ -47,12 +45,10 @@ routerCoupons.get(
     try {
       const reqDb = await CouponsReqDB.getCouponDB(req.query);
       const response = JSON.stringify(reqDb);
-      console.log('DBreq: ', reqDb);
       res.setHeader('Content-Type', 'application/json');
       res.status(200);
       res.send({response});
     } catch (e) {
-      console.log('e: ', e);
       const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
       res.setHeader('Content-Type', 'application/json');
       res.status(500);
@@ -66,7 +62,6 @@ routerCoupons.put('/', async (
   req,
   res,
   next) => {
-  console.log('post');
   /*Проверка валидации данных*/
   try {
     const reqValidation = await validation.putCoupons(req.body);
@@ -76,7 +71,8 @@ routerCoupons.put('/', async (
       res.status(501);
       res.send(error);
     }
-  } catch (e) {
+  }
+  catch (e) {
     const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
     res.setHeader('Content-Type', 'application/json');
     res.status(501);
@@ -100,18 +96,56 @@ routerCoupons.put('/', async (
       res.status(500);
       res.send(error);
     }
-
-  } catch (e) {
-    console.log('d');
-    console.log('e: ', e);
+  }
+  catch (e) {
     const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
     res.setHeader('Content-Type', 'application/json');
     res.status(500);
     res.send(error);
   }
-
-
 });
+
+/*Поиск купона по id*/
+routerCoupons.post('/id', async (
+  req,
+  res,
+  next) => {
+  console.log('reqPost:', req);
+  /*Проверка валидации данных*/
+  try {
+    const reqValidation = await validation.postCouponId(req.body);
+    if (!reqValidation[0]) {
+      const error: string = JSON.stringify({error: reqValidation[1]});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(501);
+      res.send(error);
+    }
+  }
+  catch (e) {
+    const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(501);
+    res.send(error);
+  }
+
+  /*Выборка из Базы данных*/
+  try {
+    const reqDb = await CouponsReqDB.postCouponIdDB(req.body);
+    console.log('reqdBID: ', reqDb);
+    const response = JSON.stringify(reqDb);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200);
+    res.send({response});
+  }
+  catch (e) {
+    const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    res.send(error);
+  }
+});
+
+
 
 
 

@@ -168,5 +168,23 @@ export class CouponsValidation {
     }
     return [true, ''];
   }
+
+  /*Проверка запроса для поиска купона по id*/
+  postCouponId(req: object): [boolean, string] {
+    /*Проверка на тип данных*/
+    if (!validationd.typeObj(req)) {
+      return [false, ErrorValidation.ErrorTypeGet];
+    }
+    /*Проверка наличия ключа*/
+    if (!req.hasOwnProperty('id')) {
+      return [false, ErrorValidation.ErrorKeyCouponId];
+    }
+    /*Проверка типа значения*/
+    if (!validationd.integerNum(req['id'])) {
+      return [false, ErrorValidation.ErrorCouponIntegerId];
+    }
+    return [true, ''];
+  }
+
 }
 

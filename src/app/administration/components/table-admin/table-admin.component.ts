@@ -85,9 +85,5 @@ export class TableAdminComponent implements OnInit, OnChanges {
       this.arrEditor.push(id);
       this.clickBut.emit(this.arrEditor);
     }
-
-
-    console.log('id: ', id);
-    console.log('this.arrEditor ', this.arrEditor);
   }
 }

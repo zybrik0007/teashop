@@ -35,6 +35,9 @@ export class MainAdminComponent implements OnInit {
   loader: boolean = false;
   arrRowsArr: number[];
   arrRowsCount: number;
+  error: boolean = false;
+  errorText: string;
+  rowId: number;
 
 
 
@@ -297,6 +300,24 @@ export class MainAdminComponent implements OnInit {
         this.modalNameParent = 'add-group';
       }
     }
+    edit() {
+      if (this.router.url === '/administration/options/coupons') {
+        if (this.arrRowsCount < 1) {
+          this.error = true;
+          this.errorText = 'Не вабрано ни одного купона';
+        }
+        if (this.arrRowsCount > 1) {
+          this.error = true;
+          this.errorText = 'Выбрано больше одного купона';
+        }
+        if (this.arrRowsCount === 1) {
+          console.log('111');
+          this.modal = true;
+          this.rowId = this.arrRowsArr[0];
+          this.modalNameParent = 'edit-coupon';
+        }
+      }
+    }
   closeModalEditor() {
       this.loader = true;
       this.modal = false;
@@ -315,6 +336,19 @@ export class MainAdminComponent implements OnInit {
   UpdateArrRowsArr(arr: number[]) {
     this.arrRowsArr = arr;
     this.arrRowsCount = this.arrRowsArr.length;
+  }
+
+  /*Вызов модального окна в случае ошибки*/
+  errorModal(event) {
+    this.error = true;
+    this.errorText = event['error'];
+    console.log('event mosdl error:', event);
+  }
+
+  /*Функция закрытия модального окна Ошибки*/
+  closeError() {
+    this.error = false;
+    this.errorText = '';
   }
 
 }
