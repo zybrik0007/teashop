@@ -131,6 +131,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
 
     /*Определение изменений, при создании или редактирование*/
     const dataChangeModal = changes['modalNameChild'];
+    console.log('dataChangeModal: ', dataChangeModal);
 
     /*Определение значений при открытии на добавления Купона*/
     if (dataChangeModal['currentValue'] === 'add-coupon') {
@@ -152,6 +153,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     /*Определение значение при открыти на редактирование Купона*/
     if (dataChangeModal['currentValue'] === 'edit-coupon') {
       const dataId = changes['rowId'];
+      let editParams: object = {};
       console.log('dataId: ', dataId);
       const requestId: CouponPostIdInterface = {
         id: dataId['currentValue']
@@ -163,15 +165,35 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         .subscribe(
           res => {
             console.log('resID:', res);
+            if (res['status'] === 200) {
+              console.log('respponse 200');
+              const resBody = res['body'];
+              const resParse = JSON.parse(resBody['response']);
+              editParams = resParse;
+              console.log('resParse', resParse);
+              console.log('this.couponPut:', this.couponPut);
+            }
           },
           error => {
             console.log('errorID:', error);
           }
         );
+      this.couponPut = {
+        publication: editParams['publication'],
+        code: editParams['code'],
+        type: editParams['type'],
+        value: editParams['value'],
+        dateStart: editParams['startDate'],
+        dateEnd: editParams['endDate'],
+        client: editParams['clientId'],
+        finish: editParams['finish']
+      };
+      console.log('this.couponPut1:', this.couponPut);
     }
 
 
     /*Определение значений при открытии на добавления  Способа оплаты*/
+
     if (dataChangeModal['currentValue'] === 'add-payment') {
       this.modal = 'payment';
       this.nameHead = 'Добавить cпособ оплаты';
