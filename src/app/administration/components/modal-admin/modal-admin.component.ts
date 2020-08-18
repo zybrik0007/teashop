@@ -5,7 +5,11 @@ import {Observable, pipe, fromEvent} from 'rxjs';
 
 
 import {ValidatorAdministration} from '../../validators/validator-administration';
-import {CouponPostIdInterface, CouponsPutInterface} from '../../interfaces/requests/options/requests.coupons.interface';
+import {
+  CouponPostIdInterface,
+  CouponPostInterface,
+  CouponsPutInterface
+} from '../../interfaces/requests/options/requests.coupons.interface';
 import {PaymentPutInterface} from '../../interfaces/requests/options/requests.payment.interface';
 import {DeliveryPutInterface} from '../../interfaces/requests/options/requests.delivery.interface';
 import {PricePutInterface} from '../../interfaces/requests/options/requests.price.interface';
@@ -34,6 +38,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   loader: boolean = false;
   errorAr: boolean = true;
   errorText: string = '';
+  requestId: CouponPostIdInterface;
 
 
   couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
@@ -155,40 +160,41 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       const dataId = changes['rowId'];
       let editParams: object = {};
       console.log('dataId: ', dataId);
-      const requestId: CouponPostIdInterface = {
+      this.requestId = {
         id: dataId['currentValue']
       };
-      this.modal = 'coupon';
-      this.nameHead = 'Редактировать купон';
-      this.but = 'edit';
-      this.couponsService.postIdCouponsService(requestId)
+      this.couponsService.postIdCouponsService(this.requestId)
         .subscribe(
           res => {
-            console.log('resID:', res);
             if (res['status'] === 200) {
-              console.log('respponse 200');
               const resBody = res['body'];
               const resParse = JSON.parse(resBody['response']);
               editParams = resParse;
-              console.log('resParse', resParse);
-              console.log('this.couponPut:', this.couponPut);
+              const startDate = resParse['startDate'].substr(0, 10);
+              const endDate = resParse['endDate'].substr(0, 10);
+              this.couponPut = {
+                publication: resParse['publication'],
+                code: resParse['code'],
+                type: resParse['type'],
+                value: resParse['value'],
+                dateStart: startDate,
+                dateEnd: endDate,
+                client: resParse['clientId'],
+                finish: resParse['finish']
+              };
+              this.modal = 'coupon';
+              this.nameHead = 'Редактировать купон';
+              this.but = 'edit';
+              this.ngOnInit();
+            }
+            else {
+              this.error.emit({error: 'Строка для редактирования не найдена'});
             }
           },
           error => {
-            console.log('errorID:', error);
+            this.error.emit({error: 'Ошибка сервера или отсутствует выделенная строка для редактирвоания'});
           }
         );
-      this.couponPut = {
-        publication: editParams['publication'],
-        code: editParams['code'],
-        type: editParams['type'],
-        value: editParams['value'],
-        dateStart: editParams['startDate'],
-        dateEnd: editParams['endDate'],
-        client: editParams['clientId'],
-        finish: editParams['finish']
-      };
-      console.log('this.couponPut1:', this.couponPut);
     }
 
 
@@ -310,7 +316,21 @@ export class ModalAdminComponent implements OnInit, OnChanges {
           );
         this.loader = false;
       }
-      console.log('Form Coupon: ', this.couponForm);
+      if (this.but === 'edit') {
+        this.loader = true;
+        const requestPostCoupon: CouponPostInterface = {
+          id: this.requestId['id'],
+          publication: this.couponPut.publication,
+          code: this.couponPut.code,
+          type: this.couponPut.type,
+          value: this.couponPut.value,
+          dateStart: this.couponPut.dateStart,
+          dateEnd: this.couponPut.dateEnd,
+          client: this.couponPut.client,
+          finish: this.couponPut.finish
+        }
+
+      }
     }
     if (event === 'payment') {
       console.log('Form Payment: ', this.paymentForm);

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
@@ -14,6 +14,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
   endItem: boolean;
   loaderTable: boolean = false;
   arrEditor: number[] = [];
+  ctrl: boolean = false;
 
   @Input() arrTable: object[];
 
@@ -23,6 +24,8 @@ export class TableAdminComponent implements OnInit, OnChanges {
 
   /*Заглавие всех столбцов*/
   ElementsSort: HTMLCollectionOf<Element> = document.getElementsByClassName('itemSort');
+
+
 
 
   constructor(
@@ -78,12 +81,40 @@ export class TableAdminComponent implements OnInit, OnChanges {
   }
 
   EditTable(id) {
-    if (this.arrEditor.includes(id)) {
-      this.arrEditor = this.arrEditor.filter(item => item !== id);
-      this.clickBut.emit(this.arrEditor);
-    } else {
+    console.log('this.ctrl: ', this.ctrl);
+    if (this.ctrl) {
+      if (this.arrEditor.includes(id)) {
+        this.arrEditor = this.arrEditor.filter(item => item !== id);
+        this.clickBut.emit(this.arrEditor);
+      } else {
+        this.arrEditor.push(id);
+        this.clickBut.emit(this.arrEditor);
+        console.log('ctrl:', this.arrEditor);
+      }
+    }
+    else {
+      this.arrEditor = [];
       this.arrEditor.push(id);
       this.clickBut.emit(this.arrEditor);
+      console.log('noctrl: ', this.arrEditor);
     }
   }
+
+  EditTableDouble(id) {
+    this.ctrl = false;
+    this.arrEditor = [];
+    this.arrEditor.push(id);
+    this.clickBut.emit(this.arrEditor);
+    console.log('doublectrl: ', this.arrEditor);
+    console.log('doublectrl: ',  this.ctrl);
+  }
+
+  @HostListener('document:keydown.control', ['$event']) ctrlDown(ev: MouseEvent) {
+    this.ctrl = ev.ctrlKey;
+  }
+
+  @HostListener('document:keyup.control', ['$event']) ctrlUp(ev: MouseEvent) {
+    this.ctrl = ev.ctrlKey;
+  }
+
 }
