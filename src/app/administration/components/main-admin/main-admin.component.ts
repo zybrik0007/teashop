@@ -38,6 +38,7 @@ export class MainAdminComponent implements OnInit {
   error: boolean = false;
   errorText: string;
   rowId: number;
+  rowArr: number[];
 
 
 
@@ -311,10 +312,22 @@ export class MainAdminComponent implements OnInit {
           this.errorText = 'Выбрано больше одного купона';
         }
         if (this.arrRowsCount === 1) {
-          console.log('111');
           this.modal = true;
           this.rowId = this.arrRowsArr[0];
           this.modalNameParent = 'edit-coupon';
+        }
+      }
+    }
+    delete() {
+      if (this.router.url === '/administration/options/coupons') {
+        if (this.arrRowsCount >= 1) {
+          this.modal = true;
+          this.rowArr = this.arrRowsArr;
+          this.modalNameParent = 'delete-coupon';
+        }
+        else {
+          this.error = true;
+          this.errorText = 'Не вабрано ни одного купона';
         }
       }
     }

@@ -38,6 +38,7 @@ export class CouponDB {
     return getCouponPars;
   }
 
+  /*Поиск дубликата по code*/
   async searchDublicateCouponDB(req) {
     const dublicateCoupon = await Coupon.findAll({
       attributes: [[Sequelize.fn('COUNT', Sequelize.col('*')), 'count']],
@@ -47,6 +48,8 @@ export class CouponDB {
     });
     return JSON.parse(JSON.stringify(dublicateCoupon));
   }
+
+  /*Добавление купона*/
   async putCouponDB(req) {
     const putCoupon = await Coupon.create({
       publication: req['publication'],
@@ -63,11 +66,29 @@ export class CouponDB {
     return putCouponValues;
   }
 
+  /*Поиск купона по id*/
   async postCouponIdDB(req) {
     const postCouponId = await Coupon.findOne({
       where: {id: req['id']}
     });
     const postCouponIdParse = JSON.parse(JSON.stringify(postCouponId));
     return postCouponIdParse;
+  }
+
+  async postCouponUpdate(req) {
+    const updateCoupon = await Coupon.update({
+      publication: req['publication'],
+      code: req['code'],
+      type: req['type'],
+      value: req['value'],
+      startDate:  req['dateStart'],
+      endDate: req['dateEnd'],
+      clientId: req['client'],
+      finish: req['finish']
+    }, {where: {
+      id: req['id']
+      }
+    });
+    return updateCoupon;
   }
 }

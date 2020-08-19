@@ -27,6 +27,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
 
   @Input()modalNameChild: string;
   @Input() rowId: number;
+  @Input() rowArr: number[];
   @Output()closeModal: EventEmitter<object> = new EventEmitter<object>();
   @Output()closeModalFalse: EventEmitter<object> = new EventEmitter<object>();
   @Output() error: EventEmitter<object> = new EventEmitter<object>();
@@ -186,6 +187,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
               this.nameHead = 'Редактировать купон';
               this.but = 'edit';
               this.ngOnInit();
+              console.log('this.couponPut: ', this.couponPut);
             }
             else {
               this.error.emit({error: 'Строка для редактирования не найдена'});
@@ -197,6 +199,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         );
     }
 
+    /*Определение значение при открыти на удаление Купона*/
 
     /*Определение значений при открытии на добавления  Способа оплаты*/
 
@@ -319,17 +322,36 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       if (this.but === 'edit') {
         this.loader = true;
         const requestPostCoupon: CouponPostInterface = {
-          id: this.requestId['id'],
-          publication: this.couponPut.publication,
-          code: this.couponPut.code,
-          type: this.couponPut.type,
-          value: this.couponPut.value,
-          dateStart: this.couponPut.dateStart,
-          dateEnd: this.couponPut.dateEnd,
-          client: this.couponPut.client,
-          finish: this.couponPut.finish
-        }
-
+          id: this.requestId.id,
+          publication: formValueCoupon['couponPublication'],
+          code: formValueCoupon['couponCode'],
+          type: formValueCoupon['couponType'],
+          value: formValueCoupon['couponValue'],
+          dateStart: formValueCoupon['couponDateStart'],
+          dateEnd: formValueCoupon['couponDateEnd'],
+          client: formValueCoupon['couponClient'],
+          finish: formValueCoupon['couponFinish'],
+        };
+        console.log('requestPostCoupon: ', requestPostCoupon);
+        this.couponsService.postCouponService(requestPostCoupon)
+          .subscribe(
+            res => {
+              if (res['status'] === 200) {
+                this.modalTrue();
+              } else {
+                this.error.emit({error: 'Неизвестная ошибка сервера'});
+              }
+            },
+            error => {
+              if (error['status'] === 500 || error['status'] === 501){
+                const textEr = error['error'];
+                this.error.emit({error: textEr['error']});
+              } else {
+                this.error.emit({error: 'Неизвестная ошибка сервера'});
+              }
+            }
+          );
+        this.loader = false;
       }
     }
     if (event === 'payment') {

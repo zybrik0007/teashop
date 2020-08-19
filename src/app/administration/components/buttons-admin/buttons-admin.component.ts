@@ -17,6 +17,7 @@ export class ButtonsAdminComponent implements OnInit, OnChanges {
   @Output() searchUpt: EventEmitter<object> = new EventEmitter<object>();
   @Output() add: EventEmitter<object> = new EventEmitter<object>();
   @Output() edit: EventEmitter<object> = new EventEmitter<object>();
+  @Output() delete: EventEmitter<object> = new EventEmitter<object>();
   timeItem: any;
 
   timeOut(event) {
@@ -32,8 +33,6 @@ export class ButtonsAdminComponent implements OnInit, OnChanges {
   ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('butChange:', changes);
-    console.log('arrRowsActive:', this.arrRowsActive);
     const change = changes['arrRowsActive'];
     const countRows = change['currentValue'];
     if (countRows === 1) {
@@ -63,6 +62,12 @@ export class ButtonsAdminComponent implements OnInit, OnChanges {
   editItem() {
     if (this.arrRowsActive === 1) {
       this.edit.emit();
+    }
+  }
+
+  deleteItem() {
+    if (this.arrRowsActive >= 1) {
+      this.delete.emit();
     }
   }
 

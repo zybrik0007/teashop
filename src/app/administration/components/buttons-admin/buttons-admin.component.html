@@ -1,13 +1,21 @@
 <div id="buttonsArea-admin">
   <div id="buttonsRow-admin">
     <div id="buttonsChange-admin">
-      <div (click)="addItem()" class="buttonActive"><a><span class="icon-plus"></span></a></div>
+      <div
+        (click)="addItem()"
+        class="buttonActive">
+        <a><span class="icon-plus"></span></a>
+      </div>
       <div
         (click)="editItem()"
         [ngClass]="{buttonActive: EditButtonActive, buttonBlock: !EditButtonActive}">
         <a><span class="icon-pencil"></span></a>
       </div>
-      <div [ngClass]="{buttonActive: DeleteButtonActive, buttonBlock: !DeleteButtonActive}"><a><span class="icon-bin2"></span></a></div>
+      <div
+        (click)="deleteItem()"
+        [ngClass]="{buttonActive: DeleteButtonActive, buttonBlock: !DeleteButtonActive}">
+        <a><span class="icon-bin2"></span></a>
+      </div>
     </div>
     <div id="buttonsSearch-admin">
       <div>

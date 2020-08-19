@@ -144,7 +144,6 @@
       </form>
   </div>
 
-
   <div id="modal-payment" *ngIf="modal==='payment'" cdkDragBoundary="#modal-area" cdkDrag>
     <form [formGroup]="paymentForm" (ngSubmit)="FormSubmit('payment')">
 
@@ -701,6 +700,8 @@
 
     </form>
   </div>
+
+
 
   <div class="loaderModal" *ngIf="loader"></div>
 </div>

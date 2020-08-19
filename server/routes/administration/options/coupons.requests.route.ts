@@ -82,11 +82,8 @@ routerCoupons.put('/', async (
   try {
     const searchCode = await CouponsReqDB.searchDublicateCouponDB(req.body);
     const searchCodeValue = searchCode[0];
-    console.log(typeof (searchCodeValue['count']));
     if (searchCodeValue['count'] === 0) {
-      console.log(searchCode['count']);
       const putCoupon = await CouponsReqDB.putCouponDB(req.body);
-      console.log('putCoupon: ', putCoupon['id']);
       res.setHeader('Content-Type', 'application/json');
       res.status(200);
       res.send({id: putCoupon['id']});
@@ -110,7 +107,6 @@ routerCoupons.post('/id', async (
   req,
   res,
   next) => {
-  console.log('reqPost:', req);
   /*Проверка валидации данных*/
   try {
     const reqValidation = await validation.postCouponId(req.body);
@@ -138,6 +134,45 @@ routerCoupons.post('/id', async (
     res.send({response});
   }
   catch (e) {
+    const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    res.send(error);
+  }
+});
+
+/*Редактирование купона*/
+routerCoupons.post('/', async (
+  req,
+  res,
+  next) => {
+  /*Проверка валидации данных*/
+  try {
+    const reqValidation = await validation.postCoupons(req.body);
+    if (!reqValidation[0]) {
+      const error: string = JSON.stringify({error: reqValidation[1]});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(501);
+      res.send(error);
+    }
+  }
+  catch (e) {
+    const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(501);
+    res.send(error);
+  }
+
+  /*Выборка из Базы данных*/
+  try {
+    const reqDb = await CouponsReqDB.postCouponUpdate(req['body']);
+    console.log('reqDB Update:', reqDb);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200);
+    res.send({id: reqDb['id']});
+  }
+  catch (e) {
+    console.log('reqDb Error: ', e);
     const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
     res.setHeader('Content-Type', 'application/json');
     res.status(500);

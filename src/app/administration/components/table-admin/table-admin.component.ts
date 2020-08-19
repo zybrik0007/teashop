@@ -35,8 +35,6 @@ export class TableAdminComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     if (this.router.url === '/administration/options/coupons') {
       this.activeURL = 'coupon';
-      console.log('arrTable Table ngOnInit: ', this.arrTable);
-      console.log('this.endItem ngOnInit:', this.endItem);
     }
   }
 
@@ -81,7 +79,6 @@ export class TableAdminComponent implements OnInit, OnChanges {
   }
 
   EditTable(id) {
-    console.log('this.ctrl: ', this.ctrl);
     if (this.ctrl) {
       if (this.arrEditor.includes(id)) {
         this.arrEditor = this.arrEditor.filter(item => item !== id);
@@ -89,14 +86,12 @@ export class TableAdminComponent implements OnInit, OnChanges {
       } else {
         this.arrEditor.push(id);
         this.clickBut.emit(this.arrEditor);
-        console.log('ctrl:', this.arrEditor);
       }
     }
     else {
       this.arrEditor = [];
       this.arrEditor.push(id);
       this.clickBut.emit(this.arrEditor);
-      console.log('noctrl: ', this.arrEditor);
     }
   }
 
@@ -105,8 +100,6 @@ export class TableAdminComponent implements OnInit, OnChanges {
     this.arrEditor = [];
     this.arrEditor.push(id);
     this.clickBut.emit(this.arrEditor);
-    console.log('doublectrl: ', this.arrEditor);
-    console.log('doublectrl: ',  this.ctrl);
   }
 
   @HostListener('document:keydown.control', ['$event']) ctrlDown(ev: MouseEvent) {
