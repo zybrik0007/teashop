@@ -14,6 +14,7 @@ import {GroupsService} from '../../services/requests/options/groups.service';
 import {PaymentService} from '../../services/requests/options/payment.service';
 import {PriceService} from '../../services/requests/options/price.service';
 import {StatusService} from '../../services/requests/options/status.service';
+import {CategoryService} from '../../services/requests/сategory/category.service';
 
 
 @Component({
@@ -50,6 +51,7 @@ export class MainAdminComponent implements OnInit {
     private priceService: PriceService,
     private statusService: StatusService,
     private deliveryService: DeliveryService,
+    private categoryService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -129,6 +131,17 @@ export class MainAdminComponent implements OnInit {
         searchName: this.searchName
       });
     }
+
+    /*Первичная инициализация раздела Категории*/
+    if (this.router.url === '/administration/category/category') {
+      this.getCategory({
+        rows: this.rows,
+        page: this.page,
+        sortName: this.sortName,
+        sortValue: this.sortValue,
+        searchName: this.searchName
+      });
+    }
   }
 
   UpdatePage(event: object) {
@@ -177,36 +190,27 @@ export class MainAdminComponent implements OnInit {
     this.couponsService.getCouponsService(getParameter)
       .subscribe(
         res => {
-          this.loader = true;
-          try {
-            if (res['status'] === 200) {
-              const response = JSON.parse(res['body']['response']);
-              const count = response.pop();
-              this.countRows = Number(count['count']);
-              console.log('this.countRows:', this.countRows);
-              this.arrTable = response;
-              console.log('this.arrTable: ', this.arrTable);
-            }
-            else if (res['status'] === 500) {
-              const error = JSON.parse(res['body']['response']);
-              console.log('error 500: ', error);
-            }
-            else if (res['status'] === 501) {
-              const error = JSON.parse(res['body']['response']);
-              console.log('error 501: ', error);
-            }
-            else {
-              console.log(res['status'], 'неизвестная ошибка');
-            }
-          } catch (err) {
-            console.log('Error parse');
+          if (res['status'] === 200) {
+            const response = JSON.parse(res['body']['response']);
+            const count = response.pop();
+            this.countRows = Number(count['count']);
+            this.arrTable = response;
+            this.loader = false;
+          } else {
+            this.errorModal({error: 'Неизвестная ошибка клиента'});
+            this.loader = false;
           }
-          this.loader = false;
         },
         error => {
-          this.loader = true;
-          console.log('Error Client: ', error);
-          this.loader = false;
+          if (error['status'] === 500 || error['status'] === 501) {
+            const textEr = error['error'];
+            this.errorModal({error: textEr['error']});
+            this.loader = false;
+          }
+          else {
+            this.errorModal({error: 'Неизвестная ошибка серевера'});
+            this.loader = false;
+          }
         }
         );
 
@@ -265,7 +269,7 @@ export class MainAdminComponent implements OnInit {
 
   /*Группа пользователей*/
   /*Выборка сопособ групп пользователей для таблицы Статус заказа*/
-  getGroups(getParameter: GroupsGetInterface) {
+    getGroups(getParameter: GroupsGetInterface) {
     this.groupsService.getGroupsService(getParameter)
       .subscribe(
         res => {},
@@ -273,8 +277,39 @@ export class MainAdminComponent implements OnInit {
       );
   }
 
-    /***** *****/
+  /*Катеогии*/
+  /*Выборка категорий для таблицы Купоны*/
+  getCategory(getParameter: CouponsGetInterface) {
+    this.loader = true;
+    this.categoryService.getCategoryService(getParameter)
+      .subscribe(
+        res => {
+          if (res['status'] === 200) {
+            const response = JSON.parse(res['body']['response']);
+            const count = response.pop();
+            this.countRows = Number(count['count']);
+            this.arrTable = response;
+            this.loader = false;
+          } else {
+            this.errorModal({error: 'Неизвестная ошибка клиента'});
+            this.loader = false;
+          }
+        },
+        error => {
+          if (error['status'] === 500 || error['status'] === 501) {
+            const textEr = error['error'];
+            this.errorModal({error: textEr['error']});
+            this.loader = false;
+          }
+          else {
+            this.errorModal({error: 'Неизвестная ошибка серевера'});
+            this.loader = false;
+          }
+        }
+      );
+  }
 
+    /***** *****/
     add() {
       if (this.router.url === '/administration/options/coupons') {
         this.modal = true;
@@ -331,14 +366,14 @@ export class MainAdminComponent implements OnInit {
         }
       }
     }
-  closeModalEditor() {
+    closeModalEditor() {
       this.loader = true;
       this.modal = false;
       this.modalNameParent = '';
       this.ngOnInit();
       this.loader = false;
   }
-  closeModal() {
+    closeModal() {
     this.loader = true;
     this.modal = false;
     this.modalNameParent = '';
@@ -355,7 +390,6 @@ export class MainAdminComponent implements OnInit {
   errorModal(event) {
     this.error = true;
     this.errorText = event['error'];
-    console.log('event mosdl error:', event);
   }
 
   /*Функция закрытия модального окна Ошибки*/

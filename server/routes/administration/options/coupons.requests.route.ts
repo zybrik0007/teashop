@@ -127,7 +127,6 @@ routerCoupons.post('/id', async (
   /*Выборка из Базы данных*/
   try {
     const reqDb = await CouponsReqDB.postCouponIdDB(req.body);
-    console.log('reqdBID: ', reqDb);
     const response = JSON.stringify(reqDb);
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
@@ -166,19 +165,19 @@ routerCoupons.post('/', async (
   /*Выборка из Базы данных*/
   try {
     const reqDb = await CouponsReqDB.postCouponUpdate(req['body']);
-    console.log('reqDB Update:', reqDb);
     res.setHeader('Content-Type', 'application/json');
     res.status(200);
     res.send({id: reqDb['id']});
   }
   catch (e) {
-    console.log('reqDb Error: ', e);
     const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
     res.setHeader('Content-Type', 'application/json');
     res.status(500);
     res.send(error);
   }
 });
+
+
 
 
 

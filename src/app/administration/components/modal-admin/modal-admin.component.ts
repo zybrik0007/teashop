@@ -190,11 +190,17 @@ export class ModalAdminComponent implements OnInit, OnChanges {
               console.log('this.couponPut: ', this.couponPut);
             }
             else {
-              this.error.emit({error: 'Строка для редактирования не найдена'});
+              this.error.emit({error: 'Ошибка сервера или отсутствует выделенная строка для редактирвоания'});
             }
           },
           error => {
-            this.error.emit({error: 'Ошибка сервера или отсутствует выделенная строка для редактирвоания'});
+            if (error['status'] === 500 || error['status'] === 501) {
+              const textEr = error['error'];
+              this.error.emit({error: textEr['error']});
+            }
+            else {
+              this.error.emit({error: 'Ошибка сервера или отсутствует выделенная строка для редактирвоания'});
+            }
           }
         );
     }
@@ -309,6 +315,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
               }
             },
             error => {
+              console.log(error);
               if (error['status'] === 500 || error['status'] === 501){
                 const textEr = error['error'];
                 this.error.emit({error: textEr['error']});

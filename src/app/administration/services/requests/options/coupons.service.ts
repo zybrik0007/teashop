@@ -6,7 +6,8 @@ import {Observable} from 'rxjs';
 import {
   CouponsGetInterface,
   CouponsPutInterface,
-  CouponPostIdInterface, CouponPostInterface
+  CouponPostIdInterface,
+  CouponPostInterface
 } from '../../../interfaces/requests/options/requests.coupons.interface';
 
 
@@ -20,7 +21,7 @@ export class CouponsService {
   ) {}
 
 
-  /*****Функция определения для заголовков get запроса*****/
+  /*Функция определения для заголовков get запроса*/
   getCouponsHeaders() {
     let headersGet =  new HttpHeaders();
     headersGet =  headersGet.append('Accept', 'application/json, text/plain, */*');
@@ -28,7 +29,7 @@ export class CouponsService {
   }
 
 
-  /*****Get запрос*****/
+  /*Get запрос*/
   getCouponsService(req: CouponsGetInterface): Observable<object> {
 
     /*Определение url*/
@@ -53,7 +54,7 @@ export class CouponsService {
     });
   }
 
-  /*****Put запрос*****/
+  /*Put запрос*/
   putCouponsService(req: CouponsPutInterface): Observable<object> {
     /*Определение url*/
     const url: string = '/api/coupons';
