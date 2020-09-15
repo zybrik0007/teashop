@@ -395,7 +395,7 @@ export const Group = <MyModelStatic> sequel.define('group', {
 });
 
 /*Таблица категорий*/
-const Category = <MyModelStatic> sequel.define('category', {
+export const Category = <MyModelStatic> sequel.define('category', {
   /*id*/
   id: {
     type: DataTypes.INTEGER,
