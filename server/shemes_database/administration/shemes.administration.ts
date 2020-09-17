@@ -545,8 +545,8 @@ const Subcategory = <MyModelStatic> sequel.define('subcategory', {
 });
 
 /*Связь между таблицами категорий и субкатегорий*/
-Subcategory.hasMany(Category, {foreignKey: 'categoryId'});
-Category.belongsTo(Subcategory, {foreignKey: 'categoryId'});
+//Subcategory.hasMany(Category, {foreignKey: 'categoryId'});
+//Category.belongsTo(Subcategory, {foreignKey: 'categoryId'});
 
 /*Таблица товар*/
 const Good = <MyModelStatic> sequel.define('good', {
@@ -707,7 +707,4 @@ const Good = <MyModelStatic> sequel.define('good', {
 
 
 Coupon.sync().then(r => {console.log('Add table coupon');}).catch(e => {console.log('error add table coupon');});
-
-
-
-
+Category.sync().then(r => {console.log('Add table category');}).catch(e => {console.log('error add table category');});

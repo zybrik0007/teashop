@@ -15,6 +15,7 @@ const  bodyParser = require('body-parser');
 import {resolve} from 'dns';
 import {Express} from 'express';
 import {routerCoupons} from './server/routes/administration/options/coupons.requests.route';
+import {routerCategory} from './server/routes/administration/category/category.requests.route';
 
 
 const server = express();
@@ -41,6 +42,7 @@ server.get('*.*', express.static(distFolder, {
 }));
 
 server.use('/api/coupons', routerCoupons);
+server.use('/api/category', routerCategory);
 
 
 // All regular routes use the Universal engine
