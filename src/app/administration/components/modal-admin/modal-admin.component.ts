@@ -272,6 +272,13 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         description: ''
       };
     }
+
+    /*Определение значений при открытии на добавления Категории*/
+    if (dataChangeModal['currentValue'] === 'add-category') {
+      this.modal = 'category';
+      this.nameHead = 'Добавить категорию';
+      this.but = 'add';
+    }
   }
 
   /*Функция вычисления сегодняшенго дня*/

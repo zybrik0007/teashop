@@ -335,6 +335,10 @@ export class MainAdminComponent implements OnInit {
         this.modal = true;
         this.modalNameParent = 'add-group';
       }
+      if (this.router.url === '/administration/category/category') {
+        this.modal = true;
+        this.modalNameParent = 'add-category';
+      }
     }
     edit() {
       if (this.router.url === '/administration/options/coupons') {

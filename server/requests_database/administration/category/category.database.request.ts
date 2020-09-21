@@ -1,6 +1,6 @@
 import {Op, Sequelize} from 'sequelize';
 
-import {Category, Coupon} from '../../../shemes_database/administration/shemes.administration';
+import {Category} from '../../../shemes_database/administration/shemes.administration';
 
 export class CategoryDB {
 
@@ -10,6 +10,7 @@ export class CategoryDB {
     const limitd: number = Number(req['page']) * Number(req['rows']);
     const offsetd: number = limitd - Number(req['rows']);
     const getCategory = await Category.findAll({
+      attributes: ['name', 'publication'],
       where: {
         name: {[Op.like]: '%' + req['searchName'] + '%'}
       },

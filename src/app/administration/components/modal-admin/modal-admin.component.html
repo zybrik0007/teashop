@@ -701,6 +701,128 @@
     </form>
   </div>
 
+  <div id="modal-category" *ngIf="modal==='category'" cdkDragBoundary="#modal-area" cdkDrag>
+    <form [formGroup]="groupForm">
+
+      <div id="modal-category-head" cdkDragHandle>
+        <div>
+          <div><h4>{{nameHead}}</h4></div>
+          <div class="modal-exit"><span class="icon-cross"></span></div>
+        </div>
+      </div>
+
+      <div id="modal-category-content">
+        <div>
+          <div>
+            <div>
+              <div>
+                <div id="modal-category-publication">
+                  <div class="nameRow-30">
+                    <div><label>По умолчанию</label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="checkbox" formControlName="groupDefault">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-name">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>Название<span>*</span></label>
+                    </div>
+                  </div>
+                  <div lass="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="groupName">
+                    </div>
+                    <div *ngIf="groupForm.get('groupName').invalid && groupForm.get('groupName').touched">
+                      <small class="errorForm" *ngIf="groupForm.get('groupName').errors.required || groupForm.get('groupName').errors.trim">Введите название</small>
+                      <small class="errorForm" *ngIf="groupForm.get('groupName').errors.maxlength">Название больше 100 символов</small>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-discount">
+                  <div class="nameRow-30">
+                    <div><label>Скидка<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div class="coupVal">
+                      <input type="number" formControlName="groupDiscount"><div>%</div>
+                    </div>
+                    <div *ngIf="groupForm.get('groupDiscount').invalid && groupForm.get('groupDiscount').touched">
+                      <small class="errorForm" *ngIf="groupForm.get('groupDiscount').errors.required">Введите размер скидки</small>
+                      <small class="errorForm" *ngIf="groupForm.get('groupDiscount').errors.percent">Введено больше 100 процентов</small>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-editor">
+                  <div class="nameRow-30">
+                    <div><label>Описание<span>*</span></label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <quill-editor>
+                        <div quill-editor-toolbar>
+                          <span class="ql-formats">
+                            <button class="ql-bold" [title]="'Bold'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <button class="ql-italic" [title]="'Italic'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-color" [title]="'Color'">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="blue"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-align" [title]="'Align'">
+                              <option selected></option>
+                              <option value="center"></option>
+                              <option value="right"></option>
+                              <option value="justify"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-size" [title]="'Size'">
+                              <option selected></option>
+                              <option value="small"></option>
+                              <option value="false"></option>
+                              <option value="large"></option>
+                              <option value="huge"></option>
+                            </select>
+                          </span>
+                        </div>
+                      </quill-editor>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-category-footer">
+        <div>
+          <div>
+            <h4>
+              <button *ngIf="but === 'add'" type="submit" [disabled]="groupForm.invalid">Создать</button>
+              <button *ngIf="but === 'edit'" type="submit" [disabled]="groupForm.invalid">Сохранить</button>
+            </h4>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+
   <div class="loaderModal" *ngIf="loader"></div>
 </div>
 
