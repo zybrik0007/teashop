@@ -962,8 +962,29 @@ small {
 #modal-category-footer>div>div>h4>button:disabled {
   background: #847e7e;
 }
-/*************/
 
+#category-image-input {
+  display: none;
+}
+
+.div-category {
+  height: 200px;
+  width: 200px;
+  border: 1px solid #8f8686;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.div-category>div>label>span {
+  font-size: 190px;
+  color: #bab8ba;
+}
+
+
+/*************/
 
 
 
