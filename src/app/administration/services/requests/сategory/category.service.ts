@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {CategoryGetInterface} from '../../../interfaces/requests/options/requests.category.interface';
+import {CategoryGetInterface} from '../../../interfaces/requests/category/requests.category.interface';
 
 @Injectable({
   providedIn: 'root'

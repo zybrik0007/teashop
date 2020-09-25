@@ -5,3 +5,9 @@ export class CategoryGetInterface {
   sortValue: string;
   searchName: string;
 }
+
+export class CategoryPutInterface {
+  image: object;
+  name: string;
+  publication: boolean;
+}

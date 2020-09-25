@@ -17,6 +17,7 @@ import {StatusPutInterface} from '../../interfaces/requests/options/requests.sta
 import {GroupPutInterface} from '../../interfaces/requests/options/requests.groups.interface';
 import {Router} from '@angular/router';
 import {CouponsService} from '../../services/requests/options/coupons.service';
+import {CategoryPutInterface} from '../../interfaces/requests/category/requests.category.interface';
 
 @Component({
   selector: 'app-modal-admin',
@@ -48,6 +49,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   pricePut: PricePutInterface; /*Определение перемнной для модального окна Цена на доставку*/
   statusPut: StatusPutInterface; /*Определение перемнной для модального окна Статус заказа*/
   groupPut: GroupPutInterface; /*Определение перемнной для модального окна Группа пользователей*/
+  categoryPut: CategoryPutInterface; /*Определение перемнной для модального окна Категория*/
 
   couponForm: FormGroup; /*Форма Купоны*/
   paymentForm: FormGroup; /*Форма Способы оплаты*/
@@ -55,6 +57,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   priceForm: FormGroup; /*Форма Цены доставки*/
   statusForm: FormGroup; /*Форма статуса заказа*/
   groupForm: FormGroup; /*Форма группа пользователей*/
+  categoryForm: FormGroup; /*Форма категорий*/
 
 
 
@@ -131,13 +134,15 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       });
     }
 
+    ша
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
 
     /*Определение изменений, при создании или редактирование*/
     const dataChangeModal = changes['modalNameChild'];
-    console.log('dataChangeModal: ', dataChangeModal);
+    console.log('dataChangeModalanguar inout file: ', dataChangeModal);
 
     /*Определение значений при открытии на добавления Купона*/
     if (dataChangeModal['currentValue'] === 'add-coupon') {
@@ -431,6 +436,10 @@ export class ModalAdminComponent implements OnInit, OnChanges {
 
   modalFalse() {
     this.closeModalFalse.emit({});
+  }
+
+  imageCategoryLoad(event) {
+    console.log(event);
   }
 
 
