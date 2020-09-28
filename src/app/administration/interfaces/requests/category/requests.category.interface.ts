@@ -7,7 +7,7 @@ export class CategoryGetInterface {
 }
 
 export class CategoryPutInterface {
-  image: object;
+  image: any;
   name: string;
   publication: boolean;
 }

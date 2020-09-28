@@ -702,7 +702,7 @@
   </div>
 
   <div id="modal-category" *ngIf="modal==='category'" cdkDragBoundary="#modal-area" cdkDrag>
-    <form [formGroup]="categoryForm">
+    <form [formGroup]="categoryForm" (ngSubmit)="FormSubmit('category')">
 
       <div id="modal-category-head" cdkDragHandle>
         <div>
@@ -726,10 +726,9 @@
                         <label for="category-image-input">
                           <span class="icon-cloud-upload"></span>
                         </label>
-                        <input id="category-image-input"  type="file" accept="image/jpeg,image/png" formControlName="categoryImage" (change)="imageCategoryLoad($event.target.files)">
+                        <input id="category-image-input"  type="file" accept="image/jpeg,image/png" formControlName="categoryImage" (change)="imageCategoryLoad($event)">
                       </div>
                     </div>
-                     cnj чот  пкщгзащкь
                   </div>
                 </div>
                 <div id="modal-category-publication">
@@ -752,9 +751,9 @@
                     <div>
                       <input type="text" formControlName="categoryName">
                     </div>
-                    <div *ngIf="groupForm.get('groupName').invalid && groupForm.get('groupName').touched">
-                      <small class="errorForm" *ngIf="groupForm.get('groupName').errors.required || groupForm.get('groupName').errors.trim">Введите название</small>
-                      <small class="errorForm" *ngIf="groupForm.get('groupName').errors.maxlength">Название больше 100 символов</small>
+                    <div *ngIf="categoryForm.get('categoryName').invalid && categoryForm.get('categoryName').touched">
+                      <small class="errorForm" *ngIf="categoryForm.get('categoryName').errors.required || categoryForm.get('categoryName').errors.trim">Введите название</small>
+                      <small class="errorForm" *ngIf="categoryForm.get('categoryName').errors.maxlength">Название больше 100 символов</small>
                     </div>
                   </div>
                 </div>
@@ -768,8 +767,8 @@
         <div>
           <div>
             <h4>
-              <button *ngIf="but === 'add'" type="submit" [disabled]="groupForm.invalid">Создать</button>
-              <button *ngIf="but === 'edit'" type="submit" [disabled]="groupForm.invalid">Сохранить</button>
+              <button *ngIf="but === 'add'" type="submit" [disabled]="categoryForm.invalid">Создать</button>
+              <button *ngIf="but === 'edit'" type="submit" [disabled]="categoryForm.invalid">Сохранить</button>
             </h4>
           </div>
         </div>

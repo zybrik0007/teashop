@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-import {CategoryGetInterface} from '../../../interfaces/requests/category/requests.category.interface';
+import {CategoryGetInterface, CategoryPutInterface} from '../../../interfaces/requests/category/requests.category.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +41,19 @@ export class CategoryService {
     return this.http.get<Observable<Response>>(url, {
       headers,
       params,
+      observe: 'response'
+    });
+  }
+
+  /*Put запрос*/
+  putCategoryService(req: CategoryPutInterface): Observable<object> {
+    /*Определение url*/
+    const url: string = '/api/coupons';
+    /*Определение Headers*/
+    const headers = this.getCategoryHeaders();
+    /*Выполнение запроса на сервер*/
+    return this.http.put(url, req, {
+      headers,
       observe: 'response'
     });
   }

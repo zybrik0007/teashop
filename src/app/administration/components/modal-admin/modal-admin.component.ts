@@ -18,6 +18,7 @@ import {GroupPutInterface} from '../../interfaces/requests/options/requests.grou
 import {Router} from '@angular/router';
 import {CouponsService} from '../../services/requests/options/coupons.service';
 import {CategoryPutInterface} from '../../interfaces/requests/category/requests.category.interface';
+import {CategoryService } from '../../services/requests/сategory/category.service';
 
 @Component({
   selector: 'app-modal-admin',
@@ -134,7 +135,15 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       });
     }
 
-    ша
+    /*Инициализвция модального окна добавления, редактирвания категории*/
+    if (this.modal === 'category') {
+      this.categoryForm = new FormGroup({
+        categoryImage: new FormControl(this.categoryPut.image),
+        categoryPublication: new FormControl(this.categoryPut.publication),
+        categoryName: new FormControl(this.categoryPut.name, [Validators.required])
+      });
+    }
+
 
   }
 
@@ -282,7 +291,14 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (dataChangeModal['currentValue'] === 'add-category') {
       this.modal = 'category';
       this.nameHead = 'Добавить категорию';
+      console.log('1:', this.but);
       this.but = 'add';
+      console.log('2:', this.but);
+      this.categoryPut = {
+        image: '',
+        name: '',
+        publication: false
+      };
     }
   }
 
@@ -385,6 +401,13 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (event === 'status') {
       console.log('Form Status: ', this.statusForm);
     }
+    if (event === 'category') {
+      if (this.but === 'add') {
+        console.log('12122');
+        const formDataCategoryAdd = new FormData(this.categoryForm.value);
+        this.
+      }
+    }
   }
 
   /*Функция таймаута для заполения Псевдонима на основании имени*/
@@ -440,6 +463,13 @@ export class ModalAdminComponent implements OnInit, OnChanges {
 
   imageCategoryLoad(event) {
     console.log(event);
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      console.log('file: ', file);
+      this.categoryForm.patchValue({
+        image: file
+      });
+    }
   }
 
 
