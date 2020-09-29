@@ -20,6 +20,12 @@ export class CategoryService {
     return headersGet;
   }
 
+  putCategoryHeaders() {
+    const headersPut =  new HttpHeaders();
+    headersPut.append('Content-Type', 'multipart/form-data, boundary=something');
+    return headersPut;
+  }
+
   /*Get запрос*/
   getCategoryService(req: CategoryGetInterface): Observable<object> {
 
@@ -46,17 +52,17 @@ export class CategoryService {
   }
 
   /*Put запрос*/
-  putCategoryService(req: CategoryPutInterface): Observable<object> {
+  putCategoryService(req: FormData): Observable<object> {
+
+    console.log('putservice');
     /*Определение url*/
-    const url: string = '/api/coupons';
+    const url: string = '/api/category';
     /*Определение Headers*/
-    const headers = this.getCategoryHeaders();
+    const headers = this.putCategoryHeaders();
     /*Выполнение запроса на сервер*/
     return this.http.put(url, req, {
       headers,
       observe: 'response'
     });
   }
-
-
 }

@@ -9,6 +9,15 @@ import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 
 const  bodyParser = require('body-parser');
+const formData = require('express-form-data');
+const os = require('os');
+
+const opt = {
+  uploadDir: os.tmpdir(),
+  autoClean: true
+};
+//const multer = require('multer');
+//const upload = multer();
 
 
 
@@ -24,6 +33,11 @@ const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.o
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
+
+server.use(formData.parse(opt));
+
+//server.use(upload.array());
+//server.use(express.static('public'));
 
 // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
 

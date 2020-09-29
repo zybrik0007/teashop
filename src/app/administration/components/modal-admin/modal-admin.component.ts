@@ -27,11 +27,11 @@ import {CategoryService } from '../../services/requests/сategory/category.servi
 })
 export class ModalAdminComponent implements OnInit, OnChanges {
 
-  @Input()modalNameChild: string;
+  @Input() modalNameChild: string;
   @Input() rowId: number;
   @Input() rowArr: number[];
-  @Output()closeModal: EventEmitter<object> = new EventEmitter<object>();
-  @Output()closeModalFalse: EventEmitter<object> = new EventEmitter<object>();
+  @Output() closeModal: EventEmitter<object> = new EventEmitter<object>();
+  @Output() closeModalFalse: EventEmitter<object> = new EventEmitter<object>();
   @Output() error: EventEmitter<object> = new EventEmitter<object>();
   nameHead: string; /*Название заглавия модального окна*/
   modal: string; /*Определение какое модальное окно активруется.*/
@@ -42,6 +42,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   errorAr: boolean = true;
   errorText: string = '';
   requestId: CouponPostIdInterface;
+  fileImage1: any;
 
 
   couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
@@ -61,10 +62,11 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   categoryForm: FormGroup; /*Форма категорий*/
 
 
-
   constructor(
     private couponsService: CouponsService,
-  ) { }
+    private categoryService: CategoryService
+  ) {
+  }
 
   ngOnInit(): void {
     /*Инициализвция модального окна добавления, редактирвания купона*/
@@ -202,8 +204,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
               this.but = 'edit';
               this.ngOnInit();
               console.log('this.couponPut: ', this.couponPut);
-            }
-            else {
+            } else {
               this.error.emit({error: 'Ошибка сервера или отсутствует выделенная строка для редактирвоания'});
             }
           },
@@ -211,8 +212,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
             if (error['status'] === 500 || error['status'] === 501) {
               const textEr = error['error'];
               this.error.emit({error: textEr['error']});
-            }
-            else {
+            } else {
               this.error.emit({error: 'Ошибка сервера или отсутствует выделенная строка для редактирвоания'});
             }
           }
@@ -344,7 +344,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
             },
             error => {
               console.log(error);
-              if (error['status'] === 500 || error['status'] === 501){
+              if (error['status'] === 500 || error['status'] === 501) {
                 const textEr = error['error'];
                 this.error.emit({error: textEr['error']});
               } else {
@@ -378,7 +378,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
               }
             },
             error => {
-              if (error['status'] === 500 || error['status'] === 501){
+              if (error['status'] === 500 || error['status'] === 501) {
                 const textEr = error['error'];
                 this.error.emit({error: textEr['error']});
               } else {
@@ -404,8 +404,20 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (event === 'category') {
       if (this.but === 'add') {
         console.log('12122');
-        const formDataCategoryAdd = new FormData(this.categoryForm.value);
-        this.
+        const formDataCategoryAdd = new FormData();
+        const formValueCategory: object = this.categoryForm['value'];
+        console.log('fileIn=mage1:', this.fileImage1);
+        console.log('formValueCoupon:', formValueCategory);
+        console.log('type:', typeof (formValueCategory['categoryImage']));
+        formDataCategoryAdd.append('image', this.fileImage1);
+        formDataCategoryAdd.append('name', formValueCategory['categoryName']);
+        formDataCategoryAdd.append('publication', formValueCategory['categoryPublication']);
+        this.categoryService.putCategoryService(formDataCategoryAdd)
+          .subscribe(res => {
+            console.log('res: ', res)
+          }, error => {
+            console.log('error: ', error)
+          });
       }
     }
   }
@@ -421,7 +433,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         ['щ', 'shh'], ['ш', 'sh'], ['ч', 'ch'], ['ц', 'cz'], ['ю', 'yu'],
         ['я', 'ya'], ['ё', 'yo'], ['ж', 'zh'], ['ъ', ''], ['ы', 'y'], ['э', 'e'],
         ['а', 'a'], ['б', 'b'], ['в', 'v'], ['г', 'g'], ['д', 'd'], ['е', 'e'],
-        ['з', 'z'], ['и' , 'i'], ['й', 'j'], ['к', 'k'], ['л', 'l'], ['м', 'm'],
+        ['з', 'z'], ['и', 'i'], ['й', 'j'], ['к', 'k'], ['л', 'l'], ['м', 'm'],
         ['н', 'n'], ['о', 'o'], ['п', 'p'], ['р', 'r'], ['с', 's'], ['т', 't'],
         ['у', 'u'], ['ф', 'f'], ['х', 'x'], ['ь', ''], ['a', 'a'], ['b', 'b'],
         ['c', 'c'], ['c', 'c'], ['d', 'd'], ['e', 'e'], ['f', 'f'], ['g', 'g'],
@@ -429,7 +441,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         ['n', 'n'], ['o', 'o'], ['p', 'p'], ['q', 'q'], ['r', 'r'], ['s', 's'],
         ['t', 't'], ['u', 'u'], ['v', 'v'], ['w', 'w'], ['x', 'x'], ['y', 'y'],
         ['z', 'z'], ['1', '1'], ['2', '2'], ['3', '4'], ['4', '4'], ['5', '5'],
-        ['6', '6'], ['7', '7'], ['8', '8'], ['9', '9'],  ['0', '0']];
+        ['6', '6'], ['7', '7'], ['8', '8'], ['9', '9'], ['0', '0']];
       for (const elem of dataArr) {
         for (let i = 0; i < arr.length; i++) {
           if (elem === arr[i][0]) {
@@ -438,13 +450,14 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         }
       }
       this.pseudonym = dataRes;
-      }, 1000);
+    }, 1000);
   }
 
   /*Очищение таймаута функции для заполения Псевдонима на основании имени*/
   timeClear() {
     clearTimeout(this.timeItem);
   }
+
   /*Функция транслита псевдонима на основании значения имени*/
   translit(event) {
     this.timeClear();
@@ -464,13 +477,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   imageCategoryLoad(event) {
     console.log(event);
     if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      console.log('file: ', file);
-      this.categoryForm.patchValue({
-        image: file
-      });
+      this.fileImage1 = event.target.files[0];
     }
   }
-
-
 }

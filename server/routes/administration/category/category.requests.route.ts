@@ -6,6 +6,7 @@ import {ErrorValidation} from '../../../errors/ErrorValidation';
 import {ErrorDB} from '../../../errors/ErrorDB';
 import {CategoryValodation} from '../../../validation_route/administration/category/validation.category';
 import {CategoryDB} from '../../../requests_database/administration/category/category.database.request';
+import {routerCoupons} from '../options/coupons.requests.route';
 
 const validation = new CategoryValodation();
 const CategoryReqDB = new CategoryDB();
@@ -55,6 +56,16 @@ routerCategory.get(
     }
   }
 );
+
+
+/*Поиск купона по id*/
+routerCategory.put('/', async (
+  req,
+  res,
+  next) => {
+  console.log('req routerCategory: ', req);
+});
+
 
 
 
