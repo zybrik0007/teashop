@@ -11,6 +11,12 @@ import {routerCoupons} from '../options/coupons.requests.route';
 const validation = new CategoryValodation();
 const CategoryReqDB = new CategoryDB();
 
+const fs = require('fs');
+const gm = require('gm').subClass({imageMagick: true});
+const path = require('path');
+
+
+
 export const routerCategory = express.Router();
 
 /*Роутеры для раздела купонов Администрирования сайта*/
@@ -63,7 +69,21 @@ routerCategory.put('/', async (
   req,
   res,
   next) => {
-  console.log('req routerCategory: ', req);
+  console.log('req routerCategory: ',  req, typeof(req.files['image']['path']));
+  const im = req.files['image']['path'];
+  const newim = path.join(__dirname + '../../../../server/image/category');
+  console.log('newim: ', newim);
+  gm(im)
+    .resize(300, 300, '!')
+    .write(newim + '/' + 'test.jpg', (err) => {
+    if (!err) {
+      console.log('err loaded true');
+    } else {
+      console.log(err);
+      console.log('err loaded fuck');
+    }
+  });
+  console.log('dirname: ', __dirname);
 });
 
 
