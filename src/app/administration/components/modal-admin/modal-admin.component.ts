@@ -141,8 +141,11 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (this.modal === 'category') {
       this.categoryForm = new FormGroup({
         categoryImage: new FormControl(this.categoryPut.image),
+        categoryName: new FormControl(this.categoryPut.name, [Validators.required]),
+        categoryNick: new FormControl(this.categoryPut.nickname, [Validators.required]),
         categoryPublication: new FormControl(this.categoryPut.publication),
-        categoryName: new FormControl(this.categoryPut.name, [Validators.required])
+
+
       });
     }
 

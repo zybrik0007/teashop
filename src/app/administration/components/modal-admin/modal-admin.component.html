@@ -731,16 +731,6 @@
                     </div>
                   </div>
                 </div>
-                <div id="modal-category-publication">
-                  <div class="nameRow-30">
-                    <div><label>По умолчанию</label></div>
-                  </div>
-                  <div class="valueRow-70">
-                    <div>
-                      <input type="checkbox" formControlName="categoryPublication">
-                    </div>
-                  </div>
-                </div>
                 <div id="modal-category-name">
                   <div class="nameRow-30">
                     <div>
@@ -754,6 +744,125 @@
                     <div *ngIf="categoryForm.get('categoryName').invalid && categoryForm.get('categoryName').touched">
                       <small class="errorForm" *ngIf="categoryForm.get('categoryName').errors.required || categoryForm.get('categoryName').errors.trim">Введите название</small>
                       <small class="errorForm" *ngIf="categoryForm.get('categoryName').errors.maxlength">Название больше 100 символов</small>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-nickname">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>Псевдоним<span>*</span></label>
+                    </div>
+                  </div>
+                  <div lass="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="categoryNick">
+                    </div>
+                    <div *ngIf="categoryForm.get('categoryNick').invalid && categoryForm.get('categoryNick').touched">
+                      <small class="errorForm" *ngIf="categoryForm.get('categoryNick').errors.required || categoryForm.get('categoryNick').errors.trim">Введите название</small>
+                      <small class="errorForm" *ngIf="categoryForm.get('categoryNick').errors.maxlength">Название больше 100 символов</small>
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-publication">
+                  <div class="nameRow-30">
+                    <div><label>Публикация</label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="checkbox" formControlName="categoryPublication">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-meta-title">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>META title</label>
+                    </div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="categoryMetaTitle">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-meta-description">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>META description</label>
+                    </div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="categoryMetaDescription">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-meta-keyboards">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>META keywords</label>
+                    </div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="categoryMetaKeywords">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-short">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>Краткое описание</label>
+                    </div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <input type="text" formControlName="categoryShort">
+                    </div>
+                  </div>
+                </div>
+                <div id="modal-category-editor">
+                  <div class="nameRow-30">
+                    <div><label>Описание</label></div>
+                  </div>
+                  <div class="valueRow-70">
+                    <div>
+                      <quill-editor formControlName="categoryDescription">
+                        <div quill-editor-toolbar>
+                          <span class="ql-formats">
+                            <button class="ql-bold" [title]="'Bold'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <button class="ql-italic" [title]="'Italic'"></button>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-color" [title]="'Color'">
+                              <option selected></option>
+                              <option value="red"></option>
+                              <option value="blue"></option>
+                              <option value="yellow"></option>
+                              <option value="green"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-align" [title]="'Align'">
+                              <option selected></option>
+                              <option value="center"></option>
+                              <option value="right"></option>
+                              <option value="justify"></option>
+                            </select>
+                          </span>
+                          <span class="ql-formats">
+                            <select class="ql-size" [title]="'Size'">
+                              <option selected></option>
+                              <option value="small"></option>
+                              <option value="false"></option>
+                              <option value="large"></option>
+                              <option value="huge"></option>
+                            </select>
+                          </span>
+                        </div>
+                      </quill-editor>
                     </div>
                   </div>
                 </div>

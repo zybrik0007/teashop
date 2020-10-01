@@ -7,7 +7,13 @@ export class CategoryGetInterface {
 }
 
 export class CategoryPutInterface {
-  image: any;
   name: string;
-  publication: boolean;
+  nickname: string;
+  description: string;
+  short: string;
+  METAtitle: string;
+  METAdescription: string;
+  METAkeywords: string;
+  publication: string;
+  image: any;
 }
