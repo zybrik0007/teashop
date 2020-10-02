@@ -43,6 +43,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   errorText: string = '';
   requestId: CouponPostIdInterface;
   fileImage1: any = '';
+  image1: any = '';
 
 
   couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
@@ -483,10 +484,17 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   }
 
   imageCategoryLoad(event) {
-    console.log(event);
+    console.log('event:', event);
     if (event.target.files.length > 0) {
       this.fileImage1 = event.target.files[0];
-
+      this.imageRead(event.target.files[0]);
     }
+  }
+  imageRead(event) {
+    const readerFile = new FileReader();
+    readerFile.onload = (e) => {
+      this.image1 = e.target.result;
+    };
+    readerFile.readAsDataURL(event);
   }
 }
