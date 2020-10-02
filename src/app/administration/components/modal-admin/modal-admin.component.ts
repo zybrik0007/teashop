@@ -42,7 +42,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   errorAr: boolean = true;
   errorText: string = '';
   requestId: CouponPostIdInterface;
-  fileImage1: any;
+  fileImage1: any = '';
 
 
   couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
@@ -144,12 +144,13 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         categoryName: new FormControl(this.categoryPut.name, [Validators.required]),
         categoryNick: new FormControl(this.categoryPut.nickname, [Validators.required]),
         categoryPublication: new FormControl(this.categoryPut.publication),
-
-
+        categoryMetaTitle: new FormControl(this.categoryPut.METAtitle),
+        categoryMetaDescription: new FormControl(this.categoryPut.METAdescription),
+        categoryMetaKeywords: new FormControl(this.categoryPut.METAkeywords),
+        categoryShort: new FormControl(this.categoryPut.short),
+        categoryDescription: new FormControl(this.categoryPut.description)
       });
     }
-
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -294,13 +295,17 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (dataChangeModal['currentValue'] === 'add-category') {
       this.modal = 'category';
       this.nameHead = 'Добавить категорию';
-      console.log('1:', this.but);
       this.but = 'add';
-      console.log('2:', this.but);
       this.categoryPut = {
         image: '',
         name: '',
-        publication: false
+        nickname: '',
+        publication: false,
+        METAtitle: '',
+        METAdescription: '',
+        METAkeywords: '',
+        short: '',
+        description: ''
       };
     }
   }
@@ -481,6 +486,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     console.log(event);
     if (event.target.files.length > 0) {
       this.fileImage1 = event.target.files[0];
+
     }
   }
 }

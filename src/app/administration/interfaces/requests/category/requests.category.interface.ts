@@ -14,6 +14,6 @@ export class CategoryPutInterface {
   METAtitle: string;
   METAdescription: string;
   METAkeywords: string;
-  publication: string;
+  publication: boolean;
   image: any;
 }
