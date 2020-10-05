@@ -40,6 +40,8 @@ export class MainAdminComponent implements OnInit {
   errorText: string;
   rowId: number;
   rowArr: number[];
+  expend: boolean = false;
+  image: any = '';
 
 
 
@@ -400,6 +402,21 @@ export class MainAdminComponent implements OnInit {
   closeError() {
     this.error = false;
     this.errorText = '';
+  }
+
+  expendImage(event) {
+    const readerFileImage = new FileReader();
+    readerFileImage.onload = (e) => {
+      this.image = e.target.result;
+    };
+    readerFileImage.readAsDataURL(event);
+    this.expend = true;
+    console.log('event IMG:', event);
+  }
+
+  closeExpend() {
+    this.image = '';
+    this.expend = false;
   }
 
 }

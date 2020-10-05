@@ -33,6 +33,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   @Output() closeModal: EventEmitter<object> = new EventEmitter<object>();
   @Output() closeModalFalse: EventEmitter<object> = new EventEmitter<object>();
   @Output() error: EventEmitter<object> = new EventEmitter<object>();
+  @Output() expend: EventEmitter<any> = new EventEmitter<any>();
   nameHead: string; /*Название заглавия модального окна*/
   modal: string; /*Определение какое модальное окно активруется.*/
   but: string; /*Определение кнопки Submit*/
@@ -484,11 +485,19 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   }
 
   imageCategoryLoad(event) {
-    console.log('event:', event);
-    if (event.target.files.length > 0) {
-      this.fileImage1 = event.target.files[0];
-      this.imageRead(event.target.files[0]);
+    console.log('event TOOO');
+    if (event !== '') {
+      if (event.target.files.length > 0) {
+        this.fileImage1 = event.target.files[0];
+        this.imageRead(event.target.files[0]);
+      } else {
+        this.fileImage1 = '';
+      }
+    } else {
+      console.log('111111111');
+      this.fileImage1 = '';
     }
+
   }
   imageRead(event) {
     const readerFile = new FileReader();
@@ -496,5 +505,15 @@ export class ModalAdminComponent implements OnInit, OnChanges {
       this.image1 = e.target.result;
     };
     readerFile.readAsDataURL(event);
+  }
+  ExpendImage() {
+    this.expend.emit(this.fileImage1);
+  }
+  deleteExpand(event: number) {
+    console.log('33333');
+    if (event === 1) {
+      this.image1 = '';
+      this.fileImage1 = '';
+    }
   }
 }

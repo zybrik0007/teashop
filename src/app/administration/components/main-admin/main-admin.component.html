@@ -36,6 +36,7 @@
     (closeModal)="closeModalEditor()"
     (closeModalFalse)="closeModal()"
     (error)="errorModal($event)"
+    (expend)="expendImage($event)"
   ></app-modal-admin>
 </div>
 <div class="loader" *ngIf="loader"></div>
@@ -65,4 +66,10 @@
   </div>
 </div>
 
+<div id="expend" *ngIf="expend">
+  <div>
+    <div class="expend-image"><img [src]="image"></div>
+    <div class="expend-close" (click)="closeExpend()"><span class="icon-cross"></span></div>
+  </div>
+</div>
 

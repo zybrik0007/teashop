@@ -968,6 +968,7 @@ small {
 }
 
 .div-category {
+  position: relative;
   height: 200px;
   width: 200px;
   border: 1px solid #8f8686;
@@ -988,8 +989,31 @@ small {
   height: 190px;
 }
 
+.delete-category-image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: small;
+  color: #444;
+}
+.delete-category-image>span {
+  opacity: 0.3;
+}
+.delete-category-image>span:hover{
+  opacity: 1;
+}
+.expand-category-image {
+  position: absolute;
+  color: #444;
+}
+.expand-category-image>span {
+  opacity: 0.3;
+}
+.expand-category-image>span:hover {
+  opacity: 1;
+}
 
-/*************/
+  /*************/
 
 
 

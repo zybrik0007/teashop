@@ -721,7 +721,7 @@
                     <div><label>Картинка</label></div>
                   </div>
                   <div class="valueRow-70">
-                    <div class="div-category" *ngIf="fileImage1 === ''">
+                    <div class="div-category" *ngIf="fileImage1 == ''">
                       <div>
                         <label for="category-image-input">
                           <span class="icon-cloud-upload"></span>
@@ -731,6 +731,8 @@
                     </div>
                     <div class="div-category" *ngIf="fileImage1 !== ''">
                       <img [src]='image1'>
+                      <div class="delete-category-image" (click)="deleteExpand(1)"><span class="icon-cross"></span></div>
+                      <div class="expand-category-image" (click)="ExpendImage()"><span class="icon-enlarge"></span></div>
                     </div>
                   </div>
                 </div>
