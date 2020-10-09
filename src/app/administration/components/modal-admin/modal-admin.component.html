@@ -721,7 +721,7 @@
                     <div><label>Картинка</label></div>
                   </div>
                   <div class="valueRow-70">
-                    <div class="div-category" *ngIf="fileImage1 == ''">
+                    <div class="div-category" *ngIf="fileImage1 === ''">
                       <div>
                         <label for="category-image-input">
                           <span class="icon-cloud-upload"></span>
@@ -763,7 +763,7 @@
                       <input type="text" formControlName="categoryNick">
                     </div>
                     <div *ngIf="categoryForm.get('categoryNick').invalid && categoryForm.get('categoryNick').touched">
-                      <small class="errorForm" *ngIf="categoryForm.get('categoryNick').errors.required || categoryForm.get('categoryNick').errors.trim">Введите название</small>
+                      <small class="errorForm" *ngIf="categoryForm.get('categoryNick').errors.required || categoryForm.get('categoryNick').errors.trim">Введите псевдоним</small>
                       <small class="errorForm" *ngIf="categoryForm.get('categoryNick').errors.maxlength">Название больше 100 символов</small>
                     </div>
                   </div>

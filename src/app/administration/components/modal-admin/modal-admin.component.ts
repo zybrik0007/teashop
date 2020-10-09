@@ -45,6 +45,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   requestId: CouponPostIdInterface;
   fileImage1: any = '';
   image1: any = '';
+  CategoryDisplayImage: boolean = false;
 
 
   couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
@@ -421,7 +422,13 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         console.log('type:', typeof (formValueCategory['categoryImage']));
         formDataCategoryAdd.append('image', this.fileImage1);
         formDataCategoryAdd.append('name', formValueCategory['categoryName']);
+        formDataCategoryAdd.append('nickname', formValueCategory['categoryNick']);
         formDataCategoryAdd.append('publication', formValueCategory['categoryPublication']);
+        formDataCategoryAdd.append('metaTitle', formValueCategory['categoryMetaTitle']);
+        formDataCategoryAdd.append('metaDescription', formValueCategory['categoryMetaDescription']);
+        formDataCategoryAdd.append('metaKeywords', formValueCategory['categoryMetaKeywords']);
+        formDataCategoryAdd.append('short', formValueCategory['categoryShort']);
+        formDataCategoryAdd.append('description', formValueCategory['categoryDescription']);
         this.categoryService.putCategoryService(formDataCategoryAdd)
           .subscribe(res => {
             console.log('res: ', res)
@@ -486,19 +493,15 @@ export class ModalAdminComponent implements OnInit, OnChanges {
 
   imageCategoryLoad(event) {
     console.log('event TOOO');
-    if (event !== '') {
-      if (event.target.files.length > 0) {
-        this.fileImage1 = event.target.files[0];
-        this.imageRead(event.target.files[0]);
-      } else {
-        this.fileImage1 = '';
-      }
-    } else {
-      console.log('111111111');
-      this.fileImage1 = '';
+    if (event.target.files.length > 0) {
+      this.fileImage1 = event.target.files[0];
+      this.imageRead(event.target.files[0]);
+      this.CategoryDisplayImage = true;
     }
-
   }
+
+
+
   imageRead(event) {
     const readerFile = new FileReader();
     readerFile.onload = (e) => {
@@ -512,8 +515,12 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   deleteExpand(event: number) {
     console.log('33333');
     if (event === 1) {
+      console.log('1');
       this.image1 = '';
+      console.log('2');
       this.fileImage1 = '';
+      console.log('3');
     }
+    console.log('4');
   }
 }
