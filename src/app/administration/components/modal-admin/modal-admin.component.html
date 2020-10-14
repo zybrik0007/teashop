@@ -778,6 +778,22 @@
                     </div>
                   </div>
                 </div>
+                <div id="modal-category-sort">
+                  <div class="nameRow-30">
+                    <div>
+                      <label>Сортировка<span>*</span></label>
+                    </div>
+                  </div>
+                  <div lass="valueRow-70">
+                    <div>
+                      <input type="number" formControlName="categorySort">
+                    </div>
+                    <div *ngIf="categoryForm.get('categorySort').invalid && categoryForm.get('categorySort').touched">
+                      <small class="errorForm" *ngIf="categoryForm.get('categorySort').errors.required">Введите номер сортировки</small>
+                      <small class="errorForm" *ngIf="categoryForm.get('categorySort').errors.inbreed && !categoryForm.get('categorySort').errors.required">Номер сортировки не целое число</small>
+                    </div>
+                  </div>
+                </div>
                 <div id="modal-category-meta-title">
                   <div class="nameRow-30">
                     <div>

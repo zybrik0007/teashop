@@ -1,6 +1,7 @@
 import {Op, Sequelize} from 'sequelize';
 
 import {Category} from '../../../shemes_database/administration/shemes.administration';
+import {findAll} from '@angular/compiler-cli/ngcc/src/utils';
 
 export class CategoryDB {
 
@@ -30,4 +31,35 @@ export class CategoryDB {
     getCategoryPars.push(countCategoryPars[0]);
     return getCategoryPars;
   }
+
+  async searchCategoryDublicateParametrDB(req) {
+    const dublicateCategoryParametr = await Category.findAll({
+      attributes: [[Sequelize.fn('COUNT', Sequelize.col('*')), 'count']],
+      where: {
+        [Op.or]: [
+          {name: req['name']},
+          {nickname: req['nickname']},
+          {sort: [req['sort']]}
+        ]
+      }
+    });
+    return JSON.parse(JSON.stringify(dublicateCategoryParametr));
+  }
+
+  async putCategoryDB(req) {
+    const putCategory = await Category.create({
+      name: req['name'],
+      nickname: req['nickname'],
+      publication: req['publication'],
+      sort: req['sort'],
+      meta_title: req['metaTitle'],
+      meta_description: req['metaDescription'],
+      meta_keywords: req[' metaKeywords'],
+      short_description: req['short'],
+      description: req['description']
+    });
+    const putCategoryValues = putCategory['dataValues'];
+    return putCategoryValues;
+  }
+
 }

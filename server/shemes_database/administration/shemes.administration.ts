@@ -411,7 +411,7 @@ export const Category = <MyModelStatic> sequel.define('category', {
     allowNull: false
   },
   /*Псевдоним*/
-  pseudonym: {
+  nickname: {
     type: DataTypes.STRING,
     unique: true,
     allowNull: false

@@ -147,6 +147,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         categoryName: new FormControl(this.categoryPut.name, [Validators.required]),
         categoryNick: new FormControl(this.categoryPut.nickname, [Validators.required]),
         categoryPublication: new FormControl(this.categoryPut.publication),
+        categorySort: new FormControl(this.categoryPut.sort, [Validators.required, ValidatorAdministration.inbreed]),
         categoryMetaTitle: new FormControl(this.categoryPut.METAtitle),
         categoryMetaDescription: new FormControl(this.categoryPut.METAdescription),
         categoryMetaKeywords: new FormControl(this.categoryPut.METAkeywords),
@@ -304,6 +305,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         name: '',
         nickname: '',
         publication: false,
+        sort: null,
         METAtitle: '',
         METAdescription: '',
         METAkeywords: '',
@@ -424,6 +426,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         formDataCategoryAdd.append('name', formValueCategory['categoryName']);
         formDataCategoryAdd.append('nickname', formValueCategory['categoryNick']);
         formDataCategoryAdd.append('publication', formValueCategory['categoryPublication']);
+        formDataCategoryAdd.append('sort', formValueCategory['categorySort']);
         formDataCategoryAdd.append('metaTitle', formValueCategory['categoryMetaTitle']);
         formDataCategoryAdd.append('metaDescription', formValueCategory['categoryMetaDescription']);
         formDataCategoryAdd.append('metaKeywords', formValueCategory['categoryMetaKeywords']);

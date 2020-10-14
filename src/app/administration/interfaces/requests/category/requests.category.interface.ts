@@ -9,6 +9,7 @@ export class CategoryGetInterface {
 export class CategoryPutInterface {
   name: string;
   nickname: string;
+  sort: number;
   description: string;
   short: string;
   METAtitle: string;

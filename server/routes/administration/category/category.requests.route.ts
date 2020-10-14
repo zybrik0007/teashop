@@ -7,9 +7,11 @@ import {ErrorDB} from '../../../errors/ErrorDB';
 import {CategoryValodation} from '../../../validation_route/administration/category/validation.category';
 import {CategoryDB} from '../../../requests_database/administration/category/category.database.request';
 import {routerCoupons} from '../options/coupons.requests.route';
+import {ImageCategory} from '../../../image_function/category.image';
 
 const validation = new CategoryValodation();
 const CategoryReqDB = new CategoryDB();
+const Image = new ImageCategory();
 
 const fs = require('fs');
 const gm = require('gm').subClass({imageMagick: true});
@@ -69,6 +71,50 @@ routerCategory.put('/', async (
   req,
   res,
   next) => {
+  /*Проверка валидации данных*/
+  let id = '';
+  try {
+    const reqValidation = await validation.putCategory(req.body);
+    if (!reqValidation[0]) {
+      const error: string = JSON.stringify({error: reqValidation[1]});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(501);
+      res.send(error);
+    }
+  } catch (e) {
+    const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(501);
+    res.send(error);
+  }
+  /*Добавление в базу данных*/
+  try {
+    const searchCode = await CategoryReqDB.searchCategoryDublicateParametrDB(req.body);
+    console.log('searchCode:', searchCode);
+    const searchCodeValue = searchCode[0];
+    if (searchCodeValue['count'] === 0) {
+      const putCategory = await CategoryReqDB.putCategoryDB(req.body);
+      id = putCategory['id'];
+    }
+  } catch (e) {
+    const error: string = JSON.stringify({error: ErrorDB.ErrorDBCategoryParametr});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    res.send(error);
+  }
+  /*Создание директори в разделе картинок и добавление туда картинки*/
+  try {
+    const putCategoryImage = await Image.putCategoryImage(id, req['files']);
+    console.log(putCategoryImage);
+  } catch (e) {
+    const error: string = JSON.stringify({error: ErrorValidation.ErrorImage});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    res.send(error);
+  }
+
+  /*
+  console.log(req, req['files']);
   console.log('req routerCategory: ',  req, typeof(req.files['image']['path']));
   const im = req.files['image']['path'];
   const newim = path.join(__dirname + '../../../../server/image/category');
@@ -84,6 +130,7 @@ routerCategory.put('/', async (
     }
   });
   console.log('dirname: ', __dirname);
+  */
 });
 
 
