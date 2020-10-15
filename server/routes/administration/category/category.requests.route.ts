@@ -72,7 +72,7 @@ routerCategory.put('/', async (
   res,
   next) => {
   /*Проверка валидации данных*/
-  let id = '';
+  let idCategory = '';
   try {
     const reqValidation = await validation.putCategory(req.body);
     if (!reqValidation[0]) {
@@ -92,25 +92,36 @@ routerCategory.put('/', async (
     const searchCode = await CategoryReqDB.searchCategoryDublicateParametrDB(req.body);
     console.log('searchCode:', searchCode);
     const searchCodeValue = searchCode[0];
+    console.log('searchCodeValue catgory: ', searchCodeValue);
     if (searchCodeValue['count'] === 0) {
+      console.log('req.body: ', req.body);
       const putCategory = await CategoryReqDB.putCategoryDB(req.body);
-      id = putCategory['id'];
+      console.log('putCategory: ', putCategory);
+      idCategory = putCategory['id'];
+    } else {
+      const error: string = JSON.stringify({error: ErrorDB.ErrorDBCategoryParametr});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(500);
+      res.send(error);
     }
   } catch (e) {
-    const error: string = JSON.stringify({error: ErrorDB.ErrorDBCategoryParametr});
+    const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
     res.setHeader('Content-Type', 'application/json');
     res.status(500);
     res.send(error);
   }
   /*Создание директори в разделе картинок и добавление туда картинки*/
   try {
-    const putCategoryImage = await Image.putCategoryImage(id, req['files']);
-    console.log(putCategoryImage);
+    const putCategoryImage = await Image.putCategoryImage(idCategory, req['files']);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200);
+    res.send({id: idCategory});
   } catch (e) {
     const error: string = JSON.stringify({error: ErrorValidation.ErrorImage});
+    console.log(error);
     res.setHeader('Content-Type', 'application/json');
-    res.status(500);
-    res.send(error);
+    res.status(200);
+    res.send({id: idCategory});
   }
 
   /*

@@ -39,7 +39,7 @@ export class CategoryDB {
         [Op.or]: [
           {name: req['name']},
           {nickname: req['nickname']},
-          {sort: [req['sort']]}
+          {sort: req['sort']}
         ]
       }
     });
@@ -47,6 +47,7 @@ export class CategoryDB {
   }
 
   async putCategoryDB(req) {
+    console.log('IN DB: ', req);
     const putCategory = await Category.create({
       name: req['name'],
       nickname: req['nickname'],
@@ -54,10 +55,11 @@ export class CategoryDB {
       sort: req['sort'],
       meta_title: req['metaTitle'],
       meta_description: req['metaDescription'],
-      meta_keywords: req[' metaKeywords'],
+      meta_keywords: req['metaKeywords'],
       short_description: req['short'],
       description: req['description']
     });
+    console.log('putCategory: ', putCategory);
     const putCategoryValues = putCategory['dataValues'];
     return putCategoryValues;
   }

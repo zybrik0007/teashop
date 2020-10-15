@@ -416,6 +416,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     }
     if (event === 'category') {
       if (this.but === 'add') {
+        this.loader = true;
         console.log('12122');
         const formDataCategoryAdd = new FormData();
         const formValueCategory: object = this.categoryForm['value'];
@@ -434,10 +435,20 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         formDataCategoryAdd.append('description', formValueCategory['categoryDescription']);
         this.categoryService.putCategoryService(formDataCategoryAdd)
           .subscribe(res => {
-            console.log('res: ', res)
+            if (res['status'] === 200) {
+              this.modalTrue();
+            } else {
+              this.error.emit({error: 'Неизвестная ошибка сервера'});
+            }
           }, error => {
-            console.log('error: ', error)
+            if (error['status'] === 500 || error['status'] === 501) {
+              const textEr = error['error'];
+              this.error.emit({error: textEr['error']});
+            } else {
+              this.error.emit({error: 'Неизвестная ошибка сервера'});
+            }
           });
+        this.loader = false;
       }
     }
   }
