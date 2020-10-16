@@ -239,7 +239,7 @@ export class FooterAdminComponent implements OnInit, OnChanges {
     this.pageUpt.emit({page: this.activePage});
   }
 
-  /*Изменение Квывода количества строк*/
+  /*Изменение вывода количества строк*/
   updateRows(event) {
     this.rows = Number(event.target.value);
     this.ngOnInit();

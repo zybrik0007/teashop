@@ -149,6 +149,6 @@ export class CategoryValodation {
     if (!validationd.typeStr(req['description'])) {
       return [false, ErrorValidation.ErrorCategoryStringName];
     }
-    return [true, '']
+    return [true, ''];
   }
 }

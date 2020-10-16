@@ -36,10 +36,33 @@ export class TableAdminComponent implements OnInit, OnChanges {
     if (this.router.url === '/administration/options/coupons') {
       this.activeURL = 'coupon';
     }
+
+    if (this.router.url === '/administration/category/category') {
+      this.activeURL = 'category';
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes: ', changes);
     if (this.router.url === '/administration/options/coupons') {
+      console.log('changes1: ', changes);
+      this.loaderTable = true;
+      const changeData = changes['arrTable'];
+      console.log('changeData')
+      const arrChangesData = changeData['currentValue'];
+      const endArr = arrChangesData.pop();
+      if (endArr['count'] === 0) {
+        this.endItem = true;
+        this.ngOnInit();
+      }
+      else {
+        this.endItem = false;
+        this.arrTable = arrChangesData;
+        this.ngOnInit();
+      }
+    }
+    if (this.router.url === '/administration/category/category') {
+
       this.loaderTable = true;
       const changeData = changes['arrTable'];
       const arrChangesData = changeData['currentValue'];
@@ -58,6 +81,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
 
   sortUpt(event) {
     const arr = event.path;
+    console.log(event.path);
     for (const value of arr) {
       if (value.className === 'itemSort') {
         const sortd = value.dataset['sort'];
@@ -75,6 +99,8 @@ export class TableAdminComponent implements OnInit, OnChanges {
         }
       }
     }
+    console.log(this.column);
+    console.log(this.columnValue);
     this.sortOutput.emit({sort: {sortName: this.column, sortValue: this.columnValue}});
   }
 

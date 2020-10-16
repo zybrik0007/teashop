@@ -83,7 +83,6 @@
            (dblclick)="EditTableDouble(item['id'])">
         <div>
           <div>
-            <div><span>Нет данных для отображения</span></div>
             <div><span class="columnCenter" [ngClass]="{columnTrue: item['publication'],
             columnFalse: !item['publication']}"><span class="icon-checkmark"></span></span></div>
             <div><span>{{item['code']}}</span></div>
@@ -95,6 +94,66 @@
             columnFalse: !item['used']}"><span class="icon-checkmark"></span></span></div>
           </div>
 
+        </div>
+      </div>
+
+      <div *ngIf="endItem" class="notData">
+        <div class="notData"><span>Нет данных для отображения</span></div>
+      </div>
+
+    </div>
+
+    <div class="tableContent-admin" *ngIf="activeURL==='category'">
+
+      <div class="tableHead-admin">
+
+        <div class="itemSort" data-sort="name" data-val="" (click)="sortUpt($event)">
+          <div>
+            <div>
+              <div><span>Название</span></div>
+              <div class="filterPosition" *ngIf="column=='name' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='name' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="itemSort" data-sort="sort" data-val="" (click)="sortUpt($event)">
+          <div>
+            <div>
+              <div><span>Сортировка</span></div>
+              <div class="filterPosition" *ngIf="column=='sort' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='sort' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="itemSort" data-sort="publication" data-val="" (click)="sortUpt($event)">
+          <div>
+            <div>
+              <div><span>Публикация</span></div>
+              <div class="filterPosition" *ngIf="column=='publication' && columnValue=='ASC'"><span class="icon-ctrl"></span></div>
+              <div class="filterPosition filterDESC" *ngIf="column=='publication' && columnValue=='DESC'"><span class="icon-ctrl"></span></div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="tableBlock-admin"
+           appTableEditor
+           *ngFor="let item of arrTable"
+           [id]="item['id']" data-active="disable"
+           (click)="EditTable(item['id'])"
+           (dblclick)="EditTableDouble(item['id'])">
+        <div>
+          <div>
+            <div><span>{{item['name']}}</span></div>
+            <div><span>{{item['sort']}}</span></div>
+            <div><span class="columnCenter" [ngClass]="{columnTrue: item['publication'],
+            columnFalse: !item['publication']}"><span class="icon-checkmark"></span></span></div>
+          </div>
         </div>
       </div>
 

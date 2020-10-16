@@ -89,7 +89,7 @@ export class ValidationRequestsAdmin {
 
   /*Проверка свойства sortName для таблицы Категори*/
   sortNameCategory(req): boolean {
-    return (req === 'id' || req === 'name' || req === 'publication');
+    return (req === 'id' || req === 'name' || req === 'publication' || req === 'sort');
   }
 
   /*Проверка свойства Rows*/

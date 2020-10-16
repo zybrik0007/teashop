@@ -180,6 +180,16 @@ export class MainAdminComponent implements OnInit {
         searchName: this.searchName
       });
     }
+
+    if (this.router.url === '/administration/category/category') {
+      this.getCategory({
+        rows: this.rows,
+        page: this.page,
+        sortName: this.sortName,
+        sortValue: this.sortValue,
+        searchName: this.searchName
+      });
+    }
   }
 
 
@@ -193,10 +203,18 @@ export class MainAdminComponent implements OnInit {
       .subscribe(
         res => {
           if (res['status'] === 200) {
+            console.log('res: ', res);
+            const bodyParse = JSON.parse(res['body']['response']);
+            console.log('bodyParse1: ', bodyParse);
+            console.log('bodyParse2: ', bodyParse);
+            console.log('bodyParse3: ', bodyParse);
             const response = JSON.parse(res['body']['response']);
-            const count = response.pop();
+            console.log('response1: ', JSON.parse(JSON.stringify(response)));
+            const count = response[response.length - 1];
             this.countRows = Number(count['count']);
             this.arrTable = response;
+            console.log('response2: ', response);
+            console.log('this.arrTable: ', this.arrTable);
             this.loader = false;
           } else {
             this.errorModal({error: 'Неизвестная ошибка клиента'});
@@ -215,7 +233,6 @@ export class MainAdminComponent implements OnInit {
           }
         }
         );
-
   }
 
   /*Способ оплаты*/
@@ -271,7 +288,7 @@ export class MainAdminComponent implements OnInit {
 
   /*Группа пользователей*/
   /*Выборка сопособ групп пользователей для таблицы Статус заказа*/
-    getGroups(getParameter: GroupsGetInterface) {
+  getGroups(getParameter: GroupsGetInterface) {
     this.groupsService.getGroupsService(getParameter)
       .subscribe(
         res => {},

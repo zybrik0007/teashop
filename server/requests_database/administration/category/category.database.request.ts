@@ -11,9 +11,10 @@ export class CategoryDB {
     const limitd: number = Number(req['page']) * Number(req['rows']);
     const offsetd: number = limitd - Number(req['rows']);
     const getCategory = await Category.findAll({
-      attributes: ['name', 'publication'],
+      attributes: ['name', 'sort', 'publication'],
       where: {
-        name: {[Op.like]: '%' + req['searchName'] + '%'}
+        name: {[Op.like]: '%' + req['searchName'] + '%'},
+        sort: {[Op.like]: '%' + req['searchName'] + '%'}
       },
       order: [[req['sortName'], req['sortValue']]],
       offset: offsetd,
