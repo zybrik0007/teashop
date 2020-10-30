@@ -48,7 +48,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
       console.log('changes1: ', changes);
       this.loaderTable = true;
       const changeData = changes['arrTable'];
-      console.log('changeData')
+      console.log('changeData');
       const arrChangesData = changeData['currentValue'];
       const endArr = arrChangesData.pop();
       if (endArr['count'] === 0) {
@@ -62,7 +62,6 @@ export class TableAdminComponent implements OnInit, OnChanges {
       }
     }
     if (this.router.url === '/administration/category/category') {
-
       this.loaderTable = true;
       const changeData = changes['arrTable'];
       const arrChangesData = changeData['currentValue'];
@@ -105,6 +104,7 @@ export class TableAdminComponent implements OnInit, OnChanges {
   }
 
   EditTable(id) {
+    console.log(id);
     if (this.ctrl) {
       if (this.arrEditor.includes(id)) {
         this.arrEditor = this.arrEditor.filter(item => item !== id);

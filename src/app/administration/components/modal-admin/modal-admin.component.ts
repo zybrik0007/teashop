@@ -19,6 +19,8 @@ import {Router} from '@angular/router';
 import {CouponsService} from '../../services/requests/options/coupons.service';
 import {CategoryPutInterface} from '../../interfaces/requests/category/requests.category.interface';
 import {CategoryService } from '../../services/requests/сategory/category.service';
+import {IdInterface} from '../../interfaces/general/id.interface';
+
 
 @Component({
   selector: 'app-modal-admin',
@@ -26,6 +28,7 @@ import {CategoryService } from '../../services/requests/сategory/category.servi
   styleUrls: ['./modal-admin.component.scss']
 })
 export class ModalAdminComponent implements OnInit, OnChanges {
+
 
   @Input() modalNameChild: string;
   @Input() rowId: number;
@@ -42,7 +45,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   loader: boolean = false;
   errorAr: boolean = true;
   errorText: string = '';
-  requestId: CouponPostIdInterface;
+  requestId: IdInterface;
   fileImage1: any = '';
   image1: any = '';
   CategoryDisplayImage: boolean = false;
@@ -162,6 +165,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     /*Определение изменений, при создании или редактирование*/
     const dataChangeModal = changes['modalNameChild'];
     console.log('dataChangeModalanguar inout file: ', dataChangeModal);
+    console.log('changes: ', changes);
 
     /*Определение значений при открытии на добавления Купона*/
     if (dataChangeModal['currentValue'] === 'add-coupon') {
@@ -313,6 +317,54 @@ export class ModalAdminComponent implements OnInit, OnChanges {
         description: ''
       };
     }
+
+    /*Определение значение при открыти на редактирование Категории*/
+    if (dataChangeModal['currentValue'] === 'edit-category') {
+      const dataId = changes['rowId'];
+      let editParams: object = {};
+      this.requestId = {
+        id: dataId['currentValue']
+      };
+      this.categoryService.postIdCategoryService(this.requestId)
+        .subscribe(
+          res => {
+            if (res['status'] === 200) {
+              const resBody = res['body'];
+              const resParse = JSON.parse(resBody['response']);
+              editParams = resParse;
+              const startDate = resParse['startDate'].substr(0, 10);
+              const endDate = resParse['endDate'].substr(0, 10);
+              this.categoryPut = {
+                name: resParse['name'],
+                nickname: resParse['nickname'],
+                sort: resParse['sort'],
+                description: resParse['description'],
+                short: resParse['short'],
+                METAtitle: resParse['METAtitle'],
+                METAdescription: resParse['METAdescription'],
+                METAkeywords: resParse['METAdescription'],
+                publication: resParse['publication']
+              };
+              this.modal = 'category';
+              this.nameHead = 'Редактировать категорию';
+              this.but = 'edit';
+              this.ngOnInit();
+              console.log('this.categoryPut: ', this.categoryPut);
+            } else {
+              this.error.emit({error: 'Ошибка сервера или отсутствует выделенная строка для редактирвоания'});
+            }
+            },
+          error => {
+            if (error['status'] === 500 || error['status'] === 501) {
+              const textEr = error['error'];
+              this.error.emit({error: textEr['error']});
+            } else {
+              this.error.emit({error: 'Ошибка сервера или отсутствует выделенная строка для редактирвоания'});
+            }
+          }
+        );
+
+    }
   }
 
   /*Функция вычисления сегодняшенго дня*/
@@ -417,12 +469,8 @@ export class ModalAdminComponent implements OnInit, OnChanges {
     if (event === 'category') {
       if (this.but === 'add') {
         this.loader = true;
-        console.log('12122');
         const formDataCategoryAdd = new FormData();
         const formValueCategory: object = this.categoryForm['value'];
-        console.log('fileIn=mage1:', this.fileImage1);
-        console.log('formValueCoupon:', formValueCategory);
-        console.log('type:', typeof (formValueCategory['categoryImage']));
         formDataCategoryAdd.append('image', this.fileImage1);
         formDataCategoryAdd.append('name', formValueCategory['categoryName']);
         formDataCategoryAdd.append('nickname', formValueCategory['categoryNick']);

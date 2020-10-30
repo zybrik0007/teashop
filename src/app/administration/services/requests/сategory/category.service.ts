@@ -3,6 +3,9 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {CategoryGetInterface, CategoryPutInterface} from '../../../interfaces/requests/category/requests.category.interface';
+import {CouponPostIdInterface} from '../../../interfaces/requests/options/requests.coupons.interface';
+import {IdInterface} from '../../../interfaces/general/id.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +64,19 @@ export class CategoryService {
     const headers = this.putCategoryHeaders();
     /*Выполнение запроса на сервер*/
     return this.http.put(url, req, {
+      headers,
+      observe: 'response'
+    });
+  }
+
+  /*Post запрос по id*/
+  postIdCategoryService(req: IdInterface): Observable<object> {
+    /*Определение url*/
+    const url: string = '/api/category/id';
+    /*Определение Headers*/
+    const headers = this.getCategoryHeaders();
+    /*Выполнение запроса на сервер*/
+    return this.http.post(url, req, {
       headers,
       observe: 'response'
     });

@@ -203,18 +203,11 @@ export class MainAdminComponent implements OnInit {
       .subscribe(
         res => {
           if (res['status'] === 200) {
-            console.log('res: ', res);
             const bodyParse = JSON.parse(res['body']['response']);
-            console.log('bodyParse1: ', bodyParse);
-            console.log('bodyParse2: ', bodyParse);
-            console.log('bodyParse3: ', bodyParse);
             const response = JSON.parse(res['body']['response']);
-            console.log('response1: ', JSON.parse(JSON.stringify(response)));
             const count = response[response.length - 1];
             this.countRows = Number(count['count']);
             this.arrTable = response;
-            console.log('response2: ', response);
-            console.log('this.arrTable: ', this.arrTable);
             this.loader = false;
           } else {
             this.errorModal({error: 'Неизвестная ошибка клиента'});
@@ -375,6 +368,25 @@ export class MainAdminComponent implements OnInit {
           this.modalNameParent = 'edit-coupon';
         }
       }
+
+      if (this.router.url === '/administration/category/category') {
+        if (this.arrRowsCount < 1) {
+          this.error = true;
+          this.errorText = 'Не вабрано ни одной категории';
+        }
+        if (this.arrRowsCount > 1) {
+          this.error = true;
+          this.errorText = 'Выбрано больше одной категории';
+        }
+        if (this.arrRowsCount === 1) {
+          this.modal = true;
+          this.rowId = this.arrRowsArr[0];
+          console.log('this.arrRowsArr: ', this.arrRowsArr);
+          console.log('this.rowId: ', this.rowId);
+          this.modalNameParent = 'edit-category';
+        }
+      }
+
     }
     delete() {
       if (this.router.url === '/administration/options/coupons') {

@@ -9,6 +9,8 @@ import {
   CouponPostIdInterface,
   CouponPostInterface
 } from '../../../interfaces/requests/options/requests.coupons.interface';
+import {IdInterface} from '../../../interfaces/general/id.interface';
+
 
 
 @Injectable({
@@ -81,7 +83,7 @@ export class CouponsService {
   }
 
   /*Post запрос по id*/
-  postIdCouponsService(req: CouponPostIdInterface): Observable<object> {
+  postIdCouponsService(req: IdInterface): Observable<object> {
     /*Определение url*/
     const url: string = '/api/coupons/id';
     /*Определение Headers*/
