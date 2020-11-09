@@ -68,6 +68,7 @@ export class CategoryValodation {
     return [true, ''];
   }
 
+  /*Проверка запроса на добавление категориик*/
   putCategory(req): [boolean, string] {
 
     if (!validationd.typeObj(req)) {
@@ -148,6 +149,23 @@ export class CategoryValodation {
     /*Проверка параметра Описание*/
     if (!validationd.typeStr(req['description'])) {
       return [false, ErrorValidation.ErrorCategoryStringName];
+    }
+    return [true, ''];
+  }
+
+  /*Проверка запроса для поиска категории по id*/
+  postCategoryId(req: object): [boolean, string] {
+    /*Проверка на тип данных*/
+    if (!validationd.typeObj(req)) {
+      return [false, ErrorValidation.ErrorTypeGet];
+    }
+    /*Проверка наличия ключа*/
+    if (!req.hasOwnProperty('id')) {
+      return [false, ErrorValidation.ErrorKeyCategoryId];
+    }
+    /*Проверка типа значения*/
+    if (!validationd.integerNum(req['id'])) {
+      return [false, ErrorValidation.ErrorCategoryIntegerId];
     }
     return [true, ''];
   }

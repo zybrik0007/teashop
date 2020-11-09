@@ -298,7 +298,7 @@ export class MainAdminComponent implements OnInit {
         res => {
           if (res['status'] === 200) {
             const response = JSON.parse(res['body']['response']);
-            const count = response.pop();
+            const count = response[response.length - 1];
             this.countRows = Number(count['count']);
             this.arrTable = response;
             this.loader = false;

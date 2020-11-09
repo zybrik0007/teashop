@@ -66,7 +66,7 @@ routerCategory.get(
 );
 
 
-/*Поиск купона по id*/
+/*Добавление категории*/
 routerCategory.put('/', async (
   req,
   res,
@@ -112,42 +112,44 @@ routerCategory.put('/', async (
   res.setHeader('Content-Type', 'application/json');
   res.status(200);
   res.send({id: idCategory});
-  /*
+});
+
+/*Поиск категории по id*/
+routerCategory.post('/id', async (
+  req,
+  res,
+  next) => {
+  /*Проверка валидации данных*/
   try {
-    console.log('Запуск функции добавления картинки');
-    const putCategoryImage = await Image.putCategoryImage(idCategory, req['files']);
-    console.log('Запуск функции добавления картинки прошел успешно, отправка ответа');
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200);
-    res.send({id: idCategory});
-  } catch (e) {
-    console.log('Запуск функции добавления картинки прошел с ошибкой, отправка ответа');
-    const error: string = JSON.stringify({error: ErrorValidation.ErrorImage});
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200);
-    res.send({id: idCategory});
-  }
-  */
-
-
-  /*
-  console.log(req, req['files']);
-  console.log('req routerCategory: ',  req, typeof(req.files['image']['path']));
-  const im = req.files['image']['path'];
-  const newim = path.join(__dirname + '../../../../server/image/category');
-  console.log('newim: ', newim);
-  gm(im)
-    .resize(300, 300, '!')
-    .write(newim + '/' + 'test.jpg', (err) => {
-    if (!err) {
-      console.log('err loaded true');
-    } else {
-      console.log(err);
-      console.log('err loaded fuck');
+    const reqValidation = await validation.postCategoryId(req.body);
+    if (!reqValidation[0]) {
+      const error: string = JSON.stringify({error: reqValidation[1]});
+      res.setHeader('Content-Type', 'application/json');
+      res.status(501);
+      res.send(error);
     }
-  });
-  console.log('dirname: ', __dirname);
-  */
+  } catch (e) {
+    const error: string = JSON.stringify({error: ErrorValidation.ErrorValidationGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(501);
+    res.send(error);
+  }
+
+  /*Выборка из Базы данных*/
+
+  try {
+    const reqDb = await CategoryReqDB.postCategoryIdDB(req.body);
+    const response = JSON.stringify(reqDb);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200);
+    res.send({response});
+  }
+  catch (e) {
+    const error: string = JSON.stringify({error: ErrorDB.ErrorDBGeneral});
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500);
+    res.send(error);
+  }
 });
 
 

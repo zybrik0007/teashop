@@ -2,6 +2,7 @@ import {Op, Sequelize} from 'sequelize';
 
 import {Category} from '../../../shemes_database/administration/shemes.administration';
 import {findAll} from '@angular/compiler-cli/ngcc/src/utils';
+import {ErrorValidation} from '../../../errors/ErrorValidation';
 
 export class CategoryDB {
 
@@ -33,6 +34,7 @@ export class CategoryDB {
     return getCategoryPars;
   }
 
+  /*Поиск дубликатов категорий*/
   async searchCategoryDublicateParametrDB(req) {
     const dublicateCategoryParametr = await Category.findAll({
       attributes: [[Sequelize.fn('COUNT', Sequelize.col('*')), 'count']],
@@ -47,6 +49,7 @@ export class CategoryDB {
     return JSON.parse(JSON.stringify(dublicateCategoryParametr));
   }
 
+  /*Добавление категориии*/
   async putCategoryDB(req) {
     console.log('IN DB: ', req);
     const putCategory = await Category.create({
@@ -63,6 +66,15 @@ export class CategoryDB {
     console.log('putCategory: ', putCategory);
     const putCategoryValues = putCategory['dataValues'];
     return putCategoryValues;
+  }
+
+  /*Поиск категории по id*/
+  async postCategoryIdDB(req) {
+    const postCategoryId = await Category.findOne({
+      where: {id: req['id']}
+    });
+    const postCategoryIdParse = JSON.parse(JSON.stringify(postCategoryId));
+    return postCategoryIdParse;
   }
 
 }

@@ -70,6 +70,8 @@ export const ErrorValidation = {
   ErrorCategoryStringMetaKeywords: 'Невалидные данные. Операция отменена. У параметра META keywords неверный тип данных',
   ErrorCategoryStringShort: 'Невалидные данные. Операция отменена. У параметра Краткое описание неверный тип данных',
   ErrorCategoryStringDescription: 'Невалидные данные. Операция отменена. У параметра Описание неверный тип данных',
+  ErrorKeyCategoryId: 'Невалидные данные. Операция отменена. Отсутствует параметр Id',
+  ErrorCategoryIntegerId: 'Невалидные данные. Операция отменена. У параметра Id не целое число',
   /*Картинки*/
   ErrorImage: 'Картинка не добавлена',
   ErrorImageDirectory: 'Картинка не добавлена. Не содалась директория',

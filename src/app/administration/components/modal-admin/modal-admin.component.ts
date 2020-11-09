@@ -363,7 +363,6 @@ export class ModalAdminComponent implements OnInit, OnChanges {
             }
           }
         );
-
     }
   }
 
