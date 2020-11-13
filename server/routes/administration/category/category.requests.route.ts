@@ -135,10 +135,17 @@ routerCategory.post('/id', async (
     res.send(error);
   }
 
-  /*Выборка из Базы данных*/
+  /*Ппроверка наличия фотографии*/
+  const imageRead = await Image.readBigImage(req.body.id);
 
+  /*Выборка из Базы данных*/
   try {
     const reqDb = await CategoryReqDB.postCategoryIdDB(req.body);
+    if (!imageRead) {
+      reqDb['image'] = 'none';
+    } else {
+      reqDb['image'] = 'file';
+    }
     const response = JSON.stringify(reqDb);
     res.setHeader('Content-Type', 'application/json');
     res.status(200);

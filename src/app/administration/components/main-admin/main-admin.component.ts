@@ -442,6 +442,11 @@ export class MainAdminComponent implements OnInit {
     this.expend = true;
     console.log('event IMG:', event);
   }
+  expendImageEdit(event) {
+    console.log('expendImageEdit: ', event);
+    this.image = event;
+    this.expend = true;
+  }
 
   closeExpend() {
     this.image = '';

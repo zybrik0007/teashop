@@ -732,7 +732,8 @@
                     <div class="div-category" *ngIf="fileImage1 !== ''">
                       <img [src]='image1'>
                       <div class="delete-category-image" (click)="deleteExpand(1)"><span class="icon-cross"></span></div>
-                      <div class="expand-category-image" (click)="ExpendImage()"><span class="icon-enlarge"></span></div>
+                      <div class="expand-category-image" *ngIf="but === 'add'" (click)="ExpendImage()"><span class="icon-enlarge"></span></div>
+                      <div class="expand-category-image" *ngIf="but === 'edit'" (click)="ExpendImageEdit()"><span class="icon-enlarge"></span></div>
                     </div>
                   </div>
                 </div>

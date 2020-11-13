@@ -4,6 +4,7 @@ import {Observable, pipe, fromEvent} from 'rxjs';
 
 
 
+
 import {ValidatorAdministration} from '../../validators/validator-administration';
 import {
   CouponPostIdInterface,
@@ -37,6 +38,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   @Output() closeModalFalse: EventEmitter<object> = new EventEmitter<object>();
   @Output() error: EventEmitter<object> = new EventEmitter<object>();
   @Output() expend: EventEmitter<any> = new EventEmitter<any>();
+  @Output() expendEdit: EventEmitter<string> = new EventEmitter<string>();
   nameHead: string; /*Название заглавия модального окна*/
   modal: string; /*Определение какое модальное окно активруется.*/
   but: string; /*Определение кнопки Submit*/
@@ -49,6 +51,7 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   fileImage1: any = '';
   image1: any = '';
   CategoryDisplayImage: boolean = false;
+  server: string = 'http://172.17.1.10:4200';
 
 
   couponPut: CouponsPutInterface; /*Определение перемнной для модального окна Купоны*/
@@ -332,19 +335,23 @@ export class ModalAdminComponent implements OnInit, OnChanges {
               const resBody = res['body'];
               const resParse = JSON.parse(resBody['response']);
               editParams = resParse;
-              const startDate = resParse['startDate'].substr(0, 10);
-              const endDate = resParse['endDate'].substr(0, 10);
               this.categoryPut = {
                 name: resParse['name'],
                 nickname: resParse['nickname'],
                 sort: resParse['sort'],
                 description: resParse['description'],
-                short: resParse['short'],
-                METAtitle: resParse['METAtitle'],
-                METAdescription: resParse['METAdescription'],
-                METAkeywords: resParse['METAdescription'],
-                publication: resParse['publication']
+                short: resParse['short_description'],
+                METAtitle: resParse['meta_title'],
+                METAdescription: resParse['meta_description'],
+                METAkeywords: resParse['meta_keywords'],
+                publication: resParse['publication'],
               };
+              if (resParse.image === 'file') {
+                this.fileImage1 = this.server + '/image/category/' + resParse['id'] + '/big.jpg';
+                this.image1 = this.server + '/image/category/' + resParse['id'] + '/big.jpg';
+              }
+              console.log('111:', this.server + '/image/category/' + resParse['id'] + '/big.jpg');
+              console.log('this.categoryPut.image', this.categoryPut.image);
               this.modal = 'category';
               this.nameHead = 'Редактировать категорию';
               this.but = 'edit';
@@ -572,6 +579,10 @@ export class ModalAdminComponent implements OnInit, OnChanges {
   }
   ExpendImage() {
     this.expend.emit(this.fileImage1);
+  }
+  ExpendImageEdit() {
+    console.log('ExpendImageEdit');
+    this.expendEdit.emit(this.image1);
   }
   deleteExpand(event: number) {
     console.log('33333');

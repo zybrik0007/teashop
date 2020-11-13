@@ -16,9 +16,6 @@ const opt = {
   uploadDir: os.tmpdir(),
   autoClean: true
 };
-//const multer = require('multer');
-//const upload = multer();
-
 
 
 import {resolve} from 'dns';
@@ -55,6 +52,7 @@ server.get('*.*', express.static(distFolder, {
   maxAge: '1y'
 }));
 
+server.use(express.static('public'));
 server.use('/api/coupons', routerCoupons);
 server.use('/api/category', routerCategory);
 
